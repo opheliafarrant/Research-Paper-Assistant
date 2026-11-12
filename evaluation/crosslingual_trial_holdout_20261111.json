@@ -1,0 +1,646 @@
+{
+  "dataset_sha256": "3e2c290869cba2e57f5c7a87364df21fbb0035540a140bd2865d63b576ee3986",
+  "cases": [
+    {
+      "id": "cua-interface",
+      "question": "计算机使用智能体通过什么输入和操作来执行具身任务？",
+      "translation": "How do intelligent agents input and operate to execute embodied tasks through computers?",
+      "accepted": true,
+      "methods": {
+        "native": {
+          "chunk_ids": [
+            5,
+            6,
+            1,
+            0,
+            10,
+            13
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "translated": {
+          "chunk_ids": [
+            6,
+            4,
+            52,
+            32,
+            8,
+            12
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        },
+        "native_dense_translated_bm25": {
+          "chunk_ids": [
+            6,
+            1,
+            10,
+            52,
+            5,
+            4
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 2,
+          "reciprocal_rank": 0.5,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "multi": {
+          "chunk_ids": [
+            6,
+            52,
+            4,
+            0,
+            1,
+            10
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 5,
+          "reciprocal_rank": 0.2,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        }
+      }
+    },
+    {
+      "id": "cua-competitions",
+      "question": "作者的方案在几个 ECCV 工作坊竞赛中获奖？",
+      "translation": "In how many workshops of ECCV competitions was the author's proposal awarded?",
+      "accepted": true,
+      "methods": {
+        "native": {
+          "chunk_ids": [
+            55,
+            2,
+            53,
+            69,
+            1,
+            52
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 5,
+          "reciprocal_rank": 0.2,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "translated": {
+          "chunk_ids": [
+            53,
+            55,
+            2,
+            52,
+            54,
+            1
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 6,
+          "reciprocal_rank": 0.16666666666666666,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "native_dense_translated_bm25": {
+          "chunk_ids": [
+            55,
+            53,
+            2,
+            52,
+            1,
+            54
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 5,
+          "reciprocal_rank": 0.2,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "multi": {
+          "chunk_ids": [
+            55,
+            53,
+            2,
+            52,
+            1,
+            54
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 5,
+          "reciprocal_rank": 0.2,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        }
+      }
+    },
+    {
+      "id": "graded-blur",
+      "question": "文章分析了哪种未知模糊条件？",
+      "translation": "What unknown fuzzy condition was analyzed in the article?",
+      "accepted": true,
+      "methods": {
+        "native": {
+          "chunk_ids": [
+            16,
+            117,
+            162,
+            186,
+            45,
+            187
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        },
+        "translated": {
+          "chunk_ids": [
+            45,
+            137,
+            138,
+            134,
+            160,
+            1
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 6,
+          "reciprocal_rank": 0.16666666666666666,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "native_dense_translated_bm25": {
+          "chunk_ids": [
+            45,
+            187,
+            16,
+            117,
+            137,
+            162
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        },
+        "multi": {
+          "chunk_ids": [
+            45,
+            187,
+            16,
+            117,
+            137,
+            162
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        }
+      }
+    },
+    {
+      "id": "graded-accuracy",
+      "question": "在 MNIST 双像素模糊下，该网络取得了多少准确率？",
+      "translation": "What accuracy did the network achieve under MNIST Double Pixel Blur?",
+      "accepted": true,
+      "methods": {
+        "native": {
+          "chunk_ids": [
+            161,
+            118,
+            2,
+            137,
+            173,
+            149
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "translated": {
+          "chunk_ids": [
+            2,
+            161,
+            12,
+            149,
+            137,
+            162
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 1,
+          "reciprocal_rank": 1.0,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "native_dense_translated_bm25": {
+          "chunk_ids": [
+            2,
+            161,
+            137,
+            149,
+            12,
+            166
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 1,
+          "reciprocal_rank": 1.0,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "multi": {
+          "chunk_ids": [
+            161,
+            2,
+            118,
+            149,
+            137,
+            162
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 2,
+          "reciprocal_rank": 0.5,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        }
+      }
+    },
+    {
+      "id": "flowmop-outputs",
+      "question": "FlowMoP 生成的多人的未来运动同时建模哪两种信息？",
+      "translation": "Which two types of information does FlowMoP model simultaneously for future movements of multiple people?",
+      "accepted": true,
+      "methods": {
+        "native": {
+          "chunk_ids": [
+            0,
+            14,
+            3,
+            1,
+            114,
+            66
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 4,
+          "reciprocal_rank": 0.25,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "translated": {
+          "chunk_ids": [
+            0,
+            1,
+            14,
+            132,
+            66,
+            5
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 2,
+          "reciprocal_rank": 0.5,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "native_dense_translated_bm25": {
+          "chunk_ids": [
+            1,
+            0,
+            14,
+            132,
+            66,
+            67
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 1,
+          "reciprocal_rank": 1.0,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "multi": {
+          "chunk_ids": [
+            0,
+            1,
+            14,
+            66,
+            3,
+            114
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 2,
+          "reciprocal_rank": 0.5,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        }
+      }
+    },
+    {
+      "id": "flowmop-spline",
+      "question": "FlowMoP 中 B 样条重参数化有什么作用？",
+      "translation": "What is the role of B-spline reparameterization in FlowMoP at the level of a certain knot?",
+      "accepted": true,
+      "methods": {
+        "native": {
+          "chunk_ids": [
+            114,
+            103,
+            0,
+            124,
+            3,
+            106
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        },
+        "translated": {
+          "chunk_ids": [
+            98,
+            22,
+            25,
+            20,
+            34,
+            80
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        },
+        "native_dense_translated_bm25": {
+          "chunk_ids": [
+            114,
+            103,
+            98,
+            124,
+            20,
+            106
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        },
+        "multi": {
+          "chunk_ids": [
+            22,
+            114,
+            103,
+            98,
+            25,
+            0
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        }
+      }
+    },
+    {
+      "id": "laya-order",
+      "question": "循环改变选项顺序后，Laya 检查点有多少比例的问题改变了答案？",
+      "translation": "What proportion of questions changed answers when Laya checkpoints were altered with changes in option order?",
+      "accepted": true,
+      "methods": {
+        "native": {
+          "chunk_ids": [
+            2,
+            75,
+            38,
+            63,
+            40,
+            62
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 1,
+          "reciprocal_rank": 1.0,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "translated": {
+          "chunk_ids": [
+            92,
+            7,
+            52,
+            2,
+            8,
+            0
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 4,
+          "reciprocal_rank": 0.25,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "native_dense_translated_bm25": {
+          "chunk_ids": [
+            92,
+            7,
+            52,
+            2,
+            38,
+            0
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 4,
+          "reciprocal_rank": 0.25,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        },
+        "multi": {
+          "chunk_ids": [
+            92,
+            7,
+            52,
+            2,
+            38,
+            75
+          ],
+          "hit": true,
+          "evidence_recall": 1.0,
+          "first_rank": 4,
+          "reciprocal_rank": 0.25,
+          "evidence_hits": [
+            true
+          ],
+          "returned": 6
+        }
+      }
+    },
+    {
+      "id": "laya-shuffle",
+      "question": "Laya 的选项顺序扰动问题使用什么训练调整来缓解？",
+      "translation": "What training adjustments are used to mitigate the Option ordering perturbation problem in Layla?",
+      "accepted": false,
+      "methods": {
+        "native": {
+          "chunk_ids": [
+            16,
+            34,
+            75,
+            83,
+            63,
+            33
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        },
+        "translated": {
+          "chunk_ids": [
+            16,
+            34,
+            75,
+            83,
+            63,
+            33
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        },
+        "native_dense_translated_bm25": {
+          "chunk_ids": [
+            16,
+            34,
+            75,
+            83,
+            63,
+            33
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        },
+        "multi": {
+          "chunk_ids": [
+            16,
+            34,
+            75,
+            83,
+            63,
+            33
+          ],
+          "hit": false,
+          "evidence_recall": 0.0,
+          "first_rank": null,
+          "reciprocal_rank": 0.0,
+          "evidence_hits": [
+            false
+          ],
+          "returned": 6
+        }
+      }
+    }
+  ],
+  "note": "Exploratory evidence matching; translations may alter meaning. No generation-quality or independent relevance judgment is implied."
+}

@@ -1,0 +1,41 @@
+# Virtual environments & env files
+.venv/
+venv/
+.env/
+.env
+.env.*
+!.env.example
+
+# Python cache, logs & test artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+*.log
+logs/
+
+# Local models & Hugging Face caches
+models/
+.hf-cache/
+
+# Local runtime data (user PDFs, vector/BM25 indexes, SQLite chat history)
+data/pdfs/
+data/cache/
+data/ingested.txt
+data/conversations.sqlite3*
+
+# IDEs & OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local workflow & personal notes
+TASK_STATE.md
+*.docx
+evaluation/*interview*
+evaluation/build_interview_docx.py
+evaluation/generate_enriched_interview_doc.py
+evaluation/existing_interview_doc.json
+evaluation/评测与面试案例.md

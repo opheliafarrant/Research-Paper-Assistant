@@ -1,0 +1,10 @@
+{
+  "cua-interface": "计算机使用智能体通过什么输入和操作来执行具身任务？",
+  "cua-competitions": "作者的方案在几个 ECCV 工作坊竞赛中获奖？",
+  "graded-blur": "文章分析了哪种未知模糊条件？",
+  "graded-accuracy": "在 MNIST 双像素模糊下，该网络取得了多少准确率？",
+  "flowmop-outputs": "FlowMoP 生成的多人的未来运动同时建模哪两种信息？",
+  "flowmop-spline": "FlowMoP 中 B 样条重参数化有什么作用？",
+  "laya-order": "循环改变选项顺序后，Laya 检查点有多少比例的问题改变了答案？",
+  "laya-shuffle": "Laya 的选项顺序扰动问题使用什么训练调整来缓解？"
+}

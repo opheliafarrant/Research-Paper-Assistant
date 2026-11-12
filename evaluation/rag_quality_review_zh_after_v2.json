@@ -1,0 +1,139 @@
+{
+  "review_version": "1.0",
+  "results_file": "rag_quality_results_zh_after_v2.json",
+  "results_sha256": "a98fee203581d3cd331d9b5d88d59a77c0a754001edcff081240fb210147333f",
+  "reviewer": "single AI assistant manual chunk-by-chunk and answer-vs-context review; not independent human gold",
+  "relevance_rubric": "1 if the chunk directly answers or supplies part of the specific question from retrieved sources.",
+  "generation_rubric": {
+    "coverage": "full = covers listed expected facts; partial = covers some expected facts or misses key parts; none = misses or abstains on answerable question.",
+    "grounding": "supported = every claim and citation in the answer is backed by supplied sources; unsupported = contains misstatements, stage swaps, or false attributions; abstained = states excerpts lack the answer."
+  },
+  "cases": [
+    {
+      "id": "amp-benchmarks",
+      "relevant_chunks": [21, 31, 162, 126],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunks 21, 31, 162, and 126 cover RoboLab-120 and the three CaP-Gym suites (LIBERO-PRO, robosuite, BEHAVIOR-1K), while 46 and 45 describe real-world trials. The answer lists all four simulation benchmarks accurately, but cites only (2611.09892, p. 3) even though the LIBERO-PRO/robosuite/BEHAVIOR-1K names and horizon details come from Excerpt 2 on p. 4."
+    },
+    {
+      "id": "amp-memory",
+      "relevant_chunks": [95],
+      "coverage": "partial",
+      "grounding": "unsupported",
+      "reason": "Only chunk 95 directly lists what AMP1+ writes into persistent memory (coordinate frames, physical limits, depth/calibration workarounds, manipulation primitives); chunk 77 ('observations, strategies, and code') was not retrieved, while 81/111/72/147/93 cover batching, camera ablation, episodic skills, scene-model IDs, and continual learning. The answer omits the observations/strategies/code taxonomy and conflates chunk 72 episodic plan repair with persistent memory entries."
+    },
+    {
+      "id": "amp-trials",
+      "relevant_chunks": [49, 35, 175, 48, 171, 170],
+      "coverage": "partial",
+      "grounding": "unsupported",
+      "reason": "All 6 chunks concern real-world trials and error recovery (RfE), with chunk 35 explicitly pairing AMP1 with Opus 5.5 and enabling error recovery. The answer discusses RfE behavior but calls the tested model 'closed-weight models' (from Sec. 4G Compute in chunk 175) instead of Opus 5.5 and fails to state that RfE was enabled."
+    },
+    {
+      "id": "amp-limits",
+      "relevant_chunks": [127],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunk 127 directly states slow waiting-for-reasoning execution and inability to reconsider executing trajectories; remaining chunks discuss skills, table setup, trajectories, and Astranomy. The answer states both limitations correctly, but scrambles Excerpt/page citations by pointing to Excerpt 4 p. 24 (chunk 127 is p. 12), Excerpt 5 p. 12 (chunk 34 is p. 4-5), and Excerpt 6 p. 5 (chunk 126 is p. 12)."
+    },
+    {
+      "id": "flow-method",
+      "relevant_chunks": [25, 30, 24, 12, 36, 33],
+      "coverage": "none",
+      "grounding": "unsupported",
+      "reason": "Chunk 25 explicitly states FlowAlign uses conditional flow matching to define the path-consistency score, and chunks 30, 24, 12, 36, and 33 supply the formula and CFM loss objective. The answer omits 'conditional flow matching' entirely and circularly claims FlowAlign defines the score using a 'path-consistency framework'."
+    },
+    {
+      "id": "flow-stages",
+      "relevant_chunks": [3, 71, 25, 11],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunk 25 gives the exact Stage 1 (paired velocity field training) and Stage 2 (freezing the field for path-consistency scoring) pipeline, echoed in chunks 3, 71, and 11; 15 and 130 cover contributions and plug-in regularization. The answer accurately distinguishes both stages with p. 4 citation."
+    },
+    {
+      "id": "flow-datasets",
+      "relevant_chunks": [55, 125],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunks 55 and 125 establish PBMC and BMMC as the single-cell multiome benchmarks; 4, 15, and 76 are abstract/intro/bibliography. The answer names PBMC and BMMC, but hallucinates 'p. 797' from table value '797' in chunk 55 and misattributes BMMC [13, 19] to bibliography entry [4] (PeakVI in Cell Reports Methods)."
+    },
+    {
+      "id": "flow-limits",
+      "relevant_chunks": [73],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunk 73 states all expected limitations (paired data, meaningful common vector space, accurate Stage-1 field, Euclidean linear paths assumption, no guarantee of preserving source-specific info); 71/12/25/20 cover conclusions/method/preliminaries. Answer summarizes every limitation accurately and cites 2611.09863, Page: 10."
+    },
+    {
+      "id": "grasp-name",
+      "relevant_chunks": [35, 5],
+      "coverage": "partial",
+      "grounding": "unsupported",
+      "reason": "Chunk 5 gives Task-Aware Grasp Selection and chunk 35 mentions 'Execute rearrangement (Simulator)'; chunk 33 with Isaac Lab was not retrieved. The answer only reports generic 'Simulator' and adds an unretrieved subtitle ('via Critic Distillation for Prehensile Loco-Manipulation') not present in any retrieved excerpt."
+    },
+    {
+      "id": "grasp-critic",
+      "relevant_chunks": [49, 35, 33],
+      "coverage": "partial",
+      "grounding": "unsupported",
+      "reason": "Chunks 35 and 33 describe distilling the learned PPO critic into a grasp utility network and chunk 49 explains critic value estimation. The answer mistranslates distillation as 'critic separation' ('critic 分离') and appends an unsupported limitation claim about dataset constraints and extra experiments not found in the sources."
+    },
+    {
+      "id": "grasp-reward",
+      "relevant_chunks": [48, 42],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunks 48 and 42 explicitly state transporting the object to the desired pose and the indicator formula with threshold epsilon_p. However, the answer falsely claims epsilon_p is 'a threshold less than zero' ('小于零的阈值') and cites only p. 4 while Table I spans p. 4-5."
+    },
+    {
+      "id": "grasp-future",
+      "relevant_chunks": [78],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunk 78 states extending evaluation to additional household objects and SPOT deployment on p. 8; remaining chunks cover overview and simulation results. The answer states the future work cleanly, but adds an ungrounded second-paragraph assumption comparing against PPOi, PPOg+Random, and Grasp-TAGS baselines."
+    },
+    {
+      "id": "quant-benchmarks",
+      "relevant_chunks": [],
+      "coverage": "partial",
+      "grounding": "unsupported",
+      "reason": "Sec. 3.1 chunk 24 (GSM8K and AIME25 outlier analysis) was missed; none of [69, 2, 23, 0, 73, 71] specify which benchmarks analyze early-decoding outliers (69/73/71 report quantized model evaluation). The answer omits GSM8K, conflates quantization evaluation benchmarks/models (AIME26, Qwen3-8B, Phi-4-Reasoning) with outlier analysis, and cites LiveCodeBench p. 9 metrics to p. 1."
+    },
+    {
+      "id": "quant-fluctuation",
+      "relevant_chunks": [8, 1, 24, 26, 27],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "All 5 returned chunks directly address early-decoding activation fluctuations, with chunk 24 reporting ~20% higher average activation std over the first 30 decoding steps. Every numerical claim, Fig. 2 detail, and 2611.09868 p. 3-4 citation is supported by the sources."
+    },
+    {
+      "id": "quant-baselines",
+      "relevant_chunks": [125, 20],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunk 125 (Table 9) lists BF16, QuaRot, ParoQuant, SqueezeLLM, CodeQuant, and Ours, and chunk 20 discusses SqueezeLLM and CodeQuant. The answer names all expected baselines correctly, but misattributes Table 9 benchmark datasets (Wiki2, C4, MA500, GSM8K, AIME25) to Excerpt 1 on p. 9 (chunk 74 only mentions BF16 and SqueezeLLM speedup)."
+    },
+    {
+      "id": "quant-limits",
+      "relevant_chunks": [87],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunk 87 (p. 10-11) explicitly details future study of repetition/overlong reasoning, post-training behavior interaction, and unreliable/overconfident safety risks; chunks 165 and 138 are unpruned checklist text and 1 is abstract. All claims and <2611.09868, p. 10-11> citation are fully supported."
+    },
+    {
+      "id": "noanswer-amp",
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": true,
+      "reason": "Cleanly states the excerpts contain no mention of device ZXQ-7391-BLUE or activation codes."
+    },
+    {
+      "id": "noanswer-flow",
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": true,
+      "reason": "Cleanly states the excerpts contain no mention of telescope JVN-4826-GREEN or access codes."
+    }
+  ]
+}

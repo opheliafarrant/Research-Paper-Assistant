@@ -1,0 +1,146 @@
+{
+  "version": "1.1",
+  "note": "Eight held-out question/evidence pairs plus four domain-plausible natural unanswerable probes (no synthetic 'fictitious' markers) across four papers from the 16-paper local library not included in rag_eval_gold_v1. Quotes are verified against the specified PDF page and current deduplicated index; existing answerable pairs anchor on page 1 and evaluate held-out question generalization within the same corpus.",
+  "cases": [
+    {
+      "id": "cua-interface",
+      "paper_id": "2611.09847",
+      "type": "method",
+      "question": "What observations and actions let a computer-use agent perform embodied tasks?",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "screenshots and keyboard and mouse actions"
+        }
+      ],
+      "expected": "通过屏幕截图及键盘鼠标操作与环境交互。"
+    },
+    {
+      "id": "cua-competitions",
+      "paper_id": "2611.09847",
+      "type": "experiment",
+      "question": "How many ECCV workshop competitions did the entries win prizes in?",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "first-, second-, third-, and sixth-place prizes across four ECCV workshop competitions"
+        }
+      ],
+      "expected": "四个 ECCV 工作坊竞赛，分别取得第一、二、三和六名。"
+    },
+    {
+      "id": "graded-blur",
+      "paper_id": "2611.09878",
+      "type": "method",
+      "question": "Which unknown blur condition does the article analyze?",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "under unknown Gaussian blur"
+        }
+      ],
+      "expected": "未知高斯模糊。"
+    },
+    {
+      "id": "graded-accuracy",
+      "paper_id": "2611.09878",
+      "type": "experiment",
+      "question": "What accuracy does the network achieve on MNIST under a two-pixel blur?",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "88.4% accuracy under a two-pixel blur"
+        }
+      ],
+      "expected": "88.4%。"
+    },
+    {
+      "id": "flowmop-outputs",
+      "paper_id": "2611.09882",
+      "type": "method",
+      "question": "Which two components does FlowMoP jointly model when generating future motion?",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "modeling both global trajectories and root-relative poses"
+        }
+      ],
+      "expected": "全局轨迹和相对根节点的姿态。"
+    },
+    {
+      "id": "flowmop-spline",
+      "paper_id": "2611.09882",
+      "type": "method",
+      "question": "What is the role of B-spline reparameterization in FlowMoP?",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "compresses the generative state space while enforcing temporal smooth"
+        }
+      ],
+      "expected": "压缩生成状态空间并约束时间平滑性。"
+    },
+    {
+      "id": "laya-order",
+      "paper_id": "2611.09803",
+      "type": "experiment",
+      "question": "What fraction of questions changed answers under rotated option orders?",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "changes its answer for 25.8%"
+        }
+      ],
+      "expected": "25.8% 的问题。"
+    },
+    {
+      "id": "laya-shuffle",
+      "paper_id": "2611.09803",
+      "type": "method",
+      "question": "What training adjustment is used to mitigate Laya's option-order sensitivity?",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "teacher-verified rows with option shuffling"
+        }
+      ],
+      "expected": "在微调中对选项顺序进行洗牌。"
+    },
+    {
+      "id": "noanswer-nat-cua",
+      "paper_id": "2611.09847",
+      "type": "unanswerable_probe",
+      "question": "What Kubernetes orchestration configuration and AWS EC2 hourly cloud cost are reported for deploying these computer-use agents?",
+      "absence_marker": "Kubernetes",
+      "expected": "论文片段中未报告 Kubernetes 部署配置或 AWS EC2 云端小时成本，应明确说明无法确认。",
+      "evidence": []
+    },
+    {
+      "id": "noanswer-nat-graded",
+      "paper_id": "2611.09878",
+      "type": "unanswerable_probe",
+      "question": "What top-1 validation accuracy does the graded convolutional network achieve on ImageNet-1K using a ResNet-50 backbone?",
+      "absence_marker": "ImageNet",
+      "expected": "论文片段中未报告 ImageNet-1K 或 ResNet-50 的验证准确率，应明确说明无法确认。",
+      "evidence": []
+    },
+    {
+      "id": "noanswer-nat-flowmop",
+      "paper_id": "2611.09882",
+      "type": "unanswerable_probe",
+      "question": "What MPJPE and FID scores does FlowMoP report on the AMASS dataset using TensorRT FP16 inference?",
+      "absence_marker": "AMASS",
+      "expected": "论文片段中未报告 FlowMoP 在 AMASS 数据集或 TensorRT FP16 下的 MPJPE 与 FID 指标，应明确说明无法确认。",
+      "evidence": []
+    },
+    {
+      "id": "noanswer-nat-laya",
+      "paper_id": "2611.09803",
+      "type": "unanswerable_probe",
+      "question": "What LoRA rank and QLoRA quantization bit-width were used when fine-tuning the checkpoint with option shuffling?",
+      "absence_marker": "LoRA",
+      "expected": "论文片段中未报告 LoRA 秩或 QLoRA 量化位宽设置，应明确说明无法确认。",
+      "evidence": []
+    }
+  ]
+}

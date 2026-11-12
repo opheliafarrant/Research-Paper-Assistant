@@ -1,0 +1,97 @@
+{
+  "review_version": "1.0",
+  "results_file": "rag_quality_holdout_en_v1.json",
+  "results_sha256": "e3f7df466eaeeb203fb73a8358e07c11777433c8091ba4c2b67f0b80133fe731",
+  "reviewer": "single AI assistant manual chunk-by-chunk and answer-vs-context review; not independent human gold",
+  "relevance_rubric": "1 if the chunk directly answers or supplies part of the specific question from retrieved sources.",
+  "generation_rubric": {
+    "coverage": "full = covers listed expected facts; partial = covers some expected facts or misses key parts; none = misses or abstains on answerable question.",
+    "grounding": "supported = every claim and citation in the answer is backed by supplied sources; unsupported = contains misstatements, stage swaps, or false attributions; abstained = states excerpts lack the answer."
+  },
+  "cases": [
+    {
+      "id": "cua-interface",
+      "relevant_chunks": [6, 31, 0],
+      "coverage": "partial",
+      "grounding": "supported",
+      "reason": "Chunks 6, 31, and 0 directly explain rendering the physical environment on screen and acting through desktop/GUI software controls; 12, 52, and 8 are hypothesis/conclusion/results summaries. Answer covers screen rendering and GUI/software interaction via Excerpt 3 (p. 5-6) and Excerpt 2 (p. 2), though it omits the explicit keyboard/mouse phrasing from Page 1 abstract chunk 1 (not in top-6)."
+    },
+    {
+      "id": "cua-competitions",
+      "relevant_chunks": [53, 1, 2, 55, 52, 26],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "All 6 chunks (53, 1, 2, 55, 52, 26) state or name the four ECCV workshop competitions and prize placements. Answer correctly states prizes in four ECCV workshop competitions backed by Excerpt 1 (2611.09847, p. 8)."
+    },
+    {
+      "id": "graded-blur",
+      "relevant_chunks": [45, 138, 165],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunks 45, 138, and 165 cover unknown blur via Gaussian smoothing with standard deviation sigma_b, resolution halving, zooms 0.5/2, and sharp image baseline (162 mentions mild blur sensitivity only briefly). Answer accurately reports Gaussian blurring (sigma_b, contrast normalization, zooms 0.5 and 2, sharp baseline) from Excerpt 2 (p. 20)."
+    },
+    {
+      "id": "graded-accuracy",
+      "relevant_chunks": [2, 12],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunks 2 (p. 1) and 12 (p. 2) explicitly report 88.4% MNIST accuracy under two-pixel blur (vs 66.2% on scale-normalized derivatives); 161, 137, 159, 149 discuss Lindeberg/sharp/half-size comparisons. Answer states 88.4% MNIST accuracy under a two-pixel blur with exact citation (2611.09878, p. 1)."
+    },
+    {
+      "id": "flowmop-outputs",
+      "relevant_chunks": [7, 1, 66],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunks 7, 1, and 66 explicitly state FlowMoP jointly models global trajectories and root-relative poses (0 is Fig. 1, 27 covers control points Ct/Cp in CFM ODE, 14 is related work). Answer identifies global trajectories and root-relative poses accurately, but incorrectly cites Excerpt 5 (p. 4, chunk 27) alongside Excerpt 2 (p. 2); chunk 27 discusses trajectory/pose control points rather than stating the joint modeling decomposition."
+    },
+    {
+      "id": "flowmop-spline",
+      "relevant_chunks": [22, 98, 20, 23],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "All 4 returned chunks (22, 98, 20, 23) directly explain B-spline control-point reparameterization, C < T_out compression, C2 smoothness, cubic spline bases for trajectory/pose, and projection via fixed basis matrix. Every claim in the answer is directly supported by chunks 22, 98, 20, and 23."
+    },
+    {
+      "id": "laya-order",
+      "relevant_chunks": [2],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunk 2 (p. 1) explicitly gives 25.8% of questions changing answers under cyclic rotation / permutation; 38, 83, 7, 8, 52 give protocol details or follow-up mitigations. Answer gives the exact 25.8% figure but attributes Excerpt 2 to Page 7 (actually p. 1; Excerpt 1 chunk 38 is on p. 7) and conflates Excerpt 4/5 with Excerpt 1's protocol description."
+    },
+    {
+      "id": "laya-shuffle",
+      "relevant_chunks": [0, 92, 83],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunks 0, 92, and 83 explain shuffled fine-tuning (reducing flips from 25.8% to 7.2%) and parallel layout; 16 describes the default trainer flag, 14 motivates non-generative study. Answer gives the right methods and numbers, but cites Excerpt 2 (p. 2-3, chunk 16) instead of Excerpt 3 (p. 20, chunk 92) for teacher-verified shuffled fine-tuning and cites Excerpt 4 (p. 2, chunk 14) instead of Excerpt 5 (p. 18, chunk 83) for voting and parallel layout."
+    },
+    {
+      "id": "noanswer-nat-cua",
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": true,
+      "reason": "Retrieved chunks contain no Kubernetes or AWS EC2 pricing information; model cleanly abstains."
+    },
+    {
+      "id": "noanswer-nat-graded",
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": false,
+      "reason": "Model failed to abstain on an out-of-scope ImageNet-1K ResNet-50 question: it falsely claimed 86.96% ImageNet-1K ResNet-50 top-1 accuracy from chunk 130 (p. 18), which actually reports MNIST-Scale in-distribution accuracy."
+    },
+    {
+      "id": "noanswer-nat-flowmop",
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": true,
+      "reason": "Retrieved chunks cover WorldPose/CMU-Mocap runtime and mode coverage without AMASS or TensorRT FP16; model cleanly abstains."
+    },
+    {
+      "id": "noanswer-nat-laya",
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": true,
+      "reason": "Retrieved chunks describe ModernBERT-large config and slot priors without LoRA or QLoRA bit-widths; model cleanly abstains."
+    }
+  ]
+}

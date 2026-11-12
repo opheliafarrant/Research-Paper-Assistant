@@ -1,0 +1,4959 @@
+{
+  "schema_version": 1,
+  "dataset_version": "1.0",
+  "mode": "retrieval",
+  "configuration": {
+    "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "generation_model": "qwen2.5:3b",
+    "ollama_url": "http://localhost:11434",
+    "dense_threshold": 0.4,
+    "rrf_k": 60,
+    "candidate_k": 12,
+    "final_k": 6,
+    "query_language": "zh",
+    "scope": "single-paper",
+    "unanswerable_probes": "marker absence, not semantic proof"
+  },
+  "caveats": [
+    "Exploratory labels are not exhaustive or independent held-out data.",
+    "Evidence hit requires a complete normalized quote in one returned chunk; alternative valid evidence is unjudged.",
+    "Evidence-level recall is relative to the listed evidence units, not all relevant passages.",
+    "Precision and accuracy cannot be computed without complete relevance judgments.",
+    "Generation quality requires separate human review; no keyword score is called faithfulness.",
+    "Timing is single-run warm retrieval; no p95 or end-to-end SLA is implied."
+  ],
+  "input_sha256": {
+    "evaluation\\rag_eval_gold_v1.json": "f6d513f6ea62f00d203fab39d25176e0fa78f95b787b3f47a17a3691ffa59838",
+    "data\\cache\\faiss.index": "9b05986e5a5f33d7da37747a32cf1a71693c6863d322b167c0f6bc4a30c4fed2",
+    "data\\cache\\faiss_meta.pkl": "3b3af7993c94e1e79cc17320182e3b460f7a6fa8891102b4a47c80a8ad6c4bfe",
+    "data\\cache\\bm25.pkl": "22b97e7cd8915de082e3495e4d950367d3ebbad8102d778b71405471dae3dc90",
+    "evaluation\\rag_eval_queries_zh_v1.json": "8a5c9b72e7d74f970521974ff0f7d5a1740caf0f44144ae4018f6704589491a6",
+    "data\\pdfs\\2611.09863.pdf": "eb5228c7c14456d2a82927fd995366f3092cd5d9073a98b49842091025c261e4",
+    "data\\pdfs\\2611.09864.pdf": "557a2fd1e4a279b2940d438551ddb14a5ad9084ece4ca8fa307bf4814e6ca088",
+    "data\\pdfs\\2611.09868.pdf": "ecf57294610c4e21d570b25cfc7e70824b03309e4ac74cfb8a4b0609bd702e5c",
+    "data\\pdfs\\2611.09892.pdf": "555980d14c14bf83120d89202f017eb451f37b365cd471393b463a68d9581203"
+  },
+  "code_sha256": {
+    "evaluation\\rag_quality_eval.py": "90fca4522fc5e5767faff5d15d6c383706adf07823c309ecfdbd10476e9319e7",
+    "research_assistant\\application\\research.py": "fff2ba67f2b03dda6703dd7a1da63b5a2ae5f0e94ecb02fad7838089d0284df7",
+    "research_assistant\\domain\\fusion.py": "2e424d5aef670e0a8b9f1e9837ba19c4fe2bc442a73566a7d5efa57a1f998915",
+    "research_assistant\\infrastructure\\indexes.py": "30003faf0b0daef4258f77c6d93ec3b9cd61924bf7308191f59d061ef901587f",
+    "research_assistant\\infrastructure\\embedding.py": "e0807562e61eaca27ff7a7477f22eed4d7de7c6ad7a2a0a4d2f9e6e8ef3634a3",
+    "research_assistant\\config.py": "f2622862d84e1073f6bd71c81e6697e60b51cf48575aaa017e2494bc8a98fc49"
+  },
+  "local_model_manifest_sha256": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+  "runtime": {
+    "python": "3.11.18",
+    "faiss_cpu": "1.15.1",
+    "sentence_transformers": "6.2.0",
+    "rank_bm25": "0.2.2"
+  },
+  "validation": [
+    {
+      "id": "amp-benchmarks",
+      "evidence_units": 1
+    },
+    {
+      "id": "amp-memory",
+      "evidence_units": 1
+    },
+    {
+      "id": "amp-trials",
+      "evidence_units": 2
+    },
+    {
+      "id": "amp-limits",
+      "evidence_units": 2
+    },
+    {
+      "id": "flow-method",
+      "evidence_units": 1
+    },
+    {
+      "id": "flow-stages",
+      "evidence_units": 2
+    },
+    {
+      "id": "flow-datasets",
+      "evidence_units": 1
+    },
+    {
+      "id": "flow-limits",
+      "evidence_units": 2
+    },
+    {
+      "id": "grasp-name",
+      "evidence_units": 2
+    },
+    {
+      "id": "grasp-critic",
+      "evidence_units": 1
+    },
+    {
+      "id": "grasp-reward",
+      "evidence_units": 1
+    },
+    {
+      "id": "grasp-future",
+      "evidence_units": 1
+    },
+    {
+      "id": "quant-benchmarks",
+      "evidence_units": 1
+    },
+    {
+      "id": "quant-fluctuation",
+      "evidence_units": 1
+    },
+    {
+      "id": "quant-baselines",
+      "evidence_units": 3
+    },
+    {
+      "id": "quant-limits",
+      "evidence_units": 2
+    },
+    {
+      "id": "noanswer-amp",
+      "marker_absent": true
+    },
+    {
+      "id": "noanswer-flow",
+      "marker_absent": true
+    }
+  ],
+  "retrieval_summary": {
+    "overall": {
+      "dense": {
+        "1": {
+          "queries": 16,
+          "hit_rate": 0.0625,
+          "mean_annotated_evidence_recall": 0.0625,
+          "mrr": 0.0625
+        },
+        "3": {
+          "queries": 16,
+          "hit_rate": 0.125,
+          "mean_annotated_evidence_recall": 0.125,
+          "mrr": 0.08333333333333333
+        },
+        "5": {
+          "queries": 16,
+          "hit_rate": 0.4375,
+          "mean_annotated_evidence_recall": 0.40625,
+          "mrr": 0.14895833333333333
+        },
+        "6": {
+          "queries": 16,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.46875,
+          "mrr": 0.159375
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 16,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 16,
+          "hit_rate": 0.0625,
+          "mean_annotated_evidence_recall": 0.0625,
+          "mrr": 0.020833333333333332
+        },
+        "5": {
+          "queries": 16,
+          "hit_rate": 0.125,
+          "mean_annotated_evidence_recall": 0.125,
+          "mrr": 0.03333333333333333
+        },
+        "6": {
+          "queries": 16,
+          "hit_rate": 0.125,
+          "mean_annotated_evidence_recall": 0.125,
+          "mrr": 0.03333333333333333
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 16,
+          "hit_rate": 0.0625,
+          "mean_annotated_evidence_recall": 0.0625,
+          "mrr": 0.0625
+        },
+        "3": {
+          "queries": 16,
+          "hit_rate": 0.125,
+          "mean_annotated_evidence_recall": 0.125,
+          "mrr": 0.08333333333333333
+        },
+        "5": {
+          "queries": 16,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.21875,
+          "mrr": 0.10833333333333334
+        },
+        "6": {
+          "queries": 16,
+          "hit_rate": 0.3125,
+          "mean_annotated_evidence_recall": 0.28125,
+          "mrr": 0.11875
+        }
+      }
+    },
+    "term": {
+      "dense": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.05
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.05
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        }
+      }
+    },
+    "method": {
+      "dense": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.08333333333333333
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.75,
+          "mrr": 0.19583333333333333
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.75,
+          "mrr": 0.19583333333333333
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.08333333333333333
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.08333333333333333
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.08333333333333333
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.08333333333333333
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.13333333333333333
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.75,
+          "mrr": 0.175
+        }
+      }
+    },
+    "experiment": {
+      "dense": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.25
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.25
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.25
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.25
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.05
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.05
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.25
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.25
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.25
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.25
+        }
+      }
+    },
+    "limitation": {
+      "dense": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.375,
+          "mrr": 0.1
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.625,
+          "mrr": 0.14166666666666666
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.125,
+          "mrr": 0.05
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.125,
+          "mrr": 0.05
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "amp-benchmarks",
+      "type": "term",
+      "paper_id": "2611.09892",
+      "question": "这篇论文评估了哪些仿真基准？",
+      "expected": "说明评估中包含 LIBERO-PRO、robosuite 和 BEHAVIOR-1K；其他基准应以原文为准。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "the LIBERO-PRO, robosuite, and BEHAVIOR-1K suites"
+        }
+      ],
+      "timing_ms": {
+        "dense": 2.1230000420473516,
+        "bm25": 3.9379000081680715,
+        "rrf_fusion_and_fallback": 0.14129996998235583
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          253,
+          182,
+          46,
+          193,
+          177,
+          45
+        ],
+        "bm25": [],
+        "rrf": [
+          253,
+          182,
+          46,
+          193,
+          177,
+          45
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 253,
+            "page": 25
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 182,
+            "page": 17
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 46,
+            "page": 5
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 193,
+            "page": 18
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 177,
+            "page": 17
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 45,
+            "page": 5
+          }
+        ],
+        "bm25": [],
+        "rrf": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 253,
+            "page": 25
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 182,
+            "page": 17
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 46,
+            "page": 5
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 193,
+            "page": 18
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 177,
+            "page": 17
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 45,
+            "page": 5
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "amp-memory",
+      "type": "method",
+      "paper_id": "2611.09892",
+      "question": "AMP1 在持久记忆中记录哪些内容？",
+      "expected": "持久记忆记录有用的观察、策略和代码。",
+      "evidence": [
+        {
+          "page": 3,
+          "quote": "record useful observations, strategies, and code"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.5507999924011528,
+        "bm25": 4.887500021141022,
+        "rrf_fusion_and_fallback": 0.12779998360201716
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          147,
+          95,
+          225,
+          72,
+          96,
+          111
+        ],
+        "bm25": [
+          105,
+          106,
+          272,
+          210,
+          225,
+          36
+        ],
+        "rrf": [
+          225,
+          72,
+          221,
+          147,
+          105,
+          95
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 147,
+            "page": 14
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 95,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 225,
+            "page": 23
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 72,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 96,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 111,
+            "page": 11
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 105,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 106,
+            "page": 11
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 272,
+            "page": 27
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 210,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 225,
+            "page": 23
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 36,
+            "page": 5
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 225,
+            "page": 23
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 72,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 221,
+            "page": 22
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 147,
+            "page": 14
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 105,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 95,
+            "page": 10
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "amp-trials",
+      "type": "experiment",
+      "paper_id": "2611.09892",
+      "question": "真实机器人试验使用了哪个模型，是否开启机器人错误恢复？",
+      "expected": "真实试验中使用 Opus 5.5，AMP1 启用机器人错误恢复。",
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "AMP1 is paired with Opus 5.5 for these experiments"
+        },
+        {
+          "page": 5,
+          "quote": "AMP1 is evaluated with robot error recovery enabled"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.0508999694138765,
+        "bm25": 4.489600018132478,
+        "rrf_fusion_and_fallback": 0.10900001507252455
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          171,
+          159,
+          49,
+          48,
+          170,
+          156
+        ],
+        "bm25": [],
+        "rrf": [
+          171,
+          159,
+          49,
+          48,
+          170,
+          156
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 171,
+            "page": 16
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 159,
+            "page": 15
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 49,
+            "page": 6
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 48,
+            "page": 6
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 170,
+            "page": 16
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 156,
+            "page": 15
+          }
+        ],
+        "bm25": [],
+        "rrf": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 171,
+            "page": 16
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 159,
+            "page": 15
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 49,
+            "page": 6
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 48,
+            "page": 6
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 170,
+            "page": 16
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 156,
+            "page": 15
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 0
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 0
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 0
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 0
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "amp-limits",
+      "type": "limitation",
+      "paper_id": "2611.09892",
+      "question": "AMP1 在执行速度和轨迹执行方面有哪些局限？",
+      "expected": "模型推理等待使策略慢；执行轨迹时无法重新考量，论文评估主要涉及准静态场景。",
+      "evidence": [
+        {
+          "page": 12,
+          "quote": "the policy is slow as the robot spends much of each episode waiting for the model to reason"
+        },
+        {
+          "page": 12,
+          "quote": "the model cannot reconsider a trajectory while it executes"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.545799954328686,
+        "bm25": 4.237100016325712,
+        "rrf_fusion_and_fallback": 0.08710002293810248
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          34,
+          8,
+          73,
+          72,
+          46,
+          127
+        ],
+        "bm25": [
+          105,
+          106,
+          272,
+          210,
+          225,
+          36
+        ],
+        "rrf": [
+          72,
+          34,
+          105,
+          8,
+          106,
+          73
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 34,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 8,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 73,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 72,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 46,
+            "page": 5
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 127,
+            "page": 12
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 105,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 106,
+            "page": 11
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 272,
+            "page": 27
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 210,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 225,
+            "page": 23
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 36,
+            "page": 5
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 72,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 34,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 105,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 8,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 106,
+            "page": 11
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 73,
+            "page": 8
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 6,
+            "reciprocal_rank": 0.16666666666666666,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "flow-method",
+      "type": "term",
+      "paper_id": "2611.09863",
+      "question": "FlowAlign 使用什么框架定义路径一致性分数？",
+      "expected": "使用条件流匹配定义路径一致性分数。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "uses conditional flow matching to define a path-consistency score"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.5959999873302877,
+        "bm25": 4.556700005196035,
+        "rrf_fusion_and_fallback": 0.13139995280653238
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          3,
+          12,
+          15,
+          24,
+          25,
+          71
+        ],
+        "bm25": [
+          130,
+          4,
+          135,
+          59,
+          62,
+          132
+        ],
+        "rrf": [
+          3,
+          4,
+          130,
+          71,
+          12,
+          15
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 3,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 12,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 15,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 24,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 25,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 71,
+            "page": 10
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 130,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 4,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 135,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 59,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 62,
+            "page": 9
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 132,
+            "page": 21
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 3,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 4,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 130,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 71,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 12,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 15,
+            "page": 2
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "flow-stages",
+      "type": "method",
+      "paper_id": "2611.09863",
+      "question": "FlowAlign 训练分为哪两个阶段？",
+      "expected": "第一阶段学习以源表示为条件的速度场；第二阶段冻结该场并用它定义路径一致性分数。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "First, we learn a source-conditioned velocity field"
+        },
+        {
+          "page": 4,
+          "quote": "Second, we freeze this field and use it to define a path-consistency score"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.5721999807283282,
+        "bm25": 4.328399954829365,
+        "rrf_fusion_and_fallback": 0.12690003495663404
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          71,
+          15,
+          25,
+          3,
+          12,
+          20
+        ],
+        "bm25": [
+          130,
+          4,
+          135,
+          59,
+          62,
+          132
+        ],
+        "rrf": [
+          3,
+          71,
+          130,
+          15,
+          4,
+          25
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 71,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 15,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 25,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 3,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 12,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 20,
+            "page": 3
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 130,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 4,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 135,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 59,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 62,
+            "page": 9
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 132,
+            "page": 21
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 3,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 71,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 130,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 15,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 4,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 25,
+            "page": 4
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 6,
+            "reciprocal_rank": 0.16666666666666666,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "flow-datasets",
+      "type": "experiment",
+      "paper_id": "2611.09863",
+      "question": "FlowAlign 使用了哪些单细胞多组学基准数据集？",
+      "expected": "使用 PBMC 和 BMMC 基准。",
+      "evidence": [
+        {
+          "page": 7,
+          "quote": "PBMC and BMMC benchmarks evaluate source-only mapping"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.533400034531951,
+        "bm25": 4.339699982665479,
+        "rrf_fusion_and_fallback": 0.13100000796839595
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          55,
+          81,
+          8,
+          76,
+          53,
+          93
+        ],
+        "bm25": [
+          130,
+          4,
+          135,
+          59,
+          62,
+          132
+        ],
+        "rrf": [
+          14,
+          55,
+          130,
+          81,
+          4,
+          8
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 55,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 81,
+            "page": 11
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 8,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 76,
+            "page": 11
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 53,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 93,
+            "page": 13
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 130,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 4,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 135,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 59,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 62,
+            "page": 9
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 132,
+            "page": 21
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 14,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 55,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 130,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 81,
+            "page": 11
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 4,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 8,
+            "page": 2
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "flow-limits",
+      "type": "limitation",
+      "paper_id": "2611.09863",
+      "question": "FlowAlign 有哪些数据要求和分析假设方面的局限？",
+      "expected": "依赖配对数据、合适的共同向量空间和准确的第一阶段场；当前分析假设欧氏线性路径。",
+      "evidence": [
+        {
+          "page": 10,
+          "quote": "requires paired data, a meaningful common vector space for path construction, and an accurate Stage-1 field"
+        },
+        {
+          "page": 10,
+          "quote": "the current analysis assumes Euclidean linear paths"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.6078000189736485,
+        "bm25": 4.674100026022643,
+        "rrf_fusion_and_fallback": 0.13499998021870852
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          25,
+          20,
+          12,
+          50,
+          73,
+          19
+        ],
+        "bm25": [
+          130,
+          4,
+          135,
+          59,
+          62,
+          132
+        ],
+        "rrf": [
+          130,
+          3,
+          71,
+          25,
+          20,
+          4
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 25,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 20,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 12,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 50,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 73,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 19,
+            "page": 3
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 130,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 4,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 135,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 59,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 62,
+            "page": 9
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 132,
+            "page": 21
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 130,
+            "page": 21
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 3,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 71,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 25,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 20,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 4,
+            "page": 1
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "grasp-name",
+      "type": "term",
+      "paper_id": "2611.09864",
+      "question": "Grasp-TAGS 的名称代表什么，流程图中使用了什么仿真器？",
+      "expected": "Grasp-TAGS 名称包含 Task-Aware Grasp Selection；流程图展示 Isaac Lab 仿真器。",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "Task-Aware Grasp Selection via Critic Distillation"
+        },
+        {
+          "page": 4,
+          "quote": "Simulator (Isaac Lab)"
+        }
+      ],
+      "timing_ms": {
+        "dense": 2.993200032506138,
+        "bm25": 7.119599962607026,
+        "rrf_fusion_and_fallback": 0.07160002132877707
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          35,
+          13,
+          100,
+          6
+        ],
+        "bm25": [
+          68,
+          72,
+          13,
+          70,
+          64,
+          6
+        ],
+        "rrf": [
+          13,
+          6,
+          35,
+          68,
+          72,
+          100
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 35,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 13,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 100,
+            "page": 9
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 6,
+            "page": 1
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 68,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 72,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 13,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 70,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 64,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 6,
+            "page": 1
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 13,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 6,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 35,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 68,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 72,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 100,
+            "page": 9
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 4
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 4
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "grasp-critic",
+      "type": "method",
+      "paper_id": "2611.09864",
+      "question": "Grasp-TAGS 中，PPO 训练后如何处理学习到的 critic？",
+      "expected": "PPO 训练后的 critic 被蒸馏成抓取效用网络。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "the learned critic is distilled into a grasp utility network"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.0448000393807888,
+        "bm25": 9.854900010395795,
+        "rrf_fusion_and_fallback": 0.12739998055621982
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          49,
+          41,
+          65,
+          35,
+          33,
+          54
+        ],
+        "bm25": [
+          13,
+          33,
+          35,
+          5,
+          49,
+          16
+        ],
+        "rrf": [
+          49,
+          33,
+          35,
+          68,
+          64,
+          13
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 49,
+            "page": 5
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 41,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 65,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 35,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 33,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 54,
+            "page": 6
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 13,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 33,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 35,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 5,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 49,
+            "page": 5
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 16,
+            "page": 2
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 49,
+            "page": 5
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 33,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 35,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 68,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 64,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 13,
+            "page": 2
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 4,
+            "reciprocal_rank": 0.25,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 4,
+            "reciprocal_rank": 0.25,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "grasp-reward",
+      "type": "experiment",
+      "paper_id": "2611.09864",
+      "question": "高层控制器奖励中的任务完成目标是什么？",
+      "expected": "任务完成奖励鼓励机器人将物体运送到目标位姿。",
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "task completion, which encourages the robot to transport the object to the desired pose"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.5660999924875796,
+        "bm25": 2.821900008711964,
+        "rrf_fusion_and_fallback": 0.10429997928440571
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          48,
+          29,
+          40,
+          36,
+          37,
+          42
+        ],
+        "bm25": [],
+        "rrf": [
+          48,
+          29,
+          40,
+          36,
+          37,
+          42
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 48,
+            "page": 5
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 29,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 40,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 36,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 37,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 42,
+            "page": 4
+          }
+        ],
+        "bm25": [],
+        "rrf": [
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 48,
+            "page": 5
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 29,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 40,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 36,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 37,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 42,
+            "page": 4
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "grasp-future",
+      "type": "limitation",
+      "paper_id": "2611.09864",
+      "question": "Grasp-TAGS 后续计划如何扩展评测和真实部署？",
+      "expected": "扩展对更多家用物体的评测，并在 SPOT 平台进行真实部署。",
+      "evidence": [
+        {
+          "page": 8,
+          "quote": "extend the evaluation to additional household objects and real-world deployment on the SPOT platform"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.6792999813333154,
+        "bm25": 6.363200023770332,
+        "rrf_fusion_and_fallback": 0.12620002962648869
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          13,
+          6,
+          70,
+          35,
+          68,
+          49
+        ],
+        "bm25": [
+          68,
+          72,
+          13,
+          70,
+          64,
+          6
+        ],
+        "rrf": [
+          13,
+          68,
+          70,
+          6,
+          65,
+          75
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 13,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 6,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 70,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 35,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 68,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 49,
+            "page": 5
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 68,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 72,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 13,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 70,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 64,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 6,
+            "page": 1
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 13,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 68,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 70,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 6,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 65,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09864",
+            "chunk_idx": 75,
+            "page": 8
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "quant-benchmarks",
+      "type": "term",
+      "paper_id": "2611.09868",
+      "question": "CodeQuant2 分析异常值行为时使用了哪些推理基准？",
+      "expected": "论文在异常值分析中提到 GSM8K 和 AIME25。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "including GSM8K [10] and AIME25 [56]"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.4970999909564853,
+        "bm25": 4.427299951203167,
+        "rrf_fusion_and_fallback": 0.12020004214718938
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          69,
+          23,
+          71,
+          2,
+          0,
+          75
+        ],
+        "bm25": [
+          73,
+          75,
+          16,
+          10,
+          85,
+          23
+        ],
+        "rrf": [
+          23,
+          75,
+          69,
+          2,
+          10,
+          0
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 69,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 23,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 71,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 2,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 0,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 75,
+            "page": 9
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 73,
+            "page": 9
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 75,
+            "page": 9
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 16,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 10,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 85,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 23,
+            "page": 3
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 23,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 75,
+            "page": 9
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 69,
+            "page": 8
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 2,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 10,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 0,
+            "page": 1
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "quant-fluctuation",
+      "type": "method",
+      "paper_id": "2611.09868",
+      "question": "推理早期解码阶段观察到什么激活波动？",
+      "expected": "前 30 个解码步骤的平均激活标准差比非思考解码高约 20%。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "the average activation standard deviation over the first 30 decoding steps is about 20% higher than that of non-thinking decoding"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.6681000124663115,
+        "bm25": 2.8267999878153205,
+        "rrf_fusion_and_fallback": 0.10149995796382427
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          8,
+          1,
+          27,
+          87,
+          24,
+          5
+        ],
+        "bm25": [],
+        "rrf": [
+          8,
+          1,
+          27,
+          87,
+          24,
+          5
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 8,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 1,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 27,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 87,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 24,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 5,
+            "page": 1
+          }
+        ],
+        "bm25": [],
+        "rrf": [
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 8,
+            "page": 2
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 1,
+            "page": 1
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 27,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 87,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 24,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 5,
+            "page": 1
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 0
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "quant-baselines",
+      "type": "experiment",
+      "paper_id": "2611.09868",
+      "question": "评测表格中与 QuaRot 一起列出了哪些量化基线？",
+      "expected": "表中包含 ParoQuant、SqueezeLLM 和 CodeQuant；数字与设置应结合表格核对。",
+      "evidence": [
+        {
+          "page": 7,
+          "quote": "ParoQuant 14.771 23.070"
+        },
+        {
+          "page": 7,
+          "quote": "SqueezeLLM 14.627 22.642"
+        },
+        {
+          "page": 7,
+          "quote": "CodeQuant 13.623 21.410"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.055500004440546,
+        "bm25": 3.7137999897822738,
+        "rrf_fusion_and_fallback": 0.07499998901039362
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          20,
+          135,
+          113,
+          125,
+          62,
+          74
+        ],
+        "bm25": [
+          121,
+          122,
+          123,
+          125,
+          54,
+          64
+        ],
+        "rrf": [
+          121,
+          125,
+          60,
+          20,
+          135,
+          122
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 20,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 135,
+            "page": 18
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 113,
+            "page": 14
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 125,
+            "page": 16
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 62,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 74,
+            "page": 9
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 121,
+            "page": 16
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 122,
+            "page": 16
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 123,
+            "page": 16
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 125,
+            "page": 16
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 54,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 64,
+            "page": 8
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 121,
+            "page": 16
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 125,
+            "page": 16
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 60,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 20,
+            "page": 3
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 135,
+            "page": 18
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 122,
+            "page": 16
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true,
+              true,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true,
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "quant-limits",
+      "type": "limitation",
+      "paper_id": "2611.09868",
+      "question": "论文对量化后的推理行为和安全问题提出了哪些未来研究问题？",
+      "expected": "需要进一步研究量化后的推理轨迹及不可靠或过度自信输出等安全问题。",
+      "evidence": [
+        {
+          "page": 10,
+          "quote": "further study of its generated reasoning trajectories"
+        },
+        {
+          "page": 10,
+          "quote": "unreliable or overconfident outputs"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.6898000030778348,
+        "bm25": 2.6172000216320157,
+        "rrf_fusion_and_fallback": 0.07259997073560953
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          145,
+          167,
+          168,
+          140,
+          87,
+          155
+        ],
+        "bm25": [],
+        "rrf": [
+          145,
+          167,
+          168,
+          140,
+          87,
+          155
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 145,
+            "page": 20
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 167,
+            "page": 22
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 168,
+            "page": 23
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 140,
+            "page": 19
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 87,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 155,
+            "page": 21
+          }
+        ],
+        "bm25": [],
+        "rrf": [
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 145,
+            "page": 20
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 167,
+            "page": 22
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 168,
+            "page": 23
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 140,
+            "page": 19
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 87,
+            "page": 10
+          },
+          {
+            "paper_id": "2611.09868",
+            "chunk_idx": 155,
+            "page": 21
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              false,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              false,
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 0
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 0
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 0
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 0
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              false,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              false,
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "noanswer-amp",
+      "type": "unanswerable_probe",
+      "paper_id": "2611.09892",
+      "question": "论文中虚构设备 ZXQ-7391-BLUE 的激活码是什么？",
+      "expected": "无法从给定论文片段确认该虚构设备的激活码。",
+      "evidence": [],
+      "timing_ms": {
+        "dense": 1.7398000345565379,
+        "bm25": 7.169899996370077,
+        "rrf_fusion_and_fallback": 0.10880001354962587
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          180,
+          29
+        ],
+        "bm25": [
+          266,
+          66,
+          208,
+          251,
+          207,
+          263
+        ],
+        "rrf": [
+          180,
+          266,
+          29,
+          66,
+          208,
+          251
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 180,
+            "page": 17
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 29,
+            "page": 4
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 266,
+            "page": 27
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 66,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 208,
+            "page": 20
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 251,
+            "page": 25
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 207,
+            "page": 19
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 263,
+            "page": 27
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 180,
+            "page": 17
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 266,
+            "page": 27
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 29,
+            "page": 4
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 66,
+            "page": 7
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 208,
+            "page": 20
+          },
+          {
+            "paper_id": "2611.09892",
+            "chunk_idx": 251,
+            "page": 25
+          }
+        ]
+      },
+      "note": "Synthetic missing-marker probe: retrieval results are not an abstention or correctness score."
+    },
+    {
+      "id": "noanswer-flow",
+      "type": "unanswerable_probe",
+      "paper_id": "2611.09863",
+      "question": "论文中虚构望远镜 JVN-4826-GREEN 的访问码是什么？",
+      "expected": "无法从给定论文片段确认该虚构望远镜的访问码。",
+      "evidence": [],
+      "timing_ms": {
+        "dense": 2.9009999707341194,
+        "bm25": 9.131399972829968,
+        "rrf_fusion_and_fallback": 0.05800003418698907
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          62,
+          74
+        ],
+        "bm25": [],
+        "rrf": [
+          62,
+          74
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 62,
+            "page": 9
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 74,
+            "page": 10
+          }
+        ],
+        "bm25": [],
+        "rrf": [
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 62,
+            "page": 9
+          },
+          {
+            "paper_id": "2611.09863",
+            "chunk_idx": 74,
+            "page": 10
+          }
+        ]
+      },
+      "note": "Synthetic missing-marker probe: retrieval results are not an abstention or correctness score."
+    }
+  ]
+}

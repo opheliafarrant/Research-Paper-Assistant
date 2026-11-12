@@ -1,0 +1,226 @@
+{
+  "description": "Multi-task RAG retrieval benchmark covering Term, Method, Experiment, Unanswerable, and Limitation questions across 4 arXiv papers. Evaluates evidence text match independently of chunk_idx.",
+  "benchmark_version": "1.0",
+  "cases": [
+    {
+      "id": "term_amp1_01",
+      "category": "term",
+      "paper_id": "2611.09892",
+      "paper_title": "On Agentic Manipulation Policies",
+      "query": "What manipulation benchmarks including LIBERO are evaluated in this paper?",
+      "source_pages": [4],
+      "evidence_snippets": ["LIBERO-PRO", "BEHAVIOR-1K"],
+      "description": "Examines sparse keyword hit on exact academic benchmark names",
+      "is_unanswerable": false
+    },
+    {
+      "id": "method_amp1_continual_02",
+      "category": "method",
+      "paper_id": "2611.09892",
+      "paper_title": "On Agentic Manipulation Policies",
+      "query": "How does AMP1 implement persistent memory for continual learning from its own experience?",
+      "source_pages": [3],
+      "evidence_snippets": ["persistent memory", "record useful observations, strategies, and code"],
+      "description": "Tests semantic retrieval and adjacent chunk context for agent self-reflection mechanism",
+      "is_unanswerable": false
+    },
+    {
+      "id": "exp_amp1_realworld_03",
+      "category": "experiment",
+      "paper_id": "2611.09892",
+      "paper_title": "On Agentic Manipulation Policies",
+      "query": "What model and error recovery settings are evaluated in real-world hardware manipulation trials?",
+      "source_pages": [5],
+      "evidence_snippets": ["Table 1. Real-world trials", "Opus 5.5", "robot error recovery"],
+      "description": "Tests retrieval of experimental setup and physical hardware deployment parameters",
+      "is_unanswerable": false
+    },
+    {
+      "id": "noans_amp1_lidar_04",
+      "category": "unanswerable",
+      "paper_id": "2611.09892",
+      "paper_title": "On Agentic Manipulation Policies",
+      "query": "What is the 3D LiDAR point cloud frequency and range used for autonomous driving perception?",
+      "source_pages": [],
+      "evidence_snippets": [],
+      "description": "Negative adversarial probe: Paper is about robot manipulation, completely lacks autonomous driving LiDAR",
+      "is_unanswerable": true
+    },
+    {
+      "id": "lim_amp1_planning_05",
+      "category": "limitation",
+      "paper_id": "2611.09892",
+      "paper_title": "On Agentic Manipulation Policies",
+      "query": "What are the core limitations and future directions of agentic manipulation policies?",
+      "source_pages": [12, 13],
+      "evidence_snippets": ["policy is slow", "cannot reconsider a trajectory", "Fast local feedback controllers", "execution traces could also provide supervision"],
+      "description": "Multi-fact limitation evaluation spanning section 3B and discussion",
+      "is_unanswerable": false
+    },
+    {
+      "id": "term_flowalign_06",
+      "category": "term",
+      "paper_id": "2611.09863",
+      "paper_title": "Flow-Guided Target-Space Alignment via Path Consistency",
+      "query": "What is FlowAlign and what mathematical framework does it use for path-consistency?",
+      "source_pages": [4],
+      "evidence_snippets": ["FlowAlign", "conditional flow matching", "path-consistency score"],
+      "description": "Tests retrieval of exact novel algorithm name and formal framework",
+      "is_unanswerable": false
+    },
+    {
+      "id": "method_flowalign_stages_07",
+      "category": "method",
+      "paper_id": "2611.09863",
+      "paper_title": "Flow-Guided Target-Space Alignment via Path Consistency",
+      "query": "What are the two training stages in flow-guided target-space alignment?",
+      "source_pages": [4],
+      "evidence_snippets": ["source-conditioned velocity field", "paired source-target interpolation paths"],
+      "description": "Tests retrieval of two-stage methodological pipeline spanning consecutive paragraphs",
+      "is_unanswerable": false
+    },
+    {
+      "id": "exp_flowalign_benchmarks_08",
+      "category": "experiment",
+      "paper_id": "2611.09863",
+      "paper_title": "Flow-Guided Target-Space Alignment via Path Consistency",
+      "query": "On which single-cell multiome benchmark datasets is FlowAlign evaluated?",
+      "source_pages": [7, 8],
+      "evidence_snippets": ["PBMC", "BMMC", "single-cell multiome"],
+      "description": "Tests retrieval of biological multiome evaluation benchmarks",
+      "is_unanswerable": false
+    },
+    {
+      "id": "noans_flowalign_rlhf_09",
+      "category": "unanswerable",
+      "paper_id": "2611.09863",
+      "paper_title": "Flow-Guided Target-Space Alignment via Path Consistency",
+      "query": "How does FlowAlign implement reinforcement learning with human feedback (RLHF) and PPO reward models for LLM alignment?",
+      "source_pages": [],
+      "evidence_snippets": [],
+      "description": "Negative adversarial probe: Paper aligns multimodal spaces via flow matching, not LLM RLHF",
+      "is_unanswerable": true
+    },
+    {
+      "id": "lim_flowalign_paired_10",
+      "category": "limitation",
+      "paper_id": "2611.09863",
+      "paper_title": "Flow-Guided Target-Space Alignment via Path Consistency",
+      "query": "What limitations and future directions are acknowledged for flow-guided target alignment?",
+      "source_pages": [10],
+      "evidence_snippets": ["requires paired data", "assumes Euclidean linear paths", "partially paired or unpaired settings"],
+      "description": "Tests resistance to page 22-27 NeurIPS checklist distractors to locate page 10 conclusions",
+      "is_unanswerable": false
+    },
+    {
+      "id": "term_grasptags_11",
+      "category": "term",
+      "paper_id": "2611.09864",
+      "paper_title": "Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Loco-Manipulation",
+      "query": "What does Grasp-TAGS stand for and which simulator is used for policy training?",
+      "source_pages": [1, 4],
+      "evidence_snippets": ["Task-Aware Grasp Selection", "Isaac Lab"],
+      "description": "Tests exact expansion of acronym and simulation environment",
+      "is_unanswerable": false
+    },
+    {
+      "id": "method_grasptags_distill_12",
+      "category": "method",
+      "paper_id": "2611.09864",
+      "paper_title": "Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Loco-Manipulation",
+      "query": "How is the critic distillation objective formulated to rank candidate initial grasps?",
+      "source_pages": [6],
+      "evidence_snippets": ["Ldistill", "critic values"],
+      "description": "Tests retrieval of mathematical loss function for grasp selection",
+      "is_unanswerable": false
+    },
+    {
+      "id": "exp_grasptags_policy_13",
+      "category": "experiment",
+      "paper_id": "2611.09864",
+      "paper_title": "Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Loco-Manipulation",
+      "query": "What reward terms and weights are defined to train the high-level controller policy?",
+      "source_pages": [5],
+      "evidence_snippets": ["Reward Terms", "Task completion", "Positive reward when the object reaches the target pose"],
+      "description": "Tests retrieval of structured table and reward formulation",
+      "is_unanswerable": false
+    },
+    {
+      "id": "noans_grasptags_transformer_14",
+      "category": "unanswerable",
+      "paper_id": "2611.09864",
+      "paper_title": "Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Loco-Manipulation",
+      "query": "What is the multi-head self-attention layer count and patch size in the vision transformer backbone?",
+      "source_pages": [],
+      "evidence_snippets": [],
+      "description": "Negative adversarial probe: Paper uses MLP/critic policy in Isaac Lab, not ViT attention patches",
+      "is_unanswerable": true
+    },
+    {
+      "id": "lim_grasptags_future_15",
+      "category": "limitation",
+      "paper_id": "2611.09864",
+      "paper_title": "Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Loco-Manipulation",
+      "query": "What are the acknowledged limitations and future hardware evaluation plans for Grasp-TAGS?",
+      "source_pages": [8],
+      "evidence_snippets": ["deployment on the SPOT platform", "extend the evaluation to additional household objects", "Simulation results demonstrate"],
+      "description": "Tests distinction between Related Work prior limitations and paper's own future work",
+      "is_unanswerable": false
+    },
+    {
+      "id": "term_codequant2_16",
+      "category": "term",
+      "paper_id": "2611.09868",
+      "paper_title": "CodeQuant2: Enhanced Outlier Mitigation and Adaptive Clustering for Low-Precision LRMs",
+      "query": "What reasoning benchmarks are analyzed to characterize outlier activations in CodeQuant2?",
+      "source_pages": [4],
+      "evidence_snippets": ["GSM8K", "AIME25"],
+      "description": "Tests sparse keyword matching on exact reasoning evaluation datasets",
+      "is_unanswerable": false
+    },
+    {
+      "id": "method_codequant2_fluctuation_17",
+      "category": "method",
+      "paper_id": "2611.09868",
+      "paper_title": "CodeQuant2: Enhanced Outlier Mitigation and Adaptive Clustering for Low-Precision LRMs",
+      "query": "Why do large reasoning models exhibit larger activation fluctuations during early decoding steps?",
+      "source_pages": [4],
+      "evidence_snippets": ["activation standard deviation over the first 30 decoding steps", "non-thinking decoding"],
+      "description": "Tests retrieval of empirical outlier analysis across reasoning steps",
+      "is_unanswerable": false
+    },
+    {
+      "id": "exp_codequant2_baselines_18",
+      "category": "experiment",
+      "paper_id": "2611.09868",
+      "paper_title": "CodeQuant2: Enhanced Outlier Mitigation and Adaptive Clustering for Low-Precision LRMs",
+      "query": "What quantization baselines including QuaRot are compared under the A4W4 setting?",
+      "source_pages": [7],
+      "evidence_snippets": ["QuaRot", "ParoQuant", "SqueezeLLM", "CodeQuant"],
+      "description": "Tests retrieval of comparative quantization baseline methods",
+      "is_unanswerable": false
+    },
+    {
+      "id": "noans_codequant2_casp_19",
+      "category": "unanswerable",
+      "paper_id": "2611.09868",
+      "paper_title": "CodeQuant2: Enhanced Outlier Mitigation and Adaptive Clustering for Low-Precision LRMs",
+      "query": "What is the protein folding structure prediction accuracy of CodeQuant2 evaluated on CASP15 targets?",
+      "source_pages": [],
+      "evidence_snippets": [],
+      "description": "Negative adversarial probe: Paper is about LRM code quantization, completely unrelated to protein folding",
+      "is_unanswerable": true
+    },
+    {
+      "id": "lim_codequant2_safety_20",
+      "category": "limitation",
+      "paper_id": "2611.09868",
+      "paper_title": "CodeQuant2: Enhanced Outlier Mitigation and Adaptive Clustering for Low-Precision LRMs",
+      "query": "What limitations are discussed regarding post-training behaviors and safety evaluation in CodeQuant2?",
+      "source_pages": [10],
+      "evidence_snippets": ["further study of its generated reasoning trajectories", "behaviors learned during post-training", "unreliable or overconfident outputs"],
+      "description": "Tests retrieval of paper limitations despite heavy Checklist distractor presence",
+      "is_unanswerable": false
+    }
+  ]
+}

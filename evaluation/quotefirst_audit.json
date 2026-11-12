@@ -1,0 +1,103 @@
+{
+  "paper_id": "2611.09892",
+  "retrieved_chunk_indices": [
+    0,
+    5,
+    6,
+    20,
+    45,
+    51,
+    98,
+    104,
+    118,
+    123,
+    127,
+    128,
+    129,
+    130,
+    184
+  ],
+  "stage1_raw": "[Chunk 128, Page 12]:\n\"Notwithstanding these limitations, our results indicate that AMPs constitute a promising foundation for robot manipulation. They cannot yet be deployed in mission-critical settings, but neither can the alternatives. Specialist manipulation policies, such as VLAs and WAMs, are comparably fast but unreliable. AMPs are comparably reliable but slow.\"\n\n[Chunk 129, Page 12]:\n\"A general trend that supports this optimism is that the cost of a given capability level has fallen by roughly an order of magnitude per year [26, 27]. Thus we can expect the cost of a model call (the ‘thinking’ part of an AMP’s execution) to asymptote to zero over time. Beyond these general trends, the harness itself offers several avenues for acceleration.\"\n\n[Chunk 130, Page 13]:\n\"Reusing these routines avoids repeatedly writing code for calibration, geometric computations, and basic motions. Fast local feedback controllers could be synthesized from AMP experience [29]. AMP execution traces could also provide supervision for learned policies [11, 31]. And the model could plan the next motion while the current one executes, thus overlapping thinking with acting.\"",
+  "verbatim_verification": [
+    {
+      "chunk_idx": 128,
+      "quote": "Notwithstanding these limitations, our results indicate that AMPs constitute a promising foundation for robot manipulation. They cannot yet be deployed in mission-critical settings, but neither can the alternatives. Specialist manipulation policies, such as VLAs and WAMs, are comparably fast but unreliable. AMPs are comparably reliable but slow.",
+      "verbatim_check": {
+        "verbatim_exact": true,
+        "match_ratio": 1.0,
+        "method": "strict_substring"
+      }
+    },
+    {
+      "chunk_idx": 129,
+      "quote": "A general trend that supports this optimism is that the cost of a given capability level has fallen by roughly an order of magnitude per year [26, 27]. Thus we can expect the cost of a model call (the ‘thinking’ part of an AMP’s execution) to asymptote to zero over time. Beyond these general trends, the harness itself offers several avenues for acceleration.",
+      "verbatim_check": {
+        "verbatim_exact": true,
+        "match_ratio": 1.0,
+        "method": "strict_substring"
+      }
+    },
+    {
+      "chunk_idx": 130,
+      "quote": "Reusing these routines avoids repeatedly writing code for calibration, geometric computations, and basic motions. Fast local feedback controllers could be synthesized from AMP experience [29]. AMP execution traces could also provide supervision for learned policies [11, 31]. And the model could plan the next motion while the current one executes, thus overlapping thinking with acting.",
+      "verbatim_check": {
+        "verbatim_exact": true,
+        "match_ratio": 1.0,
+        "method": "strict_substring"
+      }
+    }
+  ],
+  "stage2_synthesis": "结构化局限性：\n- AMPs 在关键任务中尚未能够部署。\n- 相比之下，VLAs 和 WAMs 虽然速度快但不可靠。\n- AMPs 现在可靠但速度较慢。\n\n未来展望：\n- 模型成本（即“思考”部分的执行）随着时间推移将接近零。\n- 通用趋势表明，能力水平的成本每年下降一个数量级 [26, 27]。\n- 可以通过重用这些程序来避免编写用于校准、几何计算和基本运动的代码。\n- 快速局部反馈控制器可以从 AMP 的经验中生成 [29]。\n- 执行轨迹可以提供给学习政策的监督 [11, 31]。\n- 模型能够计划下一步动作，同时当前动作执行，从而在思考与行动之间重叠。",
+  "fact_evaluation": [
+    {
+      "fact_id": "slow_reasoning",
+      "evidence_chunks": [
+        127
+      ],
+      "evidence_keyword": "policy is slow",
+      "in_retrieved_context": true,
+      "in_stage1_quotes": false,
+      "in_stage2_synthesis": true
+    },
+    {
+      "fact_id": "dynamic_replanning",
+      "evidence_chunks": [
+        127
+      ],
+      "evidence_keyword": "cannot reconsider a trajectory",
+      "in_retrieved_context": true,
+      "in_stage1_quotes": false,
+      "in_stage2_synthesis": false
+    },
+    {
+      "fact_id": "feedback_controllers",
+      "evidence_chunks": [
+        130
+      ],
+      "evidence_keyword": "fast local feedback controllers",
+      "in_retrieved_context": true,
+      "in_stage1_quotes": true,
+      "in_stage2_synthesis": true
+    },
+    {
+      "fact_id": "trace_supervision",
+      "evidence_chunks": [
+        130
+      ],
+      "evidence_keyword": "execution traces could also provide supervision",
+      "in_retrieved_context": true,
+      "in_stage1_quotes": true,
+      "in_stage2_synthesis": true
+    },
+    {
+      "fact_id": "overlap_thinking_acting",
+      "evidence_chunks": [
+        130
+      ],
+      "evidence_keyword": "overlapping thinking with acting",
+      "in_retrieved_context": true,
+      "in_stage1_quotes": true,
+      "in_stage2_synthesis": true
+    }
+  ]
+}

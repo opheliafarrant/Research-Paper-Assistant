@@ -1,0 +1,4695 @@
+{
+  "schema_version": 1,
+  "dataset_version": "1.1",
+  "mode": "all",
+  "configuration": {
+    "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "generation_model": "qwen2.5:3b",
+    "ollama_url": "http://127.0.0.1:11435",
+    "dense_threshold": 0.4,
+    "rrf_k": 60,
+    "candidate_k": 12,
+    "final_k": 6,
+    "query_language": "en",
+    "scope": "single-paper",
+    "unanswerable_probes": "marker absence, not semantic proof"
+  },
+  "caveats": [
+    "Exploratory labels are not exhaustive or independent held-out data.",
+    "Evidence hit requires a complete normalized quote in one returned chunk; alternative valid evidence is unjudged.",
+    "Evidence-level recall is relative to the listed evidence units, not all relevant passages.",
+    "Precision and accuracy cannot be computed without complete relevance judgments.",
+    "Generation quality requires separate human review; no keyword score is called faithfulness.",
+    "Timing is single-run warm retrieval; no p95 or end-to-end SLA is implied."
+  ],
+  "input_sha256": {
+    "evaluation\\rag_eval_holdout_v1.json": "3e2c290869cba2e57f5c7a87364df21fbb0035540a140bd2865d63b576ee3986",
+    "data\\cache\\faiss.index": "be69219890dda9208104f231086e86ea3c90c78926641959a267ff2d73957186",
+    "data\\cache\\faiss_meta.pkl": "4f341cb96159c3233f367ab5788069a3e0b0485b9a58b490c98110e0fcc4f89f",
+    "data\\cache\\bm25.pkl": "5d8b3f67f7cf2e1960da887d69010b61c22ccc58cf897169251d19b203bb3a3c",
+    "data\\pdfs\\2611.09803.pdf": "37c12516f828cba943c4a44fc5c8312f1056c768c5d6c817e313d597e4cf3a5f",
+    "data\\pdfs\\2611.09847.pdf": "49f396cd31e770a54f269c326e9cc5c297e75856b6a3f2144bcc5784fc820f3f",
+    "data\\pdfs\\2611.09878.pdf": "ed3c3711f42b128a2ed4031560a19f87fbb1fdde92aab1087d3cb887734b26d6",
+    "data\\pdfs\\2611.09882.pdf": "1ee1e572701677ff2e480c20e1115ce5023f4a3014cbb4816cbd098eef49044b"
+  },
+  "code_sha256": {
+    "evaluation\\rag_quality_eval.py": "903f1f16e516953e05d32559107ec489d0211c5a85c4e4d9184f209df85d8bce",
+    "research_assistant\\application\\research.py": "61c6aec8f4055c28b52eef9ae3d0f53d22a2c9a1be09f29c833a00357113239b",
+    "research_assistant\\domain\\fusion.py": "d880151356d53df805cb3e73aafd3f9be755a44d6214b75aad108c75f9224a73",
+    "research_assistant\\infrastructure\\indexes.py": "e139aaee90910be06788af0547f35251f820eabb3d73b4a628a24c338cbd0ee6",
+    "research_assistant\\infrastructure\\embedding.py": "e0807562e61eaca27ff7a7477f22eed4d7de7c6ad7a2a0a4d2f9e6e8ef3634a3",
+    "research_assistant\\config.py": "e47ddb4c67eda92be1dd71e45d37c9132bae9996e6bbbdab45d39c18b2b28ea6"
+  },
+  "local_model_manifest_sha256": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+  "runtime": {
+    "python": "3.11.18",
+    "faiss_cpu": "1.15.1",
+    "sentence_transformers": "6.2.0",
+    "rank_bm25": "0.2.2"
+  },
+  "validation": [
+    {
+      "id": "cua-interface",
+      "evidence_units": 1
+    },
+    {
+      "id": "cua-competitions",
+      "evidence_units": 1
+    },
+    {
+      "id": "graded-blur",
+      "evidence_units": 1
+    },
+    {
+      "id": "graded-accuracy",
+      "evidence_units": 1
+    },
+    {
+      "id": "flowmop-outputs",
+      "evidence_units": 1
+    },
+    {
+      "id": "flowmop-spline",
+      "evidence_units": 1
+    },
+    {
+      "id": "laya-order",
+      "evidence_units": 1
+    },
+    {
+      "id": "laya-shuffle",
+      "evidence_units": 1
+    },
+    {
+      "id": "noanswer-nat-cua",
+      "marker_absent": true
+    },
+    {
+      "id": "noanswer-nat-graded",
+      "marker_absent": true
+    },
+    {
+      "id": "noanswer-nat-flowmop",
+      "marker_absent": true
+    },
+    {
+      "id": "noanswer-nat-laya",
+      "marker_absent": true
+    }
+  ],
+  "retrieval_summary": {
+    "overall": {
+      "dense": {
+        "1": {
+          "queries": 8,
+          "hit_rate": 0.125,
+          "mean_annotated_evidence_recall": 0.125,
+          "mrr": 0.125
+        },
+        "3": {
+          "queries": 8,
+          "hit_rate": 0.375,
+          "mean_annotated_evidence_recall": 0.375,
+          "mrr": 0.20833333333333331
+        },
+        "5": {
+          "queries": 8,
+          "hit_rate": 0.375,
+          "mean_annotated_evidence_recall": 0.375,
+          "mrr": 0.20833333333333331
+        },
+        "6": {
+          "queries": 8,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.22916666666666666
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 8,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.5
+        },
+        "3": {
+          "queries": 8,
+          "hit_rate": 0.625,
+          "mean_annotated_evidence_recall": 0.625,
+          "mrr": 0.5416666666666666
+        },
+        "5": {
+          "queries": 8,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.75,
+          "mrr": 0.5666666666666667
+        },
+        "6": {
+          "queries": 8,
+          "hit_rate": 0.875,
+          "mean_annotated_evidence_recall": 0.875,
+          "mrr": 0.5875
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 8,
+          "hit_rate": 0.125,
+          "mean_annotated_evidence_recall": 0.125,
+          "mrr": 0.125
+        },
+        "3": {
+          "queries": 8,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.2916666666666667
+        },
+        "5": {
+          "queries": 8,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.2916666666666667
+        },
+        "6": {
+          "queries": 8,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.2916666666666667
+        }
+      }
+    },
+    "method": {
+      "dense": {
+        "1": {
+          "queries": 5,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 5,
+          "hit_rate": 0.2,
+          "mean_annotated_evidence_recall": 0.2,
+          "mrr": 0.06666666666666667
+        },
+        "5": {
+          "queries": 5,
+          "hit_rate": 0.2,
+          "mean_annotated_evidence_recall": 0.2,
+          "mrr": 0.06666666666666667
+        },
+        "6": {
+          "queries": 5,
+          "hit_rate": 0.2,
+          "mean_annotated_evidence_recall": 0.2,
+          "mrr": 0.06666666666666667
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 5,
+          "hit_rate": 0.4,
+          "mean_annotated_evidence_recall": 0.4,
+          "mrr": 0.4
+        },
+        "3": {
+          "queries": 5,
+          "hit_rate": 0.6,
+          "mean_annotated_evidence_recall": 0.6,
+          "mrr": 0.4666666666666667
+        },
+        "5": {
+          "queries": 5,
+          "hit_rate": 0.8,
+          "mean_annotated_evidence_recall": 0.8,
+          "mrr": 0.5066666666666667
+        },
+        "6": {
+          "queries": 5,
+          "hit_rate": 0.8,
+          "mean_annotated_evidence_recall": 0.8,
+          "mrr": 0.5066666666666667
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 5,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 5,
+          "hit_rate": 0.2,
+          "mean_annotated_evidence_recall": 0.2,
+          "mrr": 0.06666666666666667
+        },
+        "5": {
+          "queries": 5,
+          "hit_rate": 0.2,
+          "mean_annotated_evidence_recall": 0.2,
+          "mrr": 0.06666666666666667
+        },
+        "6": {
+          "queries": 5,
+          "hit_rate": 0.2,
+          "mean_annotated_evidence_recall": 0.2,
+          "mrr": 0.06666666666666667
+        }
+      }
+    },
+    "experiment": {
+      "dense": {
+        "1": {
+          "queries": 3,
+          "hit_rate": 0.3333333333333333,
+          "mean_annotated_evidence_recall": 0.3333333333333333,
+          "mrr": 0.3333333333333333
+        },
+        "3": {
+          "queries": 3,
+          "hit_rate": 0.6666666666666666,
+          "mean_annotated_evidence_recall": 0.6666666666666666,
+          "mrr": 0.4444444444444444
+        },
+        "5": {
+          "queries": 3,
+          "hit_rate": 0.6666666666666666,
+          "mean_annotated_evidence_recall": 0.6666666666666666,
+          "mrr": 0.4444444444444444
+        },
+        "6": {
+          "queries": 3,
+          "hit_rate": 1.0,
+          "mean_annotated_evidence_recall": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 3,
+          "hit_rate": 0.6666666666666666,
+          "mean_annotated_evidence_recall": 0.6666666666666666,
+          "mrr": 0.6666666666666666
+        },
+        "3": {
+          "queries": 3,
+          "hit_rate": 0.6666666666666666,
+          "mean_annotated_evidence_recall": 0.6666666666666666,
+          "mrr": 0.6666666666666666
+        },
+        "5": {
+          "queries": 3,
+          "hit_rate": 0.6666666666666666,
+          "mean_annotated_evidence_recall": 0.6666666666666666,
+          "mrr": 0.6666666666666666
+        },
+        "6": {
+          "queries": 3,
+          "hit_rate": 1.0,
+          "mean_annotated_evidence_recall": 1.0,
+          "mrr": 0.7222222222222222
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 3,
+          "hit_rate": 0.3333333333333333,
+          "mean_annotated_evidence_recall": 0.3333333333333333,
+          "mrr": 0.3333333333333333
+        },
+        "3": {
+          "queries": 3,
+          "hit_rate": 1.0,
+          "mean_annotated_evidence_recall": 1.0,
+          "mrr": 0.6666666666666666
+        },
+        "5": {
+          "queries": 3,
+          "hit_rate": 1.0,
+          "mean_annotated_evidence_recall": 1.0,
+          "mrr": 0.6666666666666666
+        },
+        "6": {
+          "queries": 3,
+          "hit_rate": 1.0,
+          "mean_annotated_evidence_recall": 1.0,
+          "mrr": 0.6666666666666666
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "cua-interface",
+      "type": "method",
+      "paper_id": "2611.09847",
+      "question": "What observations and actions let a computer-use agent perform embodied tasks?",
+      "expected": "通过屏幕截图及键盘鼠标操作与环境交互。",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "screenshots and keyboard and mouse actions"
+        }
+      ],
+      "retrieval_meta": {
+        "search_query": "What observations and actions let a computer-use agent perform embodied tasks?",
+        "translated": false,
+        "faiss_count": 12,
+        "bm25_count": 12
+      },
+      "timing_ms": {
+        "dense": 0.5889000021852553,
+        "bm25": 8.141599944792688,
+        "rrf_pipeline": 27.143999992404133
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          6,
+          0,
+          12,
+          52,
+          32,
+          31
+        ],
+        "bm25": [
+          1,
+          6,
+          31,
+          12,
+          30,
+          7
+        ],
+        "rrf": [
+          6,
+          12,
+          31,
+          52,
+          0,
+          8
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 6,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 0,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 12,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 52,
+            "page": 7,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 32,
+            "page": 6,
+            "page_end": 6
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 31,
+            "page": 5,
+            "page_end": 6
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 1,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 6,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 31,
+            "page": 5,
+            "page_end": 6
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 12,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 30,
+            "page": 5,
+            "page_end": 5
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 7,
+            "page": 1,
+            "page_end": 2
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 6,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 12,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 31,
+            "page": 5,
+            "page_end": 6
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 52,
+            "page": 7,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 0,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 8,
+            "page": 2,
+            "page_end": 2
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        }
+      },
+      "generation": {
+        "status": "ok",
+        "answer": "A computer-use agent can perform embodied tasks by observing the environment rendered on a screen and interacting with it through software. The observations include physical environments such as camera images of scenes, 3D scans, or changes in rooms and viewpoints within the world that keeps moving. Actions involve manipulating these environments using controls provided by the software, which includes actions like moving (move( , x, y, z, θ)), opening or closing a gripper, clicking on screen elements such as buttons, menus, windows, and typing commands.\n\nThe exact method is described in Excerpt 3 (Paper ID: 2611.09847, Page: 5-6). The software for each competition was built to render the agent's view of a physical environment on a screen and provide controls for acting within it. This shared agent design allows the same computer-use agent to perform tasks across different embodied AI tasks by changing only the specific software used in each competition.\n\nThe baseline is that these tasks can be formulated as interactions with digital software, which lets us apply the same methods for training agents to perform these interactions (Excerpt 2, Paper ID: 2611.09847, Page: 2). The limitations are not explicitly stated in the provided excerpts but could include differences in specific hardware or software configurations required by each competition and potential variations in how tasks are defined across different embodied AI environments.",
+        "sources": [
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 6,
+            "text": "a screen and provides controls for acting in the physical environment (Figure 1)A computer-use agent can then observe the environment, take actions, and inspect their consequences using the same interface that it uses to operate ordinary desktop software. Task-specific functionality resides in the software rather than the agent design, allowing us to use existing computer-use agents across different embodied tasks without developing specialized models. To investigate our approach, we develop software applications for four embodied AI tasks: visionlanguage navigation, dialogue-driven navigation, language-guided 3D segmentation, and referring video segmentation",
+            "page": 1,
+            "page_end": 1,
+            "page_spans": [
+              {
+                "page": 1,
+                "start": 0,
+                "end": 667
+              }
+            ],
+            "_faiss_score": 0.7913533449172974,
+            "_bm25_score": 32.15682601495244,
+            "_rrf_score": 0.032522,
+            "_confidence": 0.89,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.89"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 12,
+            "text": "embodied tasks can become part of the training of future general-purpose agentsWe therefore believe that embodied AI will converge on a single general model, just as computer use did (OpenAI, 2026c; Anthropic, 2026). 2 Methodology Our goal is to provide sparks of evidence for our hypothesis that the capabilities computer-use agents learn on digital software also generalize to embodied environments. We entered four different ECCV workshop competitions, and evaluated a single computer-use agent on their official test sets. We first describe the computer-use agent shared across all four, and then the software we built for each competition",
+            "page": 2,
+            "page_end": 2,
+            "page_spans": [
+              {
+                "page": 2,
+                "start": 0,
+                "end": 643
+              }
+            ],
+            "_faiss_score": 0.7648677825927734,
+            "_bm25_score": 28.513734320895562,
+            "_rrf_score": 0.031498,
+            "_confidence": 0.87,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.87"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 31,
+            "text": "lets us apply the same methods for training agents to perform these interactionsOur results in Section 3 offer initial evidence: using the same agent and changing only the software, we performed competitively in four embodied competitions. 5See Locate Act Keys Explore Time Computer use Embodied AI a screenshot a small button click(x, y) Ctrl + S hello shortcuts and typing File Edit View menus and windows the screen often changes slowly a camera image a socket in a 3D scan move( , x, y, z, θ) open or close the gripper rooms and viewpoints the world keeps moving Figure 3: Computer use and embodied AI require much of the same from an agent",
+            "page": 5,
+            "page_end": 6,
+            "page_spans": [
+              {
+                "page": 5,
+                "start": 0,
+                "end": 241
+              },
+              {
+                "page": 6,
+                "start": 241,
+                "end": 644
+              }
+            ],
+            "_faiss_score": 0.6567145586013794,
+            "_bm25_score": 28.938966003536095,
+            "_rrf_score": 0.031025,
+            "_confidence": 0.81,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.81"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 52,
+            "text": "eed alongside task success (Arora and Zanette, 2025; Aggarwal and Welleck, 2025)These directions call on embodied AI researchers to expose their simulators and robots through software, and on developers of computer-use agents to include such software in training. 75 Conclusion In this paper, we argued that computer-use agents can already act as embodied generalists, because embodied tasks can be formulated as interaction with digital software. Using a single computer-use agent and changing only the software, we won prizes in four ECCV workshop competitions, from navigation to video segmentation",
+            "page": 7,
+            "page_end": 8,
+            "page_spans": [
+              {
+                "page": 7,
+                "start": 0,
+                "end": 265
+              },
+              {
+                "page": 8,
+                "start": 265,
+                "end": 601
+              }
+            ],
+            "_faiss_score": 0.7257254123687744,
+            "_bm25_score": 27.293290279598068,
+            "_rrf_score": 0.03055,
+            "_confidence": 0.84,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.84"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 0,
+            "text": "Computer-Use Agents Are Embodied Generalists Pranjal Aggarwal Sean Welleck Carnegie Mellon University Abstract In many areas of AI, general-purpose models have increasingly replaced handcrafted methods and specialized architectures. We argue that embodied AI is poised for a similar shift. Our key claim is that embodied tasks can be formulated as interaction with digital software. Specifically, we build software that renders an agent’s view of a physical environment on a screen and provides controls for acting in it",
+            "page": 1,
+            "page_end": 1,
+            "page_spans": [
+              {
+                "page": 1,
+                "start": 0,
+                "end": 520
+              }
+            ],
+            "_faiss_score": 0.781629204750061,
+            "_bm25_score": 24.783106385261313,
+            "_rrf_score": 0.030214,
+            "_confidence": 0.86,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.86"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 8,
+            "text": "while observing the screen. We argue that physical environments are no differentOnce exposed through software, they become just another interface for the same agent. entries place first in OpenSUN3D, second in MeViSv2-Text, third in DialNav, and sixth in the VLNVerse competitions. These results demonstrate that computer-use agents can achieve strong performance across diverse embodied tasks by interacting with task-specific software through a shared agent design. Beyond these results, we argue that embodied AI can follow the same path that computer use has already taken. Only two years ago, computer-use agents faced the challenges that embodied AI faces today",
+            "page": 2,
+            "page_end": 2,
+            "page_spans": [
+              {
+                "page": 2,
+                "start": 0,
+                "end": 667
+              }
+            ],
+            "_faiss_score": 0.6384539008140564,
+            "_bm25_score": 26.134160176954733,
+            "_rrf_score": 0.028595,
+            "_confidence": 0.77,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.77"
+          }
+        ],
+        "elapsed_seconds": 3.4651272000046447
+      }
+    },
+    {
+      "id": "cua-competitions",
+      "type": "experiment",
+      "paper_id": "2611.09847",
+      "question": "How many ECCV workshop competitions did the entries win prizes in?",
+      "expected": "四个 ECCV 工作坊竞赛，分别取得第一、二、三和六名。",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "first-, second-, third-, and sixth-place prizes across four ECCV workshop competitions"
+        }
+      ],
+      "retrieval_meta": {
+        "search_query": "How many ECCV workshop competitions did the entries win prizes in?",
+        "translated": false,
+        "faiss_count": 9,
+        "bm25_count": 9
+      },
+      "timing_ms": {
+        "dense": 0.7986999698914587,
+        "bm25": 5.686499993316829,
+        "rrf_pipeline": 32.35659998608753
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          53,
+          2,
+          55,
+          26,
+          28,
+          1
+        ],
+        "bm25": [
+          1,
+          53,
+          52,
+          22,
+          2,
+          12
+        ],
+        "rrf": [
+          53,
+          1,
+          2,
+          55,
+          52,
+          26
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 53,
+            "page": 8,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 55,
+            "page": 8,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 26,
+            "page": 5,
+            "page_end": 5
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 28,
+            "page": 5,
+            "page_end": 5
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 1,
+            "page": 1,
+            "page_end": 1
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 1,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 53,
+            "page": 8,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 52,
+            "page": 7,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 22,
+            "page": 4,
+            "page_end": 4
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 12,
+            "page": 2,
+            "page_end": 2
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 53,
+            "page": 8,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 1,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 55,
+            "page": 8,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 52,
+            "page": 7,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 26,
+            "page": 5,
+            "page_end": 5
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 6,
+            "reciprocal_rank": 0.16666666666666666,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      },
+      "generation": {
+        "status": "ok",
+        "answer": "The entries won prizes in four ECCV workshop competitions. This information is stated explicitly in Excerpt 1 (Paper ID: 2611.09847, Page: 8).",
+        "sources": [
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 53,
+            "text": "prizes in four ECCV workshop competitions, from navigation to video segmentationOperating that software through a GUI cost little compared to a text API, and a vision-language model with no action head matched 𝜋0.5 when trained on the same robot demonstrations. We then traced how computer-use agents became general and superhuman over the last two years, through visual grounding, environments for reinforcement learning, and speed, and argued that embodied AI should follow the same playbook",
+            "page": 8,
+            "page_end": 8,
+            "page_spans": [
+              {
+                "page": 8,
+                "start": 0,
+                "end": 493
+              }
+            ],
+            "_faiss_score": 0.6609252691268921,
+            "_bm25_score": 31.334425201746747,
+            "_rrf_score": 0.032522,
+            "_confidence": 0.83,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.83"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 1,
+            "text": "iew of a physical environment on a screen and provides controls for acting in itA computer-use agent (CUA) can then perform embodied tasks through the same screenshots and keyboard and mouse actions that it uses to operate ordinary software. Using a single CUA design and changing only the software, our entries win first-, second-, third-, and sixth-place prizes across four ECCV workshop competitions, without any competition-specific agent tuning",
+            "page": 1,
+            "page_end": 1,
+            "page_spans": [
+              {
+                "page": 1,
+                "start": 0,
+                "end": 449
+              }
+            ],
+            "_faiss_score": 0.4425612986087799,
+            "_bm25_score": 40.67575312166829,
+            "_rrf_score": 0.031545,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 2,
+            "text": "s four ECCV workshop competitions, without any competition-specific agent tuningThese results suggest that the skills CUAs learn on software, such as visual grounding, precise clicking, and exploration, already carry over to embodied tasks, giving CUAs a far broader scope in embodied AI than previously realized. We therefore advocate that computer-use agents can be embodied generalists",
+            "page": 1,
+            "page_end": 1,
+            "page_spans": [
+              {
+                "page": 1,
+                "start": 0,
+                "end": 388
+              }
+            ],
+            "_faiss_score": 0.5625196695327759,
+            "_bm25_score": 22.64173034864105,
+            "_rrf_score": 0.031514,
+            "_confidence": 0.77,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.77"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 55,
+            "text": "erse, DialNav, OpenSUN3D, and MeViSv2 competitions and their ECCV 2026 workshopsAll opinions expressed in this paper are the authors’ own and do not necessarily reflect the views of our sponsors or the competition organizers. References Dennis Abts, Jonathan Ross, Jonathan Sparling, Mark Wong-VanHaren, Max Baker, Tom Hawkins, Andrew Bell, John Thompson, Temesghen Kahsai, Garrin Kimmell, Jennifer Hwang, Rebekah Leslie-Hurd, Michael Bye, E. R",
+            "page": 8,
+            "page_end": 8,
+            "page_spans": [
+              {
+                "page": 8,
+                "start": 0,
+                "end": 444
+              }
+            ],
+            "_faiss_score": 0.49725744128227234,
+            "_bm25_score": 16.722861177598997,
+            "_rrf_score": 0.030366,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 52,
+            "text": "eed alongside task success (Arora and Zanette, 2025; Aggarwal and Welleck, 2025)These directions call on embodied AI researchers to expose their simulators and robots through software, and on developers of computer-use agents to include such software in training. 75 Conclusion In this paper, we argued that computer-use agents can already act as embodied generalists, because embodied tasks can be formulated as interaction with digital software. Using a single computer-use agent and changing only the software, we won prizes in four ECCV workshop competitions, from navigation to video segmentation",
+            "page": 7,
+            "page_end": 8,
+            "page_spans": [
+              {
+                "page": 7,
+                "start": 0,
+                "end": 265
+              },
+              {
+                "page": 8,
+                "start": 265,
+                "end": 601
+              }
+            ],
+            "_faiss_score": 0.40281733870506287,
+            "_bm25_score": 26.425671457255174,
+            "_rrf_score": 0.030366,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 26,
+            "text": "6; OpenSUN3D, 2026; Liu et al., 2026). All scores are expressed on a 0–100 scaleCompetition Place Metric Ours Best other VLNVerse 6th Avg SR@3 87.30 90.70 NDTW (coarse / fine) 95.0 / 96.8 96.3 / 97.6 DialNav 3rd Endpoint success rate 65.26 – SPL 52.87 – OpenSUN3D 1st AP50 25.88 21.45 AP25 36.52 26.50 MeViSv2-Text 2nd Final 86.72 90.81 J&F 74.96 79.22 3.2 GUI operations or text APIs? A natural question is whether we need to construct GUIs or could instead provide direct text APIs for navigation and other operations. We view computer use as operating a digital interface. GUIs and APIs are two choices for that interface",
+            "page": 5,
+            "page_end": 5,
+            "page_spans": [
+              {
+                "page": 5,
+                "start": 0,
+                "end": 624
+              }
+            ],
+            "_faiss_score": 0.4883868992328644,
+            "_rrf_score": 0.015625,
+            "_confidence": 0.48,
+            "_confidence_label": "参考",
+            "_confidence_badge": "参考 0.48"
+          }
+        ],
+        "elapsed_seconds": 0.9493604999734089
+      }
+    },
+    {
+      "id": "graded-blur",
+      "type": "method",
+      "paper_id": "2611.09878",
+      "question": "Which unknown blur condition does the article analyze?",
+      "expected": "未知高斯模糊。",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "under unknown Gaussian blur"
+        }
+      ],
+      "retrieval_meta": {
+        "search_query": "Which unknown blur condition does the article analyze?",
+        "translated": false,
+        "faiss_count": 12,
+        "bm25_count": 7
+      },
+      "timing_ms": {
+        "dense": 0.783399969805032,
+        "bm25": 4.864800022915006,
+        "rrf_pipeline": 25.460999982897192
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          162,
+          138,
+          165,
+          45,
+          50,
+          140
+        ],
+        "bm25": [
+          45,
+          160,
+          1,
+          137,
+          187,
+          0
+        ],
+        "rrf": [
+          45,
+          138,
+          162,
+          165
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 162,
+            "page": 23,
+            "page_end": 23
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 138,
+            "page": 20,
+            "page_end": 20
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 165,
+            "page": 23,
+            "page_end": 23
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 45,
+            "page": 7,
+            "page_end": 7
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 50,
+            "page": 7,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 140,
+            "page": 20,
+            "page_end": 20
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 45,
+            "page": 7,
+            "page_end": 7
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 160,
+            "page": 23,
+            "page_end": 23
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 1,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 137,
+            "page": 20,
+            "page_end": 20
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 187,
+            "page": 26,
+            "page_end": 26
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 0,
+            "page": 1,
+            "page_end": 1
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 45,
+            "page": 7,
+            "page_end": 7
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 138,
+            "page": 20,
+            "page_end": 20
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 162,
+            "page": 23,
+            "page_end": 23
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 165,
+            "page": 23,
+            "page_end": 23
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 4
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 4
+          }
+        }
+      },
+      "generation": {
+        "status": "ok",
+        "answer": "The article analyzes unknown blur conditions under Gaussian blurring. Specifically, it mentions that images are blurred by a Gaussian of standard deviation σb input pixels and contrast normalized again (Excerpt 2, p. 20). The analysis is conducted at the zooms 0.5 and 2, with sharp images as the baseline condition.",
+        "sources": [
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 45,
+            "text": "nt feature may follow a γ-normalization that is not itself invariant, and by Thm4.2 it then factors through πq. The two factorizations differ in content: the bundle quotient keeps the invariant s1/2ρq(f) of part (iii), which the fibre quotient discards, and which the networks of Sec. 6 use only in a foreground gate. Under blur the two realizations behave differently. 5. Blur and the scale direction 5.1. Unknown blur. An image may arrive already smoothed: by defocus, by a reduction of resolution, or by optics whose blur is fixed in pixels while the object is seen smaller. We model this by I′ = gb ∗I with an unknown b > 0",
+            "page": 7,
+            "page_end": 7,
+            "page_spans": [
+              {
+                "page": 7,
+                "start": 0,
+                "end": 627
+              }
+            ],
+            "_faiss_score": 0.4818806052207947,
+            "_bm25_score": 19.293196573277477,
+            "_rrf_score": 0.032018,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 138,
+            "text": "enlarged strokes and changes nothing. Table 4. Unknown blur. The networks of Tab1, trained on sharp digits and not retrained, tested on the same 5,000 test digits on the canvas 57: blurred by a Gaussian of standard deviation σb input pixels and contrast normalized again; with the resolution halved (antialiased reduction by two, bicubic enlargement); and at the zooms 0.5 and 2, sharp and with σb = 1. Accuracy in %, mean ± half-range over three training splits (the CNN: split 1). Last row: the number of splits in which GCN or SNT is the more accurate by the exact two-sided McNemar test on the same digits, Holm-adjusted over the ten conditions [31], at p < 0.05",
+            "page": 20,
+            "page_end": 20,
+            "page_spans": [
+              {
+                "page": 20,
+                "start": 0,
+                "end": 666
+              }
+            ],
+            "_faiss_score": 0.5003697276115417,
+            "_bm25_score": 13.1007090622658,
+            "_rrf_score": 0.031281,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 162,
+            "text": "9 points on MNIST-Scale, and under mild blur (σb ≤0.5, or the resolution halved)A possible cause, which we have not tested, is the conditioning of the retraction near vanishing blocks, where it is only H¨older continuous (Thm. 2.3). The invariance of the pooled features is exact for the even shifts of the ladder and not for continuous zoom. By Thm",
+            "page": 23,
+            "page_end": 23,
+            "page_spans": [
+              {
+                "page": 23,
+                "start": 0,
+                "end": 349
+              }
+            ],
+            "_faiss_score": 0.534512996673584,
+            "_rrf_score": 0.016393,
+            "_confidence": 0.52,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.52"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 165,
+            "text": "to Gaussian blur in the sense of [28,30] are a different and complementary toolThe pooling uses a global intensity frame, which isolated digits provide; images with several objects or with clutter are not tested, and neither are the scale-equivariant networks with learned filters [19,20]. It remains to test the graded retraction on other data, on images with clutter and under real optical blur. Appendix A. Discretization and numerical verification A.1. Discretization",
+            "page": 23,
+            "page_end": 23,
+            "page_spans": [
+              {
+                "page": 23,
+                "start": 0,
+                "end": 471
+              }
+            ],
+            "_faiss_score": 0.4980587363243103,
+            "_rrf_score": 0.015873,
+            "_confidence": 0.49,
+            "_confidence_label": "参考",
+            "_confidence_badge": "参考 0.49"
+          }
+        ],
+        "elapsed_seconds": 1.1208168000448495
+      }
+    },
+    {
+      "id": "graded-accuracy",
+      "type": "experiment",
+      "paper_id": "2611.09878",
+      "question": "What accuracy does the network achieve on MNIST under a two-pixel blur?",
+      "expected": "88.4%。",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "88.4% accuracy under a two-pixel blur"
+        }
+      ],
+      "retrieval_meta": {
+        "search_query": "What accuracy does the network achieve on MNIST under a two-pixel blur?",
+        "translated": false,
+        "faiss_count": 12,
+        "bm25_count": 11
+      },
+      "timing_ms": {
+        "dense": 0.5919000250287354,
+        "bm25": 7.249299960676581,
+        "rrf_pipeline": 26.08959999633953
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          2,
+          149,
+          161,
+          137,
+          129,
+          118
+        ],
+        "bm25": [
+          2,
+          161,
+          12,
+          166,
+          137,
+          11
+        ],
+        "rrf": [
+          2,
+          161,
+          137,
+          12,
+          159,
+          149
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 149,
+            "page": 21,
+            "page_end": 21
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 161,
+            "page": 23,
+            "page_end": 23
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 137,
+            "page": 20,
+            "page_end": 20
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 129,
+            "page": 18,
+            "page_end": 18
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 118,
+            "page": 17,
+            "page_end": 17
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 161,
+            "page": 23,
+            "page_end": 23
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 12,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 166,
+            "page": 23,
+            "page_end": 23
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 137,
+            "page": 20,
+            "page_end": 20
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 11,
+            "page": 2,
+            "page_end": 2
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 161,
+            "page": 23,
+            "page_end": 23
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 137,
+            "page": 20,
+            "page_end": 20
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 12,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 159,
+            "page": 23,
+            "page_end": 23
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 149,
+            "page": 21,
+            "page_end": 21
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      },
+      "generation": {
+        "status": "ok",
+        "answer": "The network achieves 88.4% accuracy on MNIST under a two-pixel blur. This is stated in <Paper ID: 2611.09878, p. 1>.",
+        "sources": [
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 2,
+            "text": "rs cannot. Networks built on the retraction are universal for invariant featuresOn MNIST such a network keeps 88.4% accuracy under a two-pixel blur, against 66.2% for the same network on scale-normalized derivatives; in Lindeberg’s Gaussian derivative network the retraction raises accuracy at that blur from 91.5% to 95.1%. 1. Introduction Let I be an image on R2 and L(x; s) = (gs ∗I)(x) its Gaussian scale space. The derivatives of order k of L at (x; s) are the coefficients of a binary form fk of degree k, and the jet f = (f1, . , fN) lies in the graded vector space V + = LN k=1 Symk(R2)∗",
+            "page": 1,
+            "page_end": 1,
+            "page_spans": [
+              {
+                "page": 1,
+                "start": 0,
+                "end": 595
+              }
+            ],
+            "_faiss_score": 0.6790904402732849,
+            "_bm25_score": 35.38036629680444,
+            "_rrf_score": 0.032787,
+            "_confidence": 0.84,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.84"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 161,
+            "text": "classifier separates. Networks built on the retraction inherit these propertiesOn MNIST they are invariant to zoom and far more robust to blur than the same networks on scale-normalized derivatives, and the retraction alone, applied in the first layer of Lindeberg’s Gaussian derivative network, makes that network more robust to blur as well. The scale-normalized network is more accurate than GCN on sharp images, by 0.8 to 1.3 points on average over the three splits and by up to 2.6 in one, by up to 0.9 points on MNIST-Scale, and under mild blur (σb ≤0.5, or the resolution halved)",
+            "page": 23,
+            "page_end": 23,
+            "page_spans": [
+              {
+                "page": 23,
+                "start": 0,
+                "end": 586
+              }
+            ],
+            "_faiss_score": 0.6687170267105103,
+            "_bm25_score": 27.280167110646975,
+            "_rrf_score": 0.032002,
+            "_confidence": 0.82,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.82"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 137,
+            "text": "N against 62.6% for SNT, 73.5% for UCN and 55.1% for the size-normalized networkAfter the Holm adjustment within each split, GCN is the more accurate at σb = 1.5, at σb = 2 and on the blurred half-size digits in all three splits (p < 10−51), and at σb = 1 in two of them; SNT is the more accurate on sharp digits in all three, and under some of the mild conditions. At the zoom 2 a blur of one pixel is small compared with the enlarged strokes and changes nothing. Table 4. Unknown blur. The networks of Tab",
+            "page": 20,
+            "page_end": 20,
+            "page_spans": [
+              {
+                "page": 20,
+                "start": 0,
+                "end": 507
+              }
+            ],
+            "_faiss_score": 0.6507338285446167,
+            "_bm25_score": 22.050069451298192,
+            "_rrf_score": 0.03101,
+            "_confidence": 0.8,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.80"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 12,
+            "text": "training splits, while the same network with equal grades loses up to 41 pointsUnder a Gaussian blur of two pixels it keeps 88.4%, against 66.2% for the same network on scale-normalized derivatives, and exchanging the foreground gates of the graded network and its equal-grades twin shows that the retraction, not the gate, carries this robustness; on sharp images the scale-normalized network is about one point more accurate. In Lindeberg’s Gaussian derivative network, retracting the jet of the first layer and changing nothing else raises the accuracy at a blur of two pixels from 91.5% to 95.1%, and a graded first layer improves a second version of that network as well",
+            "page": 2,
+            "page_end": 2,
+            "page_spans": [
+              {
+                "page": 2,
+                "start": 0,
+                "end": 675
+              }
+            ],
+            "_faiss_score": 0.6141059398651123,
+            "_bm25_score": 24.602942467702782,
+            "_rrf_score": 0.030366,
+            "_confidence": 0.78,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.78"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 159,
+            "text": "nst 88.90% at σb = 2 on the same 2,000 digits, and more accurate on sharp digitsIn both architectures the retraction supplies the robustness to blur that scale normalization lacks: by a wide margin in the shallow network of Sec. 8.3, where no later smoothing compensates, and by a smaller but significant one in Lindeberg’s deeper network, whose later layers compensate in part. 9. Conclusion Derivative order grades the Gaussian jet of an image, and invariance under dilations forces this grading: every invariant local feature factors through the scale-normalized jet or, if it does not use the scale, through the retraction onto the weighted sphere of the grading",
+            "page": 23,
+            "page_end": 23,
+            "page_spans": [
+              {
+                "page": 23,
+                "start": 0,
+                "end": 666
+              }
+            ],
+            "_faiss_score": 0.5892447233200073,
+            "_bm25_score": 20.3987281975634,
+            "_rrf_score": 0.028382,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 149,
+            "text": "nst 83.65% for half-size digits blurred by one pixel (181 against 59, p < 10−14)The comparison replicates in a second version of the network with the four scale channels σ0 ∈{2−1/2, 21/2, 23/2, 25/2} in place of eight, trained in the same way: 92.50 against 90.50% at σb = 2 (93 against 53, p = 0.006) and 88.35 against 82.25% for half-size digits blurred by one pixel (215 against 93, p < 10−10), with no other significant difference. On the size test the grading changes the accuracy in neither version beyond the sampling error of 800 digits, and the variance of the output across sizes, 0.004 and 0.009, stays far below the 0.122 of the maximum over channels",
+            "page": 21,
+            "page_end": 21,
+            "page_spans": [
+              {
+                "page": 21,
+                "start": 0,
+                "end": 662
+              }
+            ],
+            "_faiss_score": 0.6716946959495544,
+            "_rrf_score": 0.016129,
+            "_confidence": 0.62,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.62"
+          }
+        ],
+        "elapsed_seconds": 1.1526462000329047
+      }
+    },
+    {
+      "id": "flowmop-outputs",
+      "type": "method",
+      "paper_id": "2611.09882",
+      "question": "Which two components does FlowMoP jointly model when generating future motion?",
+      "expected": "全局轨迹和相对根节点的姿态。",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "modeling both global trajectories and root-relative poses"
+        }
+      ],
+      "retrieval_meta": {
+        "search_query": "Which two components does FlowMoP jointly model when generating future motion?",
+        "translated": false,
+        "faiss_count": 12,
+        "bm25_count": 11
+      },
+      "timing_ms": {
+        "dense": 0.5136000108905137,
+        "bm25": 5.560099962167442,
+        "rrf_pipeline": 23.003700014669448
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          0,
+          7,
+          27,
+          14,
+          66,
+          19
+        ],
+        "bm25": [
+          1,
+          7,
+          0,
+          134,
+          137,
+          60
+        ],
+        "rrf": [
+          0,
+          7,
+          1,
+          66,
+          27,
+          14
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 0,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 7,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 27,
+            "page": 4,
+            "page_end": 4
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 14,
+            "page": 3,
+            "page_end": 3
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 66,
+            "page": 10,
+            "page_end": 10
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 19,
+            "page": 3,
+            "page_end": 3
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 1,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 7,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 0,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 134,
+            "page": 21,
+            "page_end": 22
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 137,
+            "page": 22,
+            "page_end": 22
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 60,
+            "page": 9,
+            "page_end": 9
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 0,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 7,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 1,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 66,
+            "page": 10,
+            "page_end": 10
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 27,
+            "page": 4,
+            "page_end": 4
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 14,
+            "page": 3,
+            "page_end": 3
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      },
+      "generation": {
+        "status": "ok",
+        "answer": "FlowMoP jointly models global trajectories and root-relative poses when generating future motion. This is stated in both Excerpts 2 (Paper ID: 2611.09882, Page: 2) and 5 (Paper ID: 2611.09882, Page: 4).",
+        "sources": [
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 0,
+            "text": "FlowMoP: Stochastic Multi-Person Motion Prediction Aadya Agrawal University of Illinois Urbana-Champaign aadyaa3@illinois.edu Ho Kei Cheng University of Illinois Urbana-Champaign Alexander Schwing University of Illinois Urbana-Champaign V/S Figure 1: Motion forecasts projected onto broadcast video for two players. The gray skeleton and trails mark the recent motion history. (Left) T2P deterministic predictions (red). (Right) Our multimodal predictions are colored by log-likelihood (red: high, blue: low)",
+            "page": 1,
+            "page_end": 1,
+            "page_spans": [
+              {
+                "page": 1,
+                "start": 0,
+                "end": 508
+              }
+            ],
+            "_faiss_score": 0.6572983264923096,
+            "_bm25_score": 14.43229410500295,
+            "_rrf_score": 0.032266,
+            "_confidence": 0.82,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.82"
+          },
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 7,
+            "text": "et al., 2023]. This leaves an open challenge for a unified generative frameworkWe address this challenge with a flow matching framework for multi-person 3D motion prediction. We decompose joint positions into a global root trajectory and root-relative local pose, modeling both within a shared generative model. Rather than generating every future frame independently, predictions are made in a compact B-spline control-point space, reducing integration cost while enforcing temporal smoothness",
+            "page": 2,
+            "page_end": 2,
+            "page_spans": [
+              {
+                "page": 2,
+                "start": 0,
+                "end": 494
+              }
+            ],
+            "_faiss_score": 0.6266156435012817,
+            "_bm25_score": 14.94202960227349,
+            "_rrf_score": 0.032258,
+            "_confidence": 0.81,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.81"
+          },
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 1,
+            "text": "Our multimodal predictions are colored by log-likelihood (red: high, blue: low)Abstract Predicting the future motion of multiple people is inherently stochastic: the same observed history admits many plausible continuations depending on intent, coordination, and social context. Yet the dominant paradigm in multi-person 3D motion prediction remains deterministic, with existing methods producing a fixed number of outputs per agent. In contrast, we present a conditional flow matching framework that jointly generates diverse future motions for multiple agents, modeling both global trajectories and root-relative poses",
+            "page": 1,
+            "page_end": 1,
+            "page_spans": [
+              {
+                "page": 1,
+                "start": 0,
+                "end": 620
+              }
+            ],
+            "_faiss_score": 0.5462807416915894,
+            "_bm25_score": 15.477123247078232,
+            "_rrf_score": 0.030886,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 66,
+            "text": "ediate noise levels is more efficient than uniform sampling [Esser et al., 2024]6 Conclusion We presented a flow-matching framework for stochastic 3D human motion prediction that jointly models global trajectories and root-relative poses and achieved state-of-the-art performance on CMUMocap (UMPM) and 3DPW, outperforming baselines despite producing a full predictive distribution rather than a single output. On WorldPose, we showed evidence that the model learns genuine interaction constraints rather than simply reducing overall variance",
+            "page": 10,
+            "page_end": 10,
+            "page_spans": [
+              {
+                "page": 10,
+                "start": 0,
+                "end": 542
+              }
+            ],
+            "_faiss_score": 0.5828506946563721,
+            "_bm25_score": 10.464610302380073,
+            "_rrf_score": 0.030536,
+            "_confidence": 0.76,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.76"
+          },
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 27,
+            "text": "trices with Ct control points for trajectory and Cp > Ct control points for pose3.2 Conditional Flow Matching for Motion Prediction Flow matching [Lipman et al., 2023] learns a vector field vθ transporting samples drawn from a source distribution p0 to samples drawn from a target distribution p1 via an ODE. We adopt the conditional variant with a linear interpolation path that operates entirely in control-point space. Ground-truth control points ˜Y1 serve as the target, and noise is sampled directly in the same space: ˜Y0 traj, ˜Y0 pose ∼N(0, I)",
+            "page": 4,
+            "page_end": 4,
+            "page_spans": [
+              {
+                "page": 4,
+                "start": 0,
+                "end": 551
+              }
+            ],
+            "_faiss_score": 0.5986382961273193,
+            "_rrf_score": 0.015873,
+            "_confidence": 0.56,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.56"
+          },
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 14,
+            "text": "diverse predictions, inherently capping the variety of forecasts it can generateSocial Diffusion [Tanke et al., 2023] applies diffusion to multi-person 3D motion, focusing on long-term interaction plausibility under custom realism metrics. Our work is the first to apply flow matching to multi-person 3D motion prediction and to generate the full prediction horizon non-autoregressively. Stochastic single-person motion prediction. Stochastic single-person motion prediction has been explored through several generative frameworks. VAE-based methods [Chen et al., 2023b] learn compact latent representations of motion but are prone to posterior collapse",
+            "page": 3,
+            "page_end": 3,
+            "page_spans": [
+              {
+                "page": 3,
+                "start": 0,
+                "end": 653
+              }
+            ],
+            "_faiss_score": 0.5970020294189453,
+            "_rrf_score": 0.015625,
+            "_confidence": 0.56,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.56"
+          }
+        ],
+        "elapsed_seconds": 1.2788053000112996
+      }
+    },
+    {
+      "id": "flowmop-spline",
+      "type": "method",
+      "paper_id": "2611.09882",
+      "question": "What is the role of B-spline reparameterization in FlowMoP?",
+      "expected": "压缩生成状态空间并约束时间平滑性。",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "compresses the generative state space while enforcing temporal smooth"
+        }
+      ],
+      "retrieval_meta": {
+        "search_query": "What is the role of B-spline reparameterization in FlowMoP?",
+        "translated": false,
+        "faiss_count": 12,
+        "bm25_count": 9
+      },
+      "timing_ms": {
+        "dense": 0.5643999902531505,
+        "bm25": 5.868000036571175,
+        "rrf_pipeline": 25.429299974348396
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          23,
+          22,
+          103,
+          62,
+          98,
+          57
+        ],
+        "bm25": [
+          22,
+          20,
+          98,
+          10,
+          2,
+          114
+        ],
+        "rrf": [
+          22,
+          98,
+          20,
+          23
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 23,
+            "page": 4,
+            "page_end": 4
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 22,
+            "page": 3,
+            "page_end": 4
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 103,
+            "page": 16,
+            "page_end": 16
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 62,
+            "page": 9,
+            "page_end": 9
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 98,
+            "page": 15,
+            "page_end": 15
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 57,
+            "page": 9,
+            "page_end": 9
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 22,
+            "page": 3,
+            "page_end": 4
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 20,
+            "page": 3,
+            "page_end": 3
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 98,
+            "page": 15,
+            "page_end": 15
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 10,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 114,
+            "page": 18,
+            "page_end": 18
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 22,
+            "page": 3,
+            "page_end": 4
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 98,
+            "page": 15,
+            "page_end": 15
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 20,
+            "page": 3,
+            "page_end": 3
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 23,
+            "page": 4,
+            "page_end": 4
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 4
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 4
+          }
+        }
+      },
+      "generation": {
+        "status": "ok",
+        "answer": "In FlowMoP, B-spline reparameterization is used to compress future motion predictions into fewer control points while enforcing C2 temporal smoothness. This method involves using cubic B-splines for both trajectory (Ct control points) and pose (Cp control points). The reparameterization is applied by constructing a clamped knot vector with n = C −d −1 uniformly spaced interior knots, where d = 3 in this case. The role of B-spline reparameterization is to operate entirely in control-point space and project velocity residuals to full resolution via a fixed basis matrix for temporally-weighted supervision. This approach allows the model to handle structured skeleton prediction within a flow matching model, offering advantages similar to those exploited here. It represents the first application of B-spline reparameterization to generative 3D motion prediction.",
+        "sources": [
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 22,
+            "text": "wn in Figure 2, with the following subsections describing each component in turnTable 1 summarizes the frame-space and control-point-space notation used. 3.1 B-Spline Control-Point Reparameterization We reparameterize predictions using a B-spline basis, compressing the future motion to C < Tout control points while enforcing C2 temporal smoothness. 3Traj. Encoder Projection + PE Pose Encoder Projection + PE + Joint Emb. Traj. Encoder Pose Encoder C B-Spline Compressor B-Spline Compressor            K, V Future Stream MHCA + FFN  Timestep Embedding B-Spline Decoder B-Spline Decoder Traj. Head Pose Head Past Stream MHSA + FFN  +               Dual-Stream Transformer    Sec",
+            "page": 3,
+            "page_end": 4,
+            "page_spans": [
+              {
+                "page": 3,
+                "start": 0,
+                "end": 352
+              },
+              {
+                "page": 4,
+                "start": 352,
+                "end": 679
+              }
+            ],
+            "_faiss_score": 0.45930272340774536,
+            "_bm25_score": 23.418890451480415,
+            "_rrf_score": 0.032522,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 98,
+            "text": "h radius used for social context to reflect the larger spatial scale of the dataB B-Spline Reparameterization Details As introduced in §3.1, rather than predicting all Tout future frames directly, we reparameterize the output in a compressed control-point space via cubic B-splines, with separate bases for trajectory (Ct control points) and pose (Cp control points). Clamped knot vector. Given C control points and degree d = 3, we construct a clamped knot vector with n = C −d −1 uniformly spaced interior knots: ξ = \u0002 0, . , 0 | {z } d+1 , 1 n+1, 2 n+1, . , n n+1, 1, . , 1 | {z } d+1 \u0003",
+            "page": 15,
+            "page_end": 15,
+            "page_spans": [
+              {
+                "page": 15,
+                "start": 0,
+                "end": 589
+              }
+            ],
+            "_faiss_score": 0.44409888982772827,
+            "_bm25_score": 19.01133628871698,
+            "_rrf_score": 0.031258,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 20,
+            "text": "ct controlpoint representation offer advantages similar to those we exploit hereOur contribution is to apply clamped cubic B-splines to structured skeleton prediction within a flow matching model: we operate entirely in control-point space and project velocity residuals to full resolution via a fixed basis matrix for temporally-weighted supervision. To our knowledge, this is the first application of B-spline reparameterization to generative 3D motion prediction. 3 Method We predict the stochastic future motion of a focal agent over Tout frames conditioned on Tin observed frames",
+            "page": 3,
+            "page_end": 3,
+            "page_spans": [
+              {
+                "page": 3,
+                "start": 0,
+                "end": 584
+              }
+            ],
+            "_faiss_score": 0.4294635057449341,
+            "_bm25_score": 22.382744301403875,
+            "_rrf_score": 0.030415,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 23,
+            "text": "Pose Head Past Stream MHSA + FFN  +               Dual-Stream Transformer    Sec3.3 Sec. 3.1 Target:     Nearest-Neighbors Conditioning  1 2 Sec. 3.4 Figure 2: Overview of the proposed method. (a) Past trajectory and pose observations are encoded into a shared context ˜X. Noisy future control points are encoded and concatenated into ˜Yt, conditioned on flow timestep t via C. (b) L dual-stream transformer blocks process past and future tokens separately, with future tokens attending to [ ˜X; ˜Y]. (c) Velocity heads decode trajectory and pose control points, lifted to Tout frames by B-spline evaluation. Table 1: Notation",
+            "page": 4,
+            "page_end": 4,
+            "page_spans": [
+              {
+                "page": 4,
+                "start": 0,
+                "end": 626
+              }
+            ],
+            "_faiss_score": 0.5217104554176331,
+            "_rrf_score": 0.016393,
+            "_confidence": 0.52,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.52"
+          }
+        ],
+        "elapsed_seconds": 2.096066600002814
+      }
+    },
+    {
+      "id": "laya-order",
+      "type": "experiment",
+      "paper_id": "2611.09803",
+      "question": "What fraction of questions changed answers under rotated option orders?",
+      "expected": "25.8% 的问题。",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "changes its answer for 25.8%"
+        }
+      ],
+      "retrieval_meta": {
+        "search_query": "What fraction of questions changed answers under rotated option orders?",
+        "translated": false,
+        "faiss_count": 12,
+        "bm25_count": 12
+      },
+      "timing_ms": {
+        "dense": 0.6707999855279922,
+        "bm25": 6.19009998627007,
+        "rrf_pipeline": 23.851300007663667
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          38,
+          52,
+          2,
+          59,
+          40,
+          8
+        ],
+        "bm25": [
+          38,
+          83,
+          7,
+          8,
+          108,
+          2
+        ],
+        "rrf": [
+          38,
+          2,
+          83,
+          7,
+          8,
+          52
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 38,
+            "page": 7,
+            "page_end": 7
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 52,
+            "page": 10,
+            "page_end": 10
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 59,
+            "page": 12,
+            "page_end": 13
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 40,
+            "page": 7,
+            "page_end": 7
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 8,
+            "page": 2,
+            "page_end": 2
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 38,
+            "page": 7,
+            "page_end": 7
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 83,
+            "page": 18,
+            "page_end": 18
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 7,
+            "page": 1,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 8,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 108,
+            "page": 23,
+            "page_end": 23
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 38,
+            "page": 7,
+            "page_end": 7
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 83,
+            "page": 18,
+            "page_end": 18
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 7,
+            "page": 1,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 8,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 52,
+            "page": 10,
+            "page_end": 10
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 6,
+            "reciprocal_rank": 0.16666666666666666,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      },
+      "generation": {
+        "status": "ok",
+        "answer": "According to Excerpt 2 ([Paper ID: 2611.09803, Page: 7]), the released checkpoint changes its answer for 25.8% of questions when their options are rotated cyclically. Additionally, Excerpt 4 and Excerpt 5 mention that this measure is taken on 951 Qwen-verified choice questions under every cyclic rotation of their options (K≤5) or six random permutations (K=12). Therefore, the fraction of questions that changed answers under rotated option orders is 25.8%.",
+        "sources": [
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 38,
+            "text": "within 0.0 points, so we find no sign that gains come from memorised neighbours4.5  Order-sensitivity protocol Questions are taken from every test set whose question type is choice with K≥3 (951 items; categories in Table 2). For K≤5 the options are rotated cyclically, giving K orderings in which every option appears in every slot once; for K=12 six random permutations are drawn once (seed 1) and reused for every item and every model, so all models see identical presentations. Flip rate is the fraction of items whose predicted option differs across orderings",
+            "page": 7,
+            "page_end": 7,
+            "page_spans": [
+              {
+                "page": 7,
+                "start": 0,
+                "end": 564
+              }
+            ],
+            "_faiss_score": 0.669452965259552,
+            "_bm25_score": 20.625241944158017,
+            "_rrf_score": 0.032787,
+            "_confidence": 0.83,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.83"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 2,
+            "text": "arallel layout) and test whether the answer depends on where an option is listedPresenting 951 Qwen-verified questions under every cyclic rotation of their options (or six random permutations for 12 options), the released checkpoint changes its answer for 25.8% [22.9–28.7] of questions (19.7% on the 605 English-language items alone); accuracy with the gold option first versus last differs by 10.1%, and the flips concentrate where the model’s own confidence is low (54% versus 8% across confidence terciles)",
+            "page": 1,
+            "page_end": 1,
+            "page_spans": [
+              {
+                "page": 1,
+                "start": 0,
+                "end": 510
+              }
+            ],
+            "_faiss_score": 0.6323456168174744,
+            "_bm25_score": 15.731480830250128,
+            "_rrf_score": 0.031025,
+            "_confidence": 0.79,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.79"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 83,
+            "text": "dependent; shuffle and vote for high-stakes decisions, or log the order you usedIf you can fine-tune, use option shuffling; it costs nothing at inference and is as effective as the 4.1-way vote in our data. If you control training from scratch, the parallel layout is the principled fix; our adaptation of the base checkpoint to it gives flip rate 0.5% (Section 6.4). Use confidence to triage. Table 3 shows that low-confidence questions are where answers flip; abstaining or reasking with a shuffled order on low confidence removes most unstable items for the base model, but a minority of high-confidence answers still flip. What this paper does not show",
+            "page": 18,
+            "page_end": 18,
+            "page_spans": [
+              {
+                "page": 18,
+                "start": 0,
+                "end": 656
+              }
+            ],
+            "_faiss_score": 0.5817455053329468,
+            "_bm25_score": 17.559819593903235,
+            "_rrf_score": 0.030835,
+            "_confidence": 0.77,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.77"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 7,
+            "text": "hould give the same answer when the same options are listed in a different orderLaya is a non-autoregressive encoder that answers typed questions in one forward pass; for a choice question it appends one [MASK] marker per option to the question and scores the hidden state at each marker. The options are therefore laid out along a single sequence, and nothing in the weights guarantees that an option’s position is irrelevant.We measure this on 951 Qwen-verified choice questions drawn from seven categories (3, 5 and 12 options), presenting each question under every cyclic rotation of its options (K≤5) or six random permutations (K=12), i.e. 3,893 model calls per checkpoint",
+            "page": 1,
+            "page_end": 2,
+            "page_spans": [
+              {
+                "page": 1,
+                "start": 0,
+                "end": 427
+              },
+              {
+                "page": 2,
+                "start": 427,
+                "end": 678
+              }
+            ],
+            "_faiss_score": 0.5944919586181641,
+            "_bm25_score": 17.42932856437355,
+            "_rrf_score": 0.030798,
+            "_confidence": 0.77,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.77"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 8,
+            "text": "s (K≤5) or six random permutations (K=12), i.e. 3,893 model calls per checkpointResearch questions. RQ1: does the released checkpoint change its answer under reordering, and by how much? RQ2: what is the shape of the dependence (slot, option count, category, confidence)? RQ3: is a no-training remedy (voting over orderings) competitive? RQ4: does fine-tuning on Qwen-verified rows with option shuffling remove the dependence, and how much of the effect is due to shuffling itself rather than the extra data? RQ5: is the result stable across training seeds? Contributions",
+            "page": 2,
+            "page_end": 2,
+            "page_spans": [
+              {
+                "page": 2,
+                "start": 0,
+                "end": 571
+              }
+            ],
+            "_faiss_score": 0.5951893329620361,
+            "_bm25_score": 16.881002882844147,
+            "_rrf_score": 0.030777,
+            "_confidence": 0.77,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.77"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 52,
+            "text": "der the full set of orderings). K=3 has only three orderings, K=5 five, K=12 sixA practical question for anyone who wants to measure order sensitivity on their own schema: trying two random orderings exposes 77% of the unstable items among the 3-option questions (the full set has only three orderings), 56% among 5-option and 48% among 12-option questions; four orderings expose 92% (K=5) and 82% (K=12). A twoordering audit therefore misses a substantial share of unstable items on every option count; the figures above show how that share shrinks as more orderings are tried. 5.8  Unstable items are the wrong ones Order sensitivity is not a cosmetic problem",
+            "page": 10,
+            "page_end": 10,
+            "page_spans": [
+              {
+                "page": 10,
+                "start": 0,
+                "end": 661
+              }
+            ],
+            "_faiss_score": 0.6387941241264343,
+            "_bm25_score": 13.908510887978114,
+            "_rrf_score": 0.030415,
+            "_confidence": 0.79,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.79"
+          }
+        ],
+        "elapsed_seconds": 1.7667676000273786
+      }
+    },
+    {
+      "id": "laya-shuffle",
+      "type": "method",
+      "paper_id": "2611.09803",
+      "question": "What training adjustment is used to mitigate Laya's option-order sensitivity?",
+      "expected": "在微调中对选项顺序进行洗牌。",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "teacher-verified rows with option shuffling"
+        }
+      ],
+      "retrieval_meta": {
+        "search_query": "What training adjustment is used to mitigate Laya's option-order sensitivity?",
+        "translated": false,
+        "faiss_count": 12,
+        "bm25_count": 12
+      },
+      "timing_ms": {
+        "dense": 1.103400019928813,
+        "bm25": 6.152000045403838,
+        "rrf_pipeline": 23.97249999921769
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          16,
+          83,
+          3,
+          92,
+          50,
+          40
+        ],
+        "bm25": [
+          64,
+          63,
+          0,
+          52,
+          5,
+          108
+        ],
+        "rrf": [
+          0,
+          16,
+          92,
+          14,
+          83
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 16,
+            "page": 2,
+            "page_end": 3
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 83,
+            "page": 18,
+            "page_end": 18
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 3,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 92,
+            "page": 20,
+            "page_end": 20
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 50,
+            "page": 9,
+            "page_end": 9
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 40,
+            "page": 7,
+            "page_end": 7
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 64,
+            "page": 13,
+            "page_end": 14
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 63,
+            "page": 13,
+            "page_end": 13
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 0,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 52,
+            "page": 10,
+            "page_end": 10
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 5,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 108,
+            "page": 23,
+            "page_end": 23
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 0,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 16,
+            "page": 2,
+            "page_end": 3
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 92,
+            "page": 20,
+            "page_end": 20
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 14,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 83,
+            "page": 18,
+            "page_end": 18
+          }
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          }
+        }
+      },
+      "generation": {
+        "status": "ok",
+        "answer": "The training adjustment used to mitigate Laya's option-order sensitivity is shuffling the options during fine-tuning. This method is described in Excerpt 2 (Paper ID: 2611.09803, Page: 2-3). Shuffled fine-tuning on a few thousand teacher-verified rows reduces Laya’s order-sensitive questions from 25.8% to 7.2%. The exact shuffling and vote for high-stakes decisions is also mentioned in Excerpt 4 (Paper ID: 2611.09803, Page: 2), where it is stated that the parallel layout is a principled fix when training from scratch. This adaptation of the base checkpoint to the parallel layout gives a flip rate of 0.5%. Therefore, both shuffling options during fine-tuning and using the parallel layout are used as mitigation strategies for Laya's option-order sensitivity.",
+        "sources": [
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 0,
+            "text": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model Quantifying option-order dependence in Laya and removing most of it by shuffled fine-tuning Mohammed Nayeem Khan mohammed.nayeem.khan@intel.com mnknayeem@gmail.com Logesh L logesh.l@intel.com Intel Corporation v0.2 · 6 November 2026 · arXiv cs.AI (cross-list cs.CL, cs.LG) · artifacts: tasks/maya (code, frozen results, models, hashes) Abstract Laya answers typed multiple-choice questions in one forward pass by scoring a hidden state at one [MASK] marker per option",
+            "page": 1,
+            "page_end": 1,
+            "page_spans": [
+              {
+                "page": 1,
+                "start": 0,
+                "end": 588
+              }
+            ],
+            "_faiss_score": 0.5638450384140015,
+            "_bm25_score": 19.970491533656027,
+            "_rrf_score": 0.030798,
+            "_confidence": 0.76,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.76"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 16,
+            "text": "dent shortcuts whenever label frequency correlates with position during trainingIn Laya’s owntraining recipe the options are presented in the order the question lists them unless the opt-in --shuffle-options flag is used (Laya’s trainer docstring: “The scripts always present options in the order the question lists them, so the model can learn a position prior”). Our data-generation process makes gold labels uniform over slots by construction, so any position prior we measure is a property of the released weights, not of our data",
+            "page": 2,
+            "page_end": 3,
+            "page_spans": [
+              {
+                "page": 2,
+                "start": 0,
+                "end": 93
+              },
+              {
+                "page": 3,
+                "start": 93,
+                "end": 534
+              }
+            ],
+            "_faiss_score": 0.6161973476409912,
+            "_bm25_score": 16.921262330289082,
+            "_rrf_score": 0.030282,
+            "_confidence": 0.78,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.78"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 92,
+            "text": "nvironment; no key appears in the released code, data or this document. Dual useThe injection and shortcut probes in this series describe how to make a decision model answer wrongly. They are simple and publicly motivated, and we think measurement is more useful to defenders than harmful to them. 18  Conclusion Laya’s released checkpoints are order-sensitive on realistic questions: 25.8% of questions flip when only the option order changes. Data alone (shuffled fine-tuning on a few thousand teacher-verified rows) reduces this to 7.2%, and the no-shuffle ablation shows that the shuffling, not merely the rows, is responsible for 4.2% of it",
+            "page": 20,
+            "page_end": 20,
+            "page_spans": [
+              {
+                "page": 20,
+                "start": 0,
+                "end": 645
+              }
+            ],
+            "_faiss_score": 0.5890836715698242,
+            "_bm25_score": 17.426115797624945,
+            "_rrf_score": 0.030118,
+            "_confidence": 0.76,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.76"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 14,
+            "text": "gation and an architectural one. Why a separate study for a non-generative modelThe mitigations proposed for generative models, such as debiasing the prior over option IDs, assume a probability distribution over answer tokens. Laya has no such distribution: it has one scalar logit per slot. The relevant questions are therefore different: is the logit a function of the option text alone, or of its position? Is the dependence learned from the training order or built into the positional machinery of the encoder? The identical-option probe (Section 6) and the layout comparison (Section 7) answer these two questions separately. Evaluation protocol",
+            "page": 2,
+            "page_end": 2,
+            "page_spans": [
+              {
+                "page": 2,
+                "start": 0,
+                "end": 650
+              }
+            ],
+            "_faiss_score": 0.5420440435409546,
+            "_bm25_score": 17.305209872974615,
+            "_rrf_score": 0.028778,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 83,
+            "text": "dependent; shuffle and vote for high-stakes decisions, or log the order you usedIf you can fine-tune, use option shuffling; it costs nothing at inference and is as effective as the 4.1-way vote in our data. If you control training from scratch, the parallel layout is the principled fix; our adaptation of the base checkpoint to it gives flip rate 0.5% (Section 6.4). Use confidence to triage. Table 3 shows that low-confidence questions are where answers flip; abstaining or reasking with a shuffled order on low confidence removes most unstable items for the base model, but a minority of high-confidence answers still flip. What this paper does not show",
+            "page": 18,
+            "page_end": 18,
+            "page_spans": [
+              {
+                "page": 18,
+                "start": 0,
+                "end": 656
+              }
+            ],
+            "_faiss_score": 0.5993794202804565,
+            "_rrf_score": 0.016129,
+            "_confidence": 0.57,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.57"
+          }
+        ],
+        "elapsed_seconds": 2.399808500020299
+      }
+    },
+    {
+      "id": "noanswer-nat-cua",
+      "type": "unanswerable_probe",
+      "paper_id": "2611.09847",
+      "question": "What Kubernetes orchestration configuration and AWS EC2 hourly cloud cost are reported for deploying these computer-use agents?",
+      "expected": "论文片段中未报告 Kubernetes 部署配置或 AWS EC2 云端小时成本，应明确说明无法确认。",
+      "evidence": [],
+      "retrieval_meta": {
+        "search_query": "What Kubernetes orchestration configuration and AWS EC2 hourly cloud cost are reported for deploying these computer-use agents?",
+        "translated": false,
+        "faiss_count": 12,
+        "bm25_count": 11
+      },
+      "timing_ms": {
+        "dense": 0.6442000158131123,
+        "bm25": 8.872799982782453,
+        "rrf_pipeline": 28.629500011447817
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          36,
+          9,
+          52,
+          80,
+          42,
+          59
+        ],
+        "bm25": [
+          8,
+          30,
+          52,
+          50,
+          32,
+          42
+        ],
+        "rrf": [
+          52,
+          42,
+          29,
+          108,
+          36
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 36,
+            "page": 6,
+            "page_end": 6
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 9,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 52,
+            "page": 7,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 80,
+            "page": 10,
+            "page_end": 11
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 42,
+            "page": 7,
+            "page_end": 7
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 59,
+            "page": 8,
+            "page_end": 8
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 8,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 30,
+            "page": 5,
+            "page_end": 5
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 52,
+            "page": 7,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 50,
+            "page": 7,
+            "page_end": 7
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 32,
+            "page": 6,
+            "page_end": 6
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 42,
+            "page": 7,
+            "page_end": 7
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 52,
+            "page": 7,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 42,
+            "page": 7,
+            "page_end": 7
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 29,
+            "page": 5,
+            "page_end": 5
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 108,
+            "page": 14,
+            "page_end": 14
+          },
+          {
+            "paper_id": "2611.09847",
+            "chunk_idx": 36,
+            "page": 6,
+            "page_end": 6
+          }
+        ]
+      },
+      "note": "Synthetic missing-marker probe: retrieval results are not an abstention or correctness score.",
+      "generation": {
+        "status": "ok",
+        "answer": "The provided excerpts do not contain any information about Kubernetes orchestration configuration or AWS EC2 hourly cloud cost for deploying computer-use agents. Therefore, no such details can be reported based on the given data.",
+        "sources": [
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 52,
+            "text": "eed alongside task success (Arora and Zanette, 2025; Aggarwal and Welleck, 2025)These directions call on embodied AI researchers to expose their simulators and robots through software, and on developers of computer-use agents to include such software in training. 75 Conclusion In this paper, we argued that computer-use agents can already act as embodied generalists, because embodied tasks can be formulated as interaction with digital software. Using a single computer-use agent and changing only the software, we won prizes in four ECCV workshop competitions, from navigation to video segmentation",
+            "page": 7,
+            "page_end": 8,
+            "page_spans": [
+              {
+                "page": 7,
+                "start": 0,
+                "end": 265
+              },
+              {
+                "page": 8,
+                "start": 265,
+                "end": 601
+              }
+            ],
+            "_faiss_score": 0.47008216381073,
+            "_bm25_score": 20.578378646793297,
+            "_rrf_score": 0.031746,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 42,
+            "text": "obots (Yang et al., 2025a; Reed et al., 2022; Gemini Robotics Team et al., 2025)Claim 3: The path to embodied generalists follows the same playbook as computer-use agents What enabled the progress of computer-use agents over the last two years? We view the development of computer-use agents in three phases, each with a direct counterpart in embodied AI. The first phase was visual grounding. Digital interfaces provide a way to generate supervision automatically: the underlying software can expose the identities and coordinates of interface elements, which can then be paired with screenshots. This approach has been used to generate grounding data at scale (Gou et al., 2025)",
+            "page": 7,
+            "page_end": 7,
+            "page_spans": [
+              {
+                "page": 7,
+                "start": 0,
+                "end": 680
+              }
+            ],
+            "_faiss_score": 0.4532601237297058,
+            "_bm25_score": 19.387307488517607,
+            "_rrf_score": 0.030769,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 29,
+            "text": "MeViSv2-Text Final 95.8 94.6 −1.2 This expectation is consistent with prior workThe performance gap between GUI-only and APIassisted interaction has shown to be narrowing across claude generations (Aggarwal and Welleck, 2026c), while more recently, the strongest evaluated agents achieve comparable or higher task success through GUIs than through APIs (NeoCognition, 2026). 4 Position: Computer-use agents are embodied generalists Claim 1: Representing physical interfaces in software lets us apply the methods that improved computer-use agents to embodied AI The challenges facing embodied AI/robotics today are similar to those faced by computer-use agents two years ago",
+            "page": 5,
+            "page_end": 5,
+            "page_spans": [
+              {
+                "page": 5,
+                "start": 0,
+                "end": 673
+              }
+            ],
+            "_faiss_score": 0.4436922073364258,
+            "_bm25_score": 19.25568856940481,
+            "_rrf_score": 0.029857,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 108,
+            "text": "Hao Hu, Tianbao Xie, Shuai Bai, Dayiheng Liu, Que Shen, Junyang Lin, and Tao YuCUAGym: Scaling verifiable training environments and tasks for computer-use agents, 2026. URL https://arxiv.org/abs/2605.25624. Tianbao Xie, Danyang Zhang, Jixuan Chen, Xiaochuan Li, Siheng Zhao, Ruisheng Cao, Toh Jing Hua, Zhoujun Cheng, Dongchan Shin, Fangyu Lei, Yitao Liu, Yiheng Xu, Shuyan Zhou, Silvio Savarese, Caiming Xiong, Victor Zhong, and Tao Yu. OSWorld: Benchmarking multimodal agents for open-ended tasks in real computer environments. In Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2024",
+            "page": 14,
+            "page_end": 14,
+            "page_spans": [
+              {
+                "page": 14,
+                "start": 0,
+                "end": 629
+              }
+            ],
+            "_faiss_score": 0.4267387390136719,
+            "_bm25_score": 17.788069373988982,
+            "_rrf_score": 0.02837,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09847",
+            "title": "Computer-Use Agents Are Embodied Generalists",
+            "chunk_idx": 36,
+            "text": "l., 2025). But computer-use agents faced exactly this problem only two years agoA screen of a thousand by a thousand pixels is effectively a continuous space, and early agents could not act in it precisely on their own, relying instead on Set-of-Mark overlays (Yang et al., 2023; Xie et al., 2024) or separate grounding models (Gou et al., 2025). Yet with enough training, neither turned out to be necessary: today, a single model operates computers by simply writing click coordinates as ordinary text tokens, without any special head or tokenizer (Cheng et al., 2024; Qin et al., 2025; Bai et al., 2025)",
+            "page": 6,
+            "page_end": 6,
+            "page_spans": [
+              {
+                "page": 6,
+                "start": 0,
+                "end": 605
+              }
+            ],
+            "_faiss_score": 0.5059719085693359,
+            "_rrf_score": 0.016393,
+            "_confidence": 0.5,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.50"
+          }
+        ],
+        "elapsed_seconds": 0.9024732999969274
+      }
+    },
+    {
+      "id": "noanswer-nat-graded",
+      "type": "unanswerable_probe",
+      "paper_id": "2611.09878",
+      "question": "What top-1 validation accuracy does the graded convolutional network achieve on ImageNet-1K using a ResNet-50 backbone?",
+      "expected": "论文片段中未报告 ImageNet-1K 或 ResNet-50 的验证准确率，应明确说明无法确认。",
+      "evidence": [],
+      "retrieval_meta": {
+        "search_query": "What top-1 validation accuracy does the graded convolutional network achieve on ImageNet-1K using a ResNet-50 backbone?",
+        "translated": false,
+        "faiss_count": 12,
+        "bm25_count": 10
+      },
+      "timing_ms": {
+        "dense": 0.5474000354297459,
+        "bm25": 9.508099989034235,
+        "rrf_pipeline": 48.062599962577224
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          121,
+          130,
+          158,
+          12,
+          70,
+          2
+        ],
+        "bm25": [
+          120,
+          11,
+          12,
+          9,
+          126,
+          2
+        ],
+        "rrf": [
+          12,
+          2,
+          70,
+          121,
+          120,
+          130
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 121,
+            "page": 17,
+            "page_end": 17
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 130,
+            "page": 18,
+            "page_end": 19
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 158,
+            "page": 22,
+            "page_end": 23
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 12,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 70,
+            "page": 10,
+            "page_end": 10
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 120,
+            "page": 17,
+            "page_end": 17
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 11,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 12,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 9,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 126,
+            "page": 18,
+            "page_end": 18
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 12,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 2,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 70,
+            "page": 10,
+            "page_end": 10
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 121,
+            "page": 17,
+            "page_end": 17
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 120,
+            "page": 17,
+            "page_end": 17
+          },
+          {
+            "paper_id": "2611.09878",
+            "chunk_idx": 130,
+            "page": 18,
+            "page_end": 19
+          }
+        ]
+      },
+      "note": "Synthetic missing-marker probe: retrieval results are not an abstention or correctness score.",
+      "generation": {
+        "status": "ok",
+        "answer": "The graded convolutional network achieves top-1 validation accuracy of 86.96% on ImageNet-1K using a ResNet-50 backbone as reported in [2611.09878, p. 18]. This accuracy is reached during the training phase and not explicitly stated to be tested or achieved at inference stage based on provided excerpts.",
+        "sources": [
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 12,
+            "text": "training splits, while the same network with equal grades loses up to 41 pointsUnder a Gaussian blur of two pixels it keeps 88.4%, against 66.2% for the same network on scale-normalized derivatives, and exchanging the foreground gates of the graded network and its equal-grades twin shows that the retraction, not the gate, carries this robustness; on sharp images the scale-normalized network is about one point more accurate. In Lindeberg’s Gaussian derivative network, retracting the jet of the first layer and changing nothing else raises the accuracy at a blur of two pixels from 91.5% to 95.1%, and a graded first layer improves a second version of that network as well",
+            "page": 2,
+            "page_end": 2,
+            "page_spans": [
+              {
+                "page": 2,
+                "start": 0,
+                "end": 675
+              }
+            ],
+            "_faiss_score": 0.555496335029602,
+            "_bm25_score": 21.79627841326734,
+            "_rrf_score": 0.031498,
+            "_confidence": 0.76,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.76"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 2,
+            "text": "rs cannot. Networks built on the retraction are universal for invariant featuresOn MNIST such a network keeps 88.4% accuracy under a two-pixel blur, against 66.2% for the same network on scale-normalized derivatives; in Lindeberg’s Gaussian derivative network the retraction raises accuracy at that blur from 91.5% to 95.1%. 1. Introduction Let I be an image on R2 and L(x; s) = (gs ∗I)(x) its Gaussian scale space. The derivatives of order k of L at (x; s) are the coefficients of a binary form fk of degree k, and the jet f = (f1, . , fN) lies in the graded vector space V + = LN k=1 Symk(R2)∗",
+            "page": 1,
+            "page_end": 1,
+            "page_spans": [
+              {
+                "page": 1,
+                "start": 0,
+                "end": 595
+              }
+            ],
+            "_faiss_score": 0.5457090735435486,
+            "_bm25_score": 20.625057900554314,
+            "_rrf_score": 0.030536,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 70,
+            "text": "put. The grades enter in two places only, the retraction and the foreground gateA plain average over positions and scales would not be invariant: it is dominated by the finest rungs, which have the most positions, and a shift of the ladder changes which rungs are present. The pooling weights every rung by its area per unit scale and places it by its scale relative to the image. 6.3. Three networks. Definition 6.1. The graded convolutional network GCN is the graded network with θ = q and foreground energy ˜ρ = ρq( ˜f) = s1/2ρq(f). Definition 6.2. The equal-grades twin UCN is GCN with θ = (1,",
+            "page": 10,
+            "page_end": 10,
+            "page_spans": [
+              {
+                "page": 10,
+                "start": 0,
+                "end": 597
+              }
+            ],
+            "_faiss_score": 0.5536496639251709,
+            "_bm25_score": 18.852992697825957,
+            "_rrf_score": 0.02967,
+            "_confidence": 0.75,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.75"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 121,
+            "text": "ochs (1,884 steps), and the checkpoint with the best validation accuracy is keptGCN and its twins are trained on the three splits; the networks with exchanged gates and the size-normalized network are trained on split 1. Two networks are compared on the same test digits by the exact two-sided McNemar test on the per-digit predictions [33], with the Holm adjustment [31] over the ten conditions of Tab. 4 within each split. The binomial standard error of an accuracy near 95% on 5,000 digits is 0.3 points. The gradings and ablations of Tabs",
+            "page": 17,
+            "page_end": 17,
+            "page_spans": [
+              {
+                "page": 17,
+                "start": 0,
+                "end": 542
+              }
+            ],
+            "_faiss_score": 0.6771811246871948,
+            "_rrf_score": 0.016393,
+            "_confidence": 0.62,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.62"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 120,
+            "text": "rk with three convolutional layers, global average pooling and 22,826 parametersThe latter is applied to inputs rescaled about the canvas centre so that their intensity radius ˆσ equals the median radius of the training digits, which gives it the global size invariance that the pooling frame gives the graded networks; we call it the size-normalized network. All networks are trained with Adam and a one-cycle schedule, with peak learning rate 2 · 10−3, batch 64 and weight decay 10−4, for 12 epochs (1,884 steps), and the checkpoint with the best validation accuracy is kept",
+            "page": 17,
+            "page_end": 17,
+            "page_spans": [
+              {
+                "page": 17,
+                "start": 0,
+                "end": 576
+              }
+            ],
+            "_bm25_score": 22.904270943106646,
+            "_rrf_score": 0.016393,
+            "_confidence": 0.67,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.67"
+          },
+          {
+            "paper_id": "2611.09878",
+            "title": "Graded convolutional networks: scale invariance without the scale and robustness to unknown blur",
+            "chunk_idx": 130,
+            "text": "etwork reaches 86.96% in distribution and 88.1–88.4% at the five zooms (split 1)In the earlier runs, an ordinary convolutional network trained on unscaled digits reaches 94.9% at its training scale and 36.9% and 33.1% at the zooms 0.5GRADED CONVOLUTIONAL NETWORKS 19 and 2; trained with scale augmentation by a factor log-uniform in [ 1 2, 2] for five times the epochs, it reaches 92.8%, 75.4% and 86.1%, while GCN reaches 95.7%, 95.5% and 95.7% without augmentation. Tab. 2 tests parts (iv) and (v) of Thm. 4.1. The gradings (3, 1, 2) and (1, 3, 2) are exactly invariant under their own action but not under the action of dilations",
+            "page": 18,
+            "page_end": 19,
+            "page_spans": [
+              {
+                "page": 18,
+                "start": 0,
+                "end": 234
+              },
+              {
+                "page": 19,
+                "start": 234,
+                "end": 632
+              }
+            ],
+            "_faiss_score": 0.5803715586662292,
+            "_rrf_score": 0.016129,
+            "_confidence": 0.55,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.55"
+          }
+        ],
+        "elapsed_seconds": 1.4435256000142545
+      }
+    },
+    {
+      "id": "noanswer-nat-flowmop",
+      "type": "unanswerable_probe",
+      "paper_id": "2611.09882",
+      "question": "What MPJPE and FID scores does FlowMoP report on the AMASS dataset using TensorRT FP16 inference?",
+      "expected": "论文片段中未报告 FlowMoP 在 AMASS 数据集或 TensorRT FP16 下的 MPJPE 与 FID 指标，应明确说明无法确认。",
+      "evidence": [],
+      "retrieval_meta": {
+        "search_query": "What MPJPE and FID scores does FlowMoP report on the AMASS dataset using TensorRT FP16 inference?",
+        "translated": false,
+        "faiss_count": 12,
+        "bm25_count": 11
+      },
+      "timing_ms": {
+        "dense": 0.548599986359477,
+        "bm25": 9.612899972125888,
+        "rrf_pipeline": 31.566700024995953
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          128,
+          124,
+          123,
+          125,
+          126,
+          121
+        ],
+        "bm25": [
+          114,
+          3,
+          91,
+          80,
+          39,
+          0
+        ],
+        "rrf": [
+          128,
+          114,
+          124,
+          123
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 128,
+            "page": 20,
+            "page_end": 20
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 124,
+            "page": 19,
+            "page_end": 19
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 123,
+            "page": 19,
+            "page_end": 19
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 125,
+            "page": 19,
+            "page_end": 19
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 126,
+            "page": 19,
+            "page_end": 20
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 121,
+            "page": 18,
+            "page_end": 19
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 114,
+            "page": 18,
+            "page_end": 18
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 3,
+            "page": 1,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 91,
+            "page": 14,
+            "page_end": 14
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 80,
+            "page": 12,
+            "page_end": 13
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 39,
+            "page": 6,
+            "page_end": 6
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 0,
+            "page": 1,
+            "page_end": 1
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 128,
+            "page": 20,
+            "page_end": 20
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 114,
+            "page": 18,
+            "page_end": 18
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 124,
+            "page": 19,
+            "page_end": 19
+          },
+          {
+            "paper_id": "2611.09882",
+            "chunk_idx": 123,
+            "page": 19,
+            "page_end": 19
+          }
+        ]
+      },
+      "note": "Synthetic missing-marker probe: retrieval results are not an abstention or correctness score.",
+      "generation": {
+        "status": "ok",
+        "answer": "The provided excerpts do not contain any information about MPJPE and FID scores for FlowMoP on the AMASS dataset using TensorRT FP16 inference. Therefore, no specific data can be reported based solely on the given information.",
+        "sources": [
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 128,
+            "text": "a 23% lower energy score and substantially lower coordinate-wise CRPS than DuMMFWe also compare predictive spread as a scalar reliability diagnostic, with a mean error of 0.5 indicating matched dispersion, while values above 0.5 indicate over-dispersion. Our ratio of 0.48 is close to ideal, whereas DuMMF’s 0.62 is over-dispersed. Together with the coverage CDF, this shows that our distribution is more diverse, better placed, and better scaled relative to the observed future",
+            "page": 20,
+            "page_end": 20,
+            "page_spans": [
+              {
+                "page": 20,
+                "start": 0,
+                "end": 478
+              }
+            ],
+            "_faiss_score": 0.5667092800140381,
+            "_rrf_score": 0.016393,
+            "_confidence": 0.55,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.55"
+          },
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 114,
+            "text": "roximate runtime scaling of K × S relative to a single-pass deterministic methodThe WorldPose gap is further amplified by the larger number of agents per scene, higher control-point counts (Ct = 30, Cp = 45) required for the longer 3.0s horizon, and additional tokens for N = 10 neighbors’ trajectories. This latency trade-off is inherent to stochastic prediction with large proposal counts and is common to diffusion and flow matching methods at inference. At the same final K′ = 6 hypothesis budget, however, FlowMoP is ∼14× faster than DuMMF on CMU-Mocap because its proposals are integrated in parallel",
+            "page": 18,
+            "page_end": 18,
+            "page_spans": [
+              {
+                "page": 18,
+                "start": 0,
+                "end": 606
+              }
+            ],
+            "_bm25_score": 16.5775277077892,
+            "_rrf_score": 0.016393,
+            "_confidence": 0.67,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.67"
+          },
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 124,
+            "text": "n arbitrary variance, we evaluate sample efficiency and mode coverage (Figure 6)Our method consistently outperforms DuMMF across K on best-of-K JPE. Notably, while DuMMF exhibits a sharp initial reduction in error up to K = 6, its performance curve subsequently flattens. This plateau is likely an artifact of their training objective, which explicitly optimizes for a predefined number of diverse samples, in this case, 6. In contrast, our continuous flow matching formulation does not impose such a bottleneck on mode count; at K = 10, our method improves on DuMMF’s JPE at K = 20 (250.9mm)",
+            "page": 19,
+            "page_end": 19,
+            "page_spans": [
+              {
+                "page": 19,
+                "start": 0,
+                "end": 592
+              }
+            ],
+            "_faiss_score": 0.5409398674964905,
+            "_rrf_score": 0.016129,
+            "_confidence": 0.53,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.53"
+          },
+          {
+            "paper_id": "2611.09882",
+            "title": "FlowMoP: Stochastic Multi-Person Motion Prediction",
+            "chunk_idx": 123,
+            "text": "d passes of K′ = 6 learned “intent codes” and is therefore not fully independentWhile DuMMF exhibits higher absolute APD at the final 2.0s horizon (314.2 vs. 256.9 at K = 100), our method yields higher diversity at the 1.0s mark (140.7 vs. 121.3). This indicates that while DuMMF’s autoregressive rollout produces a wider spread of poses at the end of the temporal horizon, possibly symptomatic of cumulative temporal drift in the autoregressive prediction. Sample Efficiency and Mode Coverage. To demonstrate that our model’s diversity represents contextually grounded multi-modality rather than arbitrary variance, we evaluate sample efficiency and mode coverage (Figure 6)",
+            "page": 19,
+            "page_end": 19,
+            "page_spans": [
+              {
+                "page": 19,
+                "start": 0,
+                "end": 675
+              }
+            ],
+            "_faiss_score": 0.5391110181808472,
+            "_rrf_score": 0.015873,
+            "_confidence": 0.52,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.52"
+          }
+        ],
+        "elapsed_seconds": 0.9212949000066146
+      }
+    },
+    {
+      "id": "noanswer-nat-laya",
+      "type": "unanswerable_probe",
+      "paper_id": "2611.09803",
+      "question": "What LoRA rank and QLoRA quantization bit-width were used when fine-tuning the checkpoint with option shuffling?",
+      "expected": "论文片段中未报告 LoRA 秩或 QLoRA 量化位宽设置，应明确说明无法确认。",
+      "evidence": [],
+      "retrieval_meta": {
+        "search_query": "What LoRA rank and QLoRA quantization bit-width were used when fine-tuning the checkpoint with option shuffling?",
+        "translated": false,
+        "faiss_count": 12,
+        "bm25_count": 12
+      },
+      "timing_ms": {
+        "dense": 0.616599980276078,
+        "bm25": 8.978899975772947,
+        "rrf_pipeline": 45.05260003497824
+      },
+      "chinese_fallback_used": false,
+      "returned_ids": {
+        "dense": [
+          58,
+          9,
+          8,
+          21,
+          71,
+          17
+        ],
+        "bm25": [
+          8,
+          46,
+          12,
+          3,
+          66,
+          65
+        ],
+        "rrf": [
+          8,
+          9,
+          58,
+          21
+        ]
+      },
+      "returned_documents": {
+        "dense": [
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 58,
+            "page": 12,
+            "page_end": 12
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 9,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 8,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 21,
+            "page": 3,
+            "page_end": 3
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 71,
+            "page": 15,
+            "page_end": 15
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 17,
+            "page": 3,
+            "page_end": 3
+          }
+        ],
+        "bm25": [
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 8,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 46,
+            "page": 8,
+            "page_end": 8
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 12,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 3,
+            "page": 1,
+            "page_end": 1
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 66,
+            "page": 14,
+            "page_end": 14
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 65,
+            "page": 13,
+            "page_end": 14
+          }
+        ],
+        "rrf": [
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 8,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 9,
+            "page": 2,
+            "page_end": 2
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 58,
+            "page": 12,
+            "page_end": 12
+          },
+          {
+            "paper_id": "2611.09803",
+            "chunk_idx": 21,
+            "page": 3,
+            "page_end": 3
+          }
+        ]
+      },
+      "note": "Synthetic missing-marker probe: retrieval results are not an abstention or correctness score.",
+      "generation": {
+        "status": "ok",
+        "answer": "The provided excerpts do not contain any information about LoRA ranks or QLoRA quantization bit-widths used when fine-tuning the checkpoint with option shuffling. Therefore, no specific details can be stated based on the given information.",
+        "sources": [
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 8,
+            "text": "s (K≤5) or six random permutations (K=12), i.e. 3,893 model calls per checkpointResearch questions. RQ1: does the released checkpoint change its answer under reordering, and by how much? RQ2: what is the shape of the dependence (slot, option count, category, confidence)? RQ3: is a no-training remedy (voting over orderings) competitive? RQ4: does fine-tuning on Qwen-verified rows with option shuffling remove the dependence, and how much of the effect is due to shuffling itself rather than the extra data? RQ5: is the result stable across training seeds? Contributions",
+            "page": 2,
+            "page_end": 2,
+            "page_spans": [
+              {
+                "page": 2,
+                "start": 0,
+                "end": 571
+              }
+            ],
+            "_faiss_score": 0.5564255118370056,
+            "_bm25_score": 32.55608597934419,
+            "_rrf_score": 0.032266,
+            "_confidence": 0.77,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.77"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 9,
+            "text": "n the extra data? RQ5: is the result stable across training seeds? Contributions(i) On the base checkpoint 25.8% [22.9–28.7] of questions change their answer purely because the options were reordered (19.7% on the 605 English-language items alone). (ii) The dependence is not a first/last artefact alone: the first-vs-last accuracy gap is 10.1%, but predictions are concentrated in particular slots (total-variation distance from uniform 0.09 at K=3, 0.07 at K=12). (iii) Fine-tuning with shuffling reduces the flip rate to 7.2%, whereas the same rows without shuffling give 11.4%",
+            "page": 2,
+            "page_end": 2,
+            "page_spans": [
+              {
+                "page": 2,
+                "start": 0,
+                "end": 580
+              }
+            ],
+            "_faiss_score": 0.5576850175857544,
+            "_bm25_score": 23.87802587414115,
+            "_rrf_score": 0.031054,
+            "_confidence": 0.76,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.76"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 58,
+            "text": "identical options the content carries no signal, so any preference is pure priorThe base checkpoint is far from uniform at K=12: its most probable slot receives 18% against 4% for the least probable (uniform: 8.3%), a 4.9× ratio. Fine-tuning with shuffling (Maya-v1) lowers the ratio only to 2.2× and the no-shuffle ablation to 1.4×; the parallel layout brings it to 1.22× (essentially flat). This qualifies the headline result of the previous section: shuffled finetuning removes most content-dependent flips on realistic questions, but a latent position prior remains whenever the content is uninformative, and only the architectural change removes it",
+            "page": 12,
+            "page_end": 12,
+            "page_spans": [
+              {
+                "page": 12,
+                "start": 0,
+                "end": 653
+              }
+            ],
+            "_faiss_score": 0.5978151559829712,
+            "_bm25_score": 20.91148643439716,
+            "_rrf_score": 0.030282,
+            "_confidence": 0.77,
+            "_confidence_label": "高相关",
+            "_confidence_badge": "高相关 0.77"
+          },
+          {
+            "paper_id": "2611.09803",
+            "title": "Maya a1: Do the Options Read the Model, or Does Their Position? Order Sensitivity in a Non-Autoregressive Decision Model",
+            "chunk_idx": 21,
+            "text": "onfiguration keys of the base checkpoint that matter here (rl_agent_config.json)Key Value Consequence encoder answerdotai/ModernBERTlarge rotary positions; no learned absolute position table to inspect max_len 512 total tokens: head + state head_max_len 192 tokens available to instruction + all options head_layers 2 slot states exchange information through self-attention option_layout sequential (default) all published checkpoints use the sequential layout temperature 1.637, 1.251, 1.983 per-type fallbacks (choice, score, noul) temperature_by_options[choice:3-5] 1.7602 applied after clamping to [0.5, 5] temperature_by_options[choice:610] 1.0000 applied after clamping to",
+            "page": 3,
+            "page_end": 3,
+            "page_spans": [
+              {
+                "page": 3,
+                "start": 0,
+                "end": 678
+              }
+            ],
+            "_faiss_score": 0.5559958815574646,
+            "_rrf_score": 0.015625,
+            "_confidence": 0.53,
+            "_confidence_label": "中相关",
+            "_confidence_badge": "中相关 0.53"
+          }
+        ],
+        "elapsed_seconds": 0.990264699968975
+      }
+    }
+  ]
+}

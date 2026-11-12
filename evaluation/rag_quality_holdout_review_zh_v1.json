@@ -1,0 +1,97 @@
+{
+  "review_version": "1.0",
+  "results_file": "rag_quality_holdout_zh_v1.json",
+  "results_sha256": "7bbb6d0933868680c8a9cbab65b9f4ae3b61d3afa42f2530773c8283cdbef97b",
+  "reviewer": "single AI assistant manual chunk-by-chunk and answer-vs-context review; not independent human gold",
+  "relevance_rubric": "1 if the chunk directly answers or supplies part of the specific question from retrieved sources.",
+  "generation_rubric": {
+    "coverage": "full = covers listed expected facts; partial = covers some expected facts or misses key parts; none = misses or abstains on answerable question.",
+    "grounding": "supported = every claim and citation in the answer is backed by supplied sources; unsupported = contains misstatements, stage swaps, or false attributions; abstained = states excerpts lack the answer."
+  },
+  "cases": [
+    {
+      "id": "cua-interface",
+      "relevant_chunks": [6, 4, 32, 0],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunks 6, 4, 32, and 0 explain operating embodied tasks via software interfaces using screenshots, mouse clicks, and keyboard inputs (chunk 1 with exact quote phrasing was not returned, but chunk 4 supplies equivalent p. 1 evidence); 52 and 8 summarize competition outcomes. Every claim and excerpt/page reference in the answer is backed by supplied sources."
+    },
+    {
+      "id": "cua-competitions",
+      "relevant_chunks": [53, 55, 2, 52],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "All 4 returned chunks (53, 55, 2, 52) confirm participation/prizes across four ECCV workshop competitions. The answer directly states four ECCV workshop competitions with exact citation (2611.09847, Page: 8)."
+    },
+    {
+      "id": "graded-blur",
+      "relevant_chunks": [138],
+      "coverage": "partial",
+      "grounding": "unsupported",
+      "reason": "Due to query translation drift ('unknown fuzzy condition'), FAISS returned 0 chunks and BM25 kept only 187 (bibliography title) and 138 (Table 4 unknown blur). The answer confuses Gaussian blur with 'Gaussian noise', collapses the ten Table 4 conditions into 'three conditions', and mistranslates SNT as 'standard neural network'."
+    },
+    {
+      "id": "graded-accuracy",
+      "relevant_chunks": [2, 12],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunks 2 (p. 1) and 12 (p. 2) report 88.4% accuracy on MNIST under two-pixel blur versus 66.2% on scale-normalized derivatives. The answer states 88.4% correctly, but falsely cites Page 23 and wrongly implies 88.4% was obtained by comparing against 66.2%."
+    },
+    {
+      "id": "flowmop-outputs",
+      "relevant_chunks": [1, 7],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunks 1 (p. 1) and 7 (p. 2) state joint modeling of global trajectories and root-relative poses; 0/77/41/14 are figure caption/references/baselines/related work. Although the answer names both components, it cites Page 3 instead of p. 1-2 and collapses into a 63,659-character repetition loop."
+    },
+    {
+      "id": "flowmop-spline",
+      "relevant_chunks": [22, 57, 25, 98],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "All 4 returned chunks (22, 57, 25, 98) describe B-spline control-point compression, C2 smoothness, Table 4 basis comparison, clamped cubic B-spline basis matrix B, and Appendix B knot construction. Every technical statement and (2611.09882, p.3-4) citation is supported by the sources."
+    },
+    {
+      "id": "laya-order",
+      "relevant_chunks": [92, 9, 2],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunks 92, 9, and 2 report the 25.8% answer flip rate across cyclic/random orderings; 11, 58, and 8 cover related work, identical-option probes, and research questions. Answer reports 25.8% and protocol details accurately from chunk 2 with exact (2611.09803, Page: 1) citation."
+    },
+    {
+      "id": "laya-shuffle",
+      "relevant_chunks": [16, 83],
+      "coverage": "partial",
+      "grounding": "unsupported",
+      "reason": "Chunks 16 and 83 discuss the --shuffle-options training flag, shuffled fine-tuning, and parallel layout; 14/11/0/15 cover background and evaluation protocol. The answer misleads by pairing fine-tuning option shuffling with high-stakes voting, calls the architectural 'principled fix' (parallel layout in chunk 83, p. 18) a 'baseline method', and cites p. 2 instead of p. 18."
+    },
+    {
+      "id": "noanswer-nat-cua",
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": true,
+      "reason": "Retrieved chunks lack Kubernetes orchestration or AWS EC2 hourly pricing; model cleanly abstains."
+    },
+    {
+      "id": "noanswer-nat-graded",
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": true,
+      "reason": "Unlike EN, the ZH run cleanly identifies that ImageNet-1K and ResNet-50 training/validation accuracy are absent from the excerpts."
+    },
+    {
+      "id": "noanswer-nat-flowmop",
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": true,
+      "reason": "Retrieved chunks discuss WorldPose/CMU-Mocap evaluation without AMASS or TensorRT FP16; model cleanly abstains."
+    },
+    {
+      "id": "noanswer-nat-laya",
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": true,
+      "reason": "Retrieved chunks discuss option-order sensitivity without LoRA rank or QLoRA bit-widths; model cleanly abstains."
+    }
+  ]
+}

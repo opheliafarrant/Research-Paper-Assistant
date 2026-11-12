@@ -1,0 +1,28 @@
+{
+  "review_version": "1.0",
+  "results_file": "rag_quality_results_v2.json",
+  "results_sha256": "5b0c0749bbe388764de00bc8130e0bde10b404d93727d11b0aef0b142e41065a",
+  "reviewer": "One AI assistant reviewed each generated answer and the six returned RRF chunks; not an independent human or expert panel.",
+  "relevance_rubric": "For these single-paper queries, mark a returned chunk relevant only when it directly contains information answering at least one part of that question. Related background without a direct answer is marked nonrelevant. All six RRF results of each answerable case were inspected. Judgments are subjective and not exhaustive corpus-wide labels.",
+  "generation_rubric": "coverage=full/partial/none relative to the case's listed expected answer; grounding=supported/unsupported/uncertain relative to returned context, independently of coverage. A refusal is evaluated separately for synthetic no-answer probes.",
+  "cases": [
+    {"id":"amp-benchmarks","relevant_chunks":[21,31,162,126],"coverage":"full","grounding":"supported","reason":"列出目标基准，片段 31 支持；真实世界试验块不回答仿真基准。"},
+    {"id":"amp-memory","relevant_chunks":[95],"coverage":"partial","grounding":"supported","reason":"回答给出机器人具体知识与代码，受块 95 支持，但未明确概括记录观察和策略；原标注概括位于未召回块。"},
+    {"id":"amp-trials","relevant_chunks":[49,35,200,175,44,209],"coverage":"full","grounding":"supported","reason":"回答模型与错误恢复；块 35、44、200 等包含真实试验或恢复设置。"},
+    {"id":"amp-limits","relevant_chunks":[127],"coverage":"partial","grounding":"supported","reason":"回答推理等待与执行轨迹不可重新考量，均见块 127；未说明标注参考答案中的主要为准静态场景。"},
+    {"id":"flow-method","relevant_chunks":[25,24],"coverage":"none","grounding":"uncertain","reason":"未回答条件流匹配；输出公式与被截断的块 30 有关，但公式完整性无法从该片段判断。"},
+    {"id":"flow-stages","relevant_chunks":[25,71],"coverage":"full","grounding":"supported","reason":"两个阶段与块 25 一致；块 71 亦概括训练并冻结速度场。"},
+    {"id":"flow-datasets","relevant_chunks":[55,47],"coverage":"full","grounding":"supported","reason":"PBMC 和 BMMC 均见块 55 与 47；其他块仅描述任务背景。"},
+    {"id":"flow-limits","relevant_chunks":[73,71,25,20],"coverage":"full","grounding":"unsupported","reason":"核心数据与路径限制见块 73；额外声称假设起始分布不灵活，提供上下文仅说未来探索更灵活分布，不能直接推出该假设。"},
+    {"id":"grasp-name","relevant_chunks":[13,5],"coverage":"partial","grounding":"supported","reason":"回答给出名称，但未给出 Isaac Lab；块 13、5 支持名称，返回上下文未明确指出仿真器名称。"},
+    {"id":"grasp-critic","relevant_chunks":[35],"coverage":"full","grounding":"supported","reason":"块 35 明确说明 PPO 后将 critic 蒸馏为抓取效用网络。"},
+    {"id":"grasp-reward","relevant_chunks":[48,42],"coverage":"full","grounding":"supported","reason":"块 48 给出任务完成目标，块 42 的表格还提供正奖励和权重。"},
+    {"id":"grasp-future","relevant_chunks":[],"coverage":"none","grounding":"unsupported","reason":"返回六块均未给出 SPOT 与家庭物体未来计划；回答否认明确计划并给出未经上下文支持的设想，原文第 8 页块 78 有具体计划。"},
+    {"id":"quant-benchmarks","relevant_chunks":[24],"coverage":"full","grounding":"supported","reason":"块 24 直接给出用于异常值行为分析的 GSM8K 和 AIME25。"},
+    {"id":"quant-fluctuation","relevant_chunks":[8,24,1,26],"coverage":"full","grounding":"supported","reason":"块 24 支持前 30 步约 20% 的比较；其他标记块直接描述早期异常值或后期减弱。"},
+    {"id":"quant-baselines","relevant_chunks":[74,125,61],"coverage":"partial","grounding":"supported","reason":"回答只列出 ParoQuant，虽然块 125 的表也有 SqueezeLLM、CodeQuant；回答所述 A8W4 表格由块 125 支持。"},
+    {"id":"quant-limits","relevant_chunks":[87],"coverage":"full","grounding":"unsupported","reason":"块 87 支持推理重复及不可靠输出等未来问题；回答额外称这些内容写在摘要与引言中，返回上下文没有支持该定位。"},
+    {"id":"noanswer-amp","relevant_chunks":[],"coverage":"not_applicable","grounding":"abstained","abstention_correct":true,"reason":"回答明确称给定上下文没有虚构设备或激活码；该探针只验证该一次输出。"},
+    {"id":"noanswer-flow","relevant_chunks":[],"coverage":"not_applicable","grounding":"abstained","abstention_correct":true,"reason":"回答明确称给定上下文没有虚构望远镜或访问码；该探针只验证该一次输出。"}
+  ]
+}

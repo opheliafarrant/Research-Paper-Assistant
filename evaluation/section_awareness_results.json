@@ -1,0 +1,180 @@
+{
+  "limitation_cases": [
+    {
+      "paper_id": "2611.09892",
+      "total_facts": 5,
+      "strategies": {
+        "baseline": {
+          "hits": 3,
+          "distractors": 4,
+          "chars": 9090,
+          "dur_ms": 12942.2
+        },
+        "filter_checklist": {
+          "hits": 3,
+          "distractors": 4,
+          "chars": 9090,
+          "dur_ms": 95.1
+        },
+        "soft_penalty_appendix": {
+          "hits": 3,
+          "distractors": 4,
+          "chars": 9090,
+          "dur_ms": 88.1
+        },
+        "filter_all_appendix": {
+          "hits": 3,
+          "distractors": 4,
+          "chars": 9090,
+          "dur_ms": 92.2
+        }
+      }
+    },
+    {
+      "paper_id": "2611.09863",
+      "total_facts": 4,
+      "strategies": {
+        "baseline": {
+          "hits": 0,
+          "distractors": 11,
+          "chars": 8372,
+          "dur_ms": 94.0
+        },
+        "filter_checklist": {
+          "hits": 4,
+          "distractors": 0,
+          "chars": 6592,
+          "dur_ms": 90.8
+        },
+        "soft_penalty_appendix": {
+          "hits": 4,
+          "distractors": 0,
+          "chars": 6592,
+          "dur_ms": 90.0
+        },
+        "filter_all_appendix": {
+          "hits": 4,
+          "distractors": 0,
+          "chars": 4125,
+          "dur_ms": 82.7
+        }
+      }
+    },
+    {
+      "paper_id": "2611.09868",
+      "total_facts": 3,
+      "strategies": {
+        "baseline": {
+          "hits": 2,
+          "distractors": 7,
+          "chars": 8844,
+          "dur_ms": 90.3
+        },
+        "filter_checklist": {
+          "hits": 3,
+          "distractors": 0,
+          "chars": 8803,
+          "dur_ms": 91.7
+        },
+        "soft_penalty_appendix": {
+          "hits": 3,
+          "distractors": 0,
+          "chars": 8803,
+          "dur_ms": 93.9
+        },
+        "filter_all_appendix": {
+          "hits": 3,
+          "distractors": 0,
+          "chars": 7297,
+          "dur_ms": 94.1
+        }
+      }
+    },
+    {
+      "paper_id": "2611.09864",
+      "total_facts": 3,
+      "strategies": {
+        "baseline": {
+          "hits": 2,
+          "distractors": 1,
+          "chars": 8729,
+          "dur_ms": 99.7
+        },
+        "filter_checklist": {
+          "hits": 2,
+          "distractors": 1,
+          "chars": 8729,
+          "dur_ms": 94.4
+        },
+        "soft_penalty_appendix": {
+          "hits": 2,
+          "distractors": 1,
+          "chars": 8729,
+          "dur_ms": 91.6
+        },
+        "filter_all_appendix": {
+          "hits": 2,
+          "distractors": 1,
+          "chars": 8729,
+          "dur_ms": 93.7
+        }
+      }
+    }
+  ],
+  "appendix_cases": [
+    {
+      "id": "app_p63_hyperparams",
+      "paper_id": "2611.09863",
+      "query": "What hardware GPU setup and supplementary retrieval metrics are reported in Appendix B?",
+      "strategies": {
+        "baseline": {
+          "hits": 1,
+          "returned_chunks": 15,
+          "dur_ms": 107.3
+        },
+        "filter_checklist": {
+          "hits": 1,
+          "returned_chunks": 15,
+          "dur_ms": 88.7
+        },
+        "soft_penalty_appendix": {
+          "hits": 1,
+          "returned_chunks": 15,
+          "dur_ms": 96.2
+        },
+        "filter_all_appendix": {
+          "hits": 0,
+          "returned_chunks": 15,
+          "dur_ms": 100.3
+        }
+      }
+    },
+    {
+      "id": "app_p68_commonsense",
+      "paper_id": "2611.09868",
+      "query": "What perplexity results are reported for QuaRot and ParoQuant on commonsense reasoning in Appendix C?",
+      "strategies": {
+        "baseline": {
+          "hits": 1,
+          "returned_chunks": 15,
+          "dur_ms": 106.7
+        },
+        "filter_checklist": {
+          "hits": 1,
+          "returned_chunks": 15,
+          "dur_ms": 105.4
+        },
+        "soft_penalty_appendix": {
+          "hits": 1,
+          "returned_chunks": 15,
+          "dur_ms": 108.4
+        },
+        "filter_all_appendix": {
+          "hits": 0,
+          "returned_chunks": 15,
+          "dur_ms": 108.1
+        }
+      }
+    }
+  ]
+}

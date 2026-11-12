@@ -1,0 +1,14 @@
+{
+  "cua-interface": "计算机使用智能体通过什么输入和操作来执行具身任务？",
+  "cua-competitions": "作者的方案在几个 ECCV 工作坊竞赛中获奖？",
+  "graded-blur": "文章分析了哪种未知模糊条件？",
+  "graded-accuracy": "在 MNIST 双像素模糊下，该网络取得了多少准确率？",
+  "flowmop-outputs": "FlowMoP 生成的多人未来运动同时建模哪两种信息？",
+  "flowmop-spline": "FlowMoP 中 B 样条重参数化有什么作用？",
+  "laya-order": "循环改变选项顺序后，Laya 检查点有多少比例的问题改变了答案？",
+  "laya-shuffle": "Laya 的选项顺序扰动问题使用什么训练调整来缓解？",
+  "noanswer-nat-cua": "论文中为部署这些计算机使用智能体报告了怎样的 Kubernetes 编排配置和 AWS EC2 每小时云端成本？",
+  "noanswer-nat-graded": "该分级卷积网络在 ImageNet-1K 上使用 ResNet-50 主干网络取得了多少 top-1 验证准确率？",
+  "noanswer-nat-flowmop": "FlowMoP 在 AMASS 数据集上使用 TensorRT FP16 推理报告了多少 MPJPE 和 FID 分数？",
+  "noanswer-nat-laya": "在使用选项洗牌策略微调该检查点时，采用了多大的 LoRA 秩以及怎样的 QLoRA 量化位宽？"
+}

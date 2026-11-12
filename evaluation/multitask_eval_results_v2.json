@@ -1,0 +1,799 @@
+{
+  "benchmark_sha256": "9fcb2627742870155693737afc6ddd47aae1a0f2a9b82724ccbddda648517afd",
+  "dense_threshold": 0.4,
+  "total_cases": 20,
+  "cases": [
+    {
+      "id": "term_amp1_01",
+      "category": "term",
+      "paper_id": "2611.09892",
+      "query": "What manipulation benchmarks including LIBERO are evaluated in this paper?",
+      "is_unanswerable": false,
+      "total_snippets": 2,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "method_amp1_continual_02",
+      "category": "method",
+      "paper_id": "2611.09892",
+      "query": "How does AMP1 implement persistent memory for continual learning from its own experience?",
+      "is_unanswerable": false,
+      "total_snippets": 2,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 1,
+          "coverage": 0.5,
+          "mrr": 0.333,
+          "first_rank": 3
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_expanded_15": {
+          "returned": 14,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "exp_amp1_realworld_03",
+      "category": "experiment",
+      "paper_id": "2611.09892",
+      "query": "What model and error recovery settings are evaluated in real-world hardware manipulation trials?",
+      "is_unanswerable": false,
+      "total_snippets": 3,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 0.667,
+          "mrr": 0.2,
+          "first_rank": 5
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 0.667,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 0.667,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "noans_amp1_lidar_04",
+      "category": "unanswerable",
+      "paper_id": "2611.09892",
+      "query": "What is the 3D LiDAR point cloud frequency and range used for autonomous driving perception?",
+      "is_unanswerable": true,
+      "total_snippets": 0,
+      "methods": {
+        "dense_10": {
+          "returned": 3,
+          "max_score": 0.576,
+          "high_conf_count": 0
+        },
+        "sparse_10": {
+          "returned": 10,
+          "max_score": 0.0,
+          "high_conf_count": 0
+        },
+        "rrf_10": {
+          "returned": 10,
+          "max_score": 0.78,
+          "high_conf_count": 3
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "max_score": 0.0,
+          "high_conf_count": 0
+        }
+      }
+    },
+    {
+      "id": "lim_amp1_planning_05",
+      "category": "limitation",
+      "paper_id": "2611.09892",
+      "query": "What are the core limitations and future directions of agentic manipulation policies?",
+      "is_unanswerable": false,
+      "total_snippets": 4,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": false,
+          "matched_count": 0,
+          "coverage": 0.0,
+          "mrr": 0.0,
+          "first_rank": 0
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": false,
+          "matched_count": 0,
+          "coverage": 0.0,
+          "mrr": 0.0,
+          "first_rank": 0
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": false,
+          "matched_count": 0,
+          "coverage": 0.0,
+          "mrr": 0.0,
+          "first_rank": 0
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 0.5,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "term_flowalign_06",
+      "category": "term",
+      "paper_id": "2611.09863",
+      "query": "What is FlowAlign and what mathematical framework does it use for path-consistency?",
+      "is_unanswerable": false,
+      "total_snippets": 3,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "method_flowalign_stages_07",
+      "category": "method",
+      "paper_id": "2611.09863",
+      "query": "What are the two training stages in flow-guided target-space alignment?",
+      "is_unanswerable": false,
+      "total_snippets": 2,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 1,
+          "coverage": 0.5,
+          "mrr": 0.25,
+          "first_rank": 4
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 1,
+          "coverage": 0.5,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 1,
+          "coverage": 0.5,
+          "mrr": 0.25,
+          "first_rank": 4
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 1,
+          "coverage": 0.5,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "exp_flowalign_benchmarks_08",
+      "category": "experiment",
+      "paper_id": "2611.09863",
+      "query": "On which single-cell multiome benchmark datasets is FlowAlign evaluated?",
+      "is_unanswerable": false,
+      "total_snippets": 3,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "noans_flowalign_rlhf_09",
+      "category": "unanswerable",
+      "paper_id": "2611.09863",
+      "query": "How does FlowAlign implement reinforcement learning with human feedback (RLHF) and PPO reward models for LLM alignment?",
+      "is_unanswerable": true,
+      "total_snippets": 0,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "max_score": 0.563,
+          "high_conf_count": 0
+        },
+        "sparse_10": {
+          "returned": 10,
+          "max_score": 0.0,
+          "high_conf_count": 0
+        },
+        "rrf_10": {
+          "returned": 10,
+          "max_score": 0.75,
+          "high_conf_count": 3
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "max_score": 0.0,
+          "high_conf_count": 0
+        }
+      }
+    },
+    {
+      "id": "lim_flowalign_paired_10",
+      "category": "limitation",
+      "paper_id": "2611.09863",
+      "query": "What limitations and future directions are acknowledged for flow-guided target alignment?",
+      "is_unanswerable": false,
+      "total_snippets": 3,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 0.333,
+          "first_rank": 3
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 0.1,
+          "first_rank": 10
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 0.167,
+          "first_rank": 6
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "term_grasptags_11",
+      "category": "term",
+      "paper_id": "2611.09864",
+      "query": "What does Grasp-TAGS stand for and which simulator is used for policy training?",
+      "is_unanswerable": false,
+      "total_snippets": 2,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 0.25,
+          "first_rank": 4
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 1,
+          "coverage": 0.5,
+          "mrr": 0.2,
+          "first_rank": 5
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 0.5,
+          "first_rank": 2
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "method_grasptags_distill_12",
+      "category": "method",
+      "paper_id": "2611.09864",
+      "query": "How is the critic distillation objective formulated to rank candidate initial grasps?",
+      "is_unanswerable": false,
+      "total_snippets": 2,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 0.25,
+          "first_rank": 4
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": false,
+          "matched_count": 0,
+          "coverage": 0.0,
+          "mrr": 0.0,
+          "first_rank": 0
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 0.143,
+          "first_rank": 7
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "exp_grasptags_policy_13",
+      "category": "experiment",
+      "paper_id": "2611.09864",
+      "query": "What reward terms and weights are defined to train the high-level controller policy?",
+      "is_unanswerable": false,
+      "total_snippets": 3,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 0.333,
+          "first_rank": 3
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 0.333,
+          "first_rank": 3
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": 0.333,
+          "first_rank": 3
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "noans_grasptags_transformer_14",
+      "category": "unanswerable",
+      "paper_id": "2611.09864",
+      "query": "What is the multi-head self-attention layer count and patch size in the vision transformer backbone?",
+      "is_unanswerable": true,
+      "total_snippets": 0,
+      "methods": {
+        "dense_10": {
+          "returned": 5,
+          "max_score": 0.44,
+          "high_conf_count": 0
+        },
+        "sparse_10": {
+          "returned": 10,
+          "max_score": 0.0,
+          "high_conf_count": 0
+        },
+        "rrf_10": {
+          "returned": 10,
+          "max_score": 0.67,
+          "high_conf_count": 0
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "max_score": 0.0,
+          "high_conf_count": 0
+        }
+      }
+    },
+    {
+      "id": "lim_grasptags_future_15",
+      "category": "limitation",
+      "paper_id": "2611.09864",
+      "query": "What are the acknowledged limitations and future hardware evaluation plans for Grasp-TAGS?",
+      "is_unanswerable": false,
+      "total_snippets": 3,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 0.667,
+          "mrr": 0.111,
+          "first_rank": 9
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": false,
+          "matched_count": 0,
+          "coverage": 0.0,
+          "mrr": 0.0,
+          "first_rank": 0
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": false,
+          "matched_count": 0,
+          "coverage": 0.0,
+          "mrr": 0.0,
+          "first_rank": 0
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": false,
+          "matched_count": 0,
+          "coverage": 0.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "term_codequant2_16",
+      "category": "term",
+      "paper_id": "2611.09868",
+      "query": "What reasoning benchmarks are analyzed to characterize outlier activations in CodeQuant2?",
+      "is_unanswerable": false,
+      "total_snippets": 2,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "method_codequant2_fluctuation_17",
+      "category": "method",
+      "paper_id": "2611.09868",
+      "query": "Why do large reasoning models exhibit larger activation fluctuations during early decoding steps?",
+      "is_unanswerable": false,
+      "total_snippets": 2,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 0.167,
+          "first_rank": 6
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": 0.333,
+          "first_rank": 3
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "exp_codequant2_baselines_18",
+      "category": "experiment",
+      "paper_id": "2611.09868",
+      "query": "What quantization baselines including QuaRot are compared under the A4W4 setting?",
+      "is_unanswerable": false,
+      "total_snippets": 4,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 4,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 4,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 4,
+          "coverage": 1.0,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 4,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    },
+    {
+      "id": "noans_codequant2_casp_19",
+      "category": "unanswerable",
+      "paper_id": "2611.09868",
+      "query": "What is the protein folding structure prediction accuracy of CodeQuant2 evaluated on CASP15 targets?",
+      "is_unanswerable": true,
+      "total_snippets": 0,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "max_score": 0.487,
+          "high_conf_count": 0
+        },
+        "sparse_10": {
+          "returned": 10,
+          "max_score": 0.0,
+          "high_conf_count": 0
+        },
+        "rrf_10": {
+          "returned": 10,
+          "max_score": 0.75,
+          "high_conf_count": 4
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "max_score": 0.0,
+          "high_conf_count": 0
+        }
+      }
+    },
+    {
+      "id": "lim_codequant2_safety_20",
+      "category": "limitation",
+      "paper_id": "2611.09868",
+      "query": "What limitations are discussed regarding post-training behaviors and safety evaluation in CodeQuant2?",
+      "is_unanswerable": false,
+      "total_snippets": 3,
+      "methods": {
+        "dense_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 0.667,
+          "mrr": 0.333,
+          "first_rank": 3
+        },
+        "sparse_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 0.667,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_10": {
+          "returned": 10,
+          "hit": true,
+          "matched_count": 2,
+          "coverage": 0.667,
+          "mrr": 1.0,
+          "first_rank": 1
+        },
+        "rrf_expanded_15": {
+          "returned": 15,
+          "hit": true,
+          "matched_count": 3,
+          "coverage": 1.0,
+          "mrr": null,
+          "first_rank": null
+        }
+      }
+    }
+  ]
+}

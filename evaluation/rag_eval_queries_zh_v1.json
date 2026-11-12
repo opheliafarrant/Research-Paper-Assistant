@@ -1,0 +1,20 @@
+{
+  "amp-benchmarks": "这篇论文评估了哪些仿真基准？",
+  "amp-memory": "AMP1 在持久记忆中记录哪些内容？",
+  "amp-trials": "真实机器人试验使用了哪个模型，是否开启机器人错误恢复？",
+  "amp-limits": "AMP1 在执行速度和轨迹执行方面有哪些局限？",
+  "flow-method": "FlowAlign 使用什么框架定义路径一致性分数？",
+  "flow-stages": "FlowAlign 训练分为哪两个阶段？",
+  "flow-datasets": "FlowAlign 使用了哪些单细胞多组学基准数据集？",
+  "flow-limits": "FlowAlign 有哪些数据要求和分析假设方面的局限？",
+  "grasp-name": "Grasp-TAGS 的名称代表什么，流程图中使用了什么仿真器？",
+  "grasp-critic": "Grasp-TAGS 中，PPO 训练后如何处理学习到的 critic？",
+  "grasp-reward": "高层控制器奖励中的任务完成目标是什么？",
+  "grasp-future": "Grasp-TAGS 后续计划如何扩展评测和真实部署？",
+  "quant-benchmarks": "CodeQuant2 分析异常值行为时使用了哪些推理基准？",
+  "quant-fluctuation": "推理早期解码阶段观察到什么激活波动？",
+  "quant-baselines": "评测表格中与 QuaRot 一起列出了哪些量化基线？",
+  "quant-limits": "论文对量化后的推理行为和安全问题提出了哪些未来研究问题？",
+  "noanswer-amp": "论文中虚构设备 ZXQ-7391-BLUE 的激活码是什么？",
+  "noanswer-flow": "论文中虚构望远镜 JVN-4826-GREEN 的访问码是什么？"
+}

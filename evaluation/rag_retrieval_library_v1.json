@@ -1,0 +1,3392 @@
+{
+  "schema_version": 1,
+  "dataset_version": "1.0",
+  "mode": "retrieval",
+  "configuration": {
+    "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "generation_model": "qwen2.5:3b",
+    "ollama_url": "http://localhost:11434",
+    "dense_threshold": 0.4,
+    "rrf_k": 60,
+    "candidate_k": 12,
+    "final_k": 6,
+    "scope": "entire-library; title prepended",
+    "unanswerable_probes": "excluded"
+  },
+  "caveats": [
+    "Exploratory labels are not exhaustive or independent held-out data.",
+    "Evidence hit requires a complete normalized quote in one returned chunk; alternative valid evidence is unjudged.",
+    "Evidence-level recall is relative to the listed evidence units, not all relevant passages.",
+    "Precision and accuracy cannot be computed without complete relevance judgments.",
+    "Generation quality requires separate human review; no keyword score is called faithfulness.",
+    "Timing is single-run warm retrieval; no p95 or end-to-end SLA is implied."
+  ],
+  "input_sha256": {
+    "evaluation\\rag_eval_gold_v1.json": "f6d513f6ea62f00d203fab39d25176e0fa78f95b787b3f47a17a3691ffa59838",
+    "data\\cache\\faiss.index": "9b05986e5a5f33d7da37747a32cf1a71693c6863d322b167c0f6bc4a30c4fed2",
+    "data\\cache\\faiss_meta.pkl": "3b3af7993c94e1e79cc17320182e3b460f7a6fa8891102b4a47c80a8ad6c4bfe",
+    "data\\cache\\bm25.pkl": "22b97e7cd8915de082e3495e4d950367d3ebbad8102d778b71405471dae3dc90",
+    "data\\pdfs\\2611.09863.pdf": "eb5228c7c14456d2a82927fd995366f3092cd5d9073a98b49842091025c261e4",
+    "data\\pdfs\\2611.09864.pdf": "557a2fd1e4a279b2940d438551ddb14a5ad9084ece4ca8fa307bf4814e6ca088",
+    "data\\pdfs\\2611.09868.pdf": "ecf57294610c4e21d570b25cfc7e70824b03309e4ac74cfb8a4b0609bd702e5c",
+    "data\\pdfs\\2611.09892.pdf": "555980d14c14bf83120d89202f017eb451f37b365cd471393b463a68d9581203"
+  },
+  "validation": [
+    {
+      "id": "amp-benchmarks",
+      "evidence_units": 1
+    },
+    {
+      "id": "amp-memory",
+      "evidence_units": 1
+    },
+    {
+      "id": "amp-trials",
+      "evidence_units": 2
+    },
+    {
+      "id": "amp-limits",
+      "evidence_units": 2
+    },
+    {
+      "id": "flow-method",
+      "evidence_units": 1
+    },
+    {
+      "id": "flow-stages",
+      "evidence_units": 2
+    },
+    {
+      "id": "flow-datasets",
+      "evidence_units": 1
+    },
+    {
+      "id": "flow-limits",
+      "evidence_units": 2
+    },
+    {
+      "id": "grasp-name",
+      "evidence_units": 2
+    },
+    {
+      "id": "grasp-critic",
+      "evidence_units": 1
+    },
+    {
+      "id": "grasp-reward",
+      "evidence_units": 1
+    },
+    {
+      "id": "grasp-future",
+      "evidence_units": 1
+    },
+    {
+      "id": "quant-benchmarks",
+      "evidence_units": 1
+    },
+    {
+      "id": "quant-fluctuation",
+      "evidence_units": 1
+    },
+    {
+      "id": "quant-baselines",
+      "evidence_units": 3
+    },
+    {
+      "id": "quant-limits",
+      "evidence_units": 2
+    },
+    {
+      "id": "noanswer-amp",
+      "marker_absent": true
+    },
+    {
+      "id": "noanswer-flow",
+      "marker_absent": true
+    }
+  ],
+  "retrieval_summary": {
+    "overall": {
+      "dense": {
+        "1": {
+          "queries": 16,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 16,
+          "hit_rate": 0.125,
+          "mean_annotated_evidence_recall": 0.125,
+          "mrr": 0.041666666666666664
+        },
+        "5": {
+          "queries": 16,
+          "hit_rate": 0.375,
+          "mean_annotated_evidence_recall": 0.34375,
+          "mrr": 0.09479166666666666
+        },
+        "6": {
+          "queries": 16,
+          "hit_rate": 0.4375,
+          "mean_annotated_evidence_recall": 0.40625,
+          "mrr": 0.10520833333333333
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 16,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.21875,
+          "mrr": 0.25
+        },
+        "3": {
+          "queries": 16,
+          "hit_rate": 0.375,
+          "mean_annotated_evidence_recall": 0.34375,
+          "mrr": 0.2916666666666667
+        },
+        "5": {
+          "queries": 16,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.46875,
+          "mrr": 0.3229166666666667
+        },
+        "6": {
+          "queries": 16,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.46875,
+          "mrr": 0.3229166666666667
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 16,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 16,
+          "hit_rate": 0.3125,
+          "mean_annotated_evidence_recall": 0.28125,
+          "mrr": 0.125
+        },
+        "5": {
+          "queries": 16,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.46875,
+          "mrr": 0.1625
+        },
+        "6": {
+          "queries": 16,
+          "hit_rate": 0.625,
+          "mean_annotated_evidence_recall": 0.59375,
+          "mrr": 0.18333333333333332
+        }
+      }
+    },
+    "term": {
+      "dense": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.375,
+          "mrr": 0.1125
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.625,
+          "mrr": 0.15416666666666667
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.375,
+          "mrr": 0.5
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.375,
+          "mrr": 0.5
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.625,
+          "mrr": 0.5625
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.625,
+          "mrr": 0.5625
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.375,
+          "mrr": 0.20833333333333331
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.625,
+          "mrr": 0.2583333333333333
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.625,
+          "mrr": 0.2583333333333333
+        }
+      }
+    },
+    "method": {
+      "dense": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.1
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.1
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.25
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.3333333333333333
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.75,
+          "mrr": 0.3958333333333333
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.75,
+          "mrr": 0.3958333333333333
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.20833333333333331
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.75,
+          "mrr": 0.2583333333333333
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.75,
+          "mean_annotated_evidence_recall": 0.75,
+          "mrr": 0.2583333333333333
+        }
+      }
+    },
+    "experiment": {
+      "dense": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.25
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.3333333333333333
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.3333333333333333
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.3333333333333333
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.08333333333333333
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.08333333333333333
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.125
+        }
+      }
+    },
+    "limitation": {
+      "dense": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.16666666666666666
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.16666666666666666
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.16666666666666666
+        }
+      },
+      "bm25": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        }
+      },
+      "rrf": {
+        "1": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "3": {
+          "queries": 4,
+          "hit_rate": 0.0,
+          "mean_annotated_evidence_recall": 0.0,
+          "mrr": 0.0
+        },
+        "5": {
+          "queries": 4,
+          "hit_rate": 0.25,
+          "mean_annotated_evidence_recall": 0.25,
+          "mrr": 0.05
+        },
+        "6": {
+          "queries": 4,
+          "hit_rate": 0.5,
+          "mean_annotated_evidence_recall": 0.5,
+          "mrr": 0.09166666666666667
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "amp-benchmarks",
+      "type": "term",
+      "paper_id": "2611.09892",
+      "question": "For the paper On Agentic Manipulation Policies, What simulation benchmarks are evaluated in this paper?",
+      "expected": "说明评估中包含 LIBERO-PRO、robosuite 和 BEHAVIOR-1K；其他基准应以原文为准。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "the LIBERO-PRO, robosuite, and BEHAVIOR-1K suites"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.755200035404414,
+        "bm25": 30.067100015003234,
+        "rrf_fusion_only": 0.10770000517368317
+      },
+      "returned_ids": {
+        "dense": [
+          0,
+          1,
+          8,
+          55,
+          45,
+          101
+        ],
+        "bm25": [
+          7,
+          124,
+          1,
+          180,
+          145,
+          46
+        ],
+        "rrf": [
+          1,
+          8,
+          0,
+          7,
+          124,
+          55
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "amp-memory",
+      "type": "method",
+      "paper_id": "2611.09892",
+      "question": "For the paper On Agentic Manipulation Policies, What does AMP1 store in its persistent memory?",
+      "expected": "持久记忆记录有用的观察、策略和代码。",
+      "evidence": [
+        {
+          "page": 3,
+          "quote": "record useful observations, strategies, and code"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.0050999699160457,
+        "bm25": 29.761500016320497,
+        "rrf_fusion_only": 0.1577000366523862
+      },
+      "returned_ids": {
+        "dense": [
+          8,
+          77,
+          73,
+          53,
+          267,
+          11
+        ],
+        "bm25": [
+          3,
+          1,
+          124,
+          95,
+          7,
+          118
+        ],
+        "rrf": [
+          8,
+          3,
+          77,
+          1,
+          73,
+          124
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "amp-trials",
+      "type": "experiment",
+      "paper_id": "2611.09892",
+      "question": "For the paper On Agentic Manipulation Policies, Which model and robot error recovery setting are used for the real-world trials?",
+      "expected": "真实试验中使用 Opus 5.5，AMP1 启用机器人错误恢复。",
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "AMP1 is paired with Opus 5.5 for these experiments"
+        },
+        {
+          "page": 5,
+          "quote": "AMP1 is evaluated with robot error recovery enabled"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.0598000371828675,
+        "bm25": 35.0042000063695,
+        "rrf_fusion_only": 0.13320002472028136
+      },
+      "returned_ids": {
+        "dense": [
+          1,
+          9,
+          8,
+          4,
+          171,
+          19
+        ],
+        "bm25": [
+          8,
+          170,
+          35,
+          1,
+          209,
+          44
+        ],
+        "rrf": [
+          8,
+          1,
+          170,
+          19,
+          9,
+          35
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 6,
+            "reciprocal_rank": 0.16666666666666666,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "amp-limits",
+      "type": "limitation",
+      "paper_id": "2611.09892",
+      "question": "For the paper On Agentic Manipulation Policies, What limitations does AMP1 acknowledge regarding speed and trajectory execution?",
+      "expected": "模型推理等待使策略慢；执行轨迹时无法重新考量，论文评估主要涉及准静态场景。",
+      "evidence": [
+        {
+          "page": 12,
+          "quote": "the policy is slow as the robot spends much of each episode waiting for the model to reason"
+        },
+        {
+          "page": 12,
+          "quote": "the model cannot reconsider a trajectory while it executes"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.0896000312641263,
+        "bm25": 32.10630000103265,
+        "rrf_fusion_only": 0.10080001084133983
+      },
+      "returned_ids": {
+        "dense": [
+          8,
+          73,
+          127,
+          128,
+          53,
+          46
+        ],
+        "bm25": [
+          124,
+          8,
+          1,
+          118,
+          160,
+          7
+        ],
+        "rrf": [
+          8,
+          128,
+          124,
+          73,
+          127,
+          1
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "flow-method",
+      "type": "term",
+      "paper_id": "2611.09863",
+      "question": "For the paper Flow-Guided Target-Space Alignment via Path Consistency, What framework does FlowAlign use to define its path-consistency score?",
+      "expected": "使用条件流匹配定义路径一致性分数。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "uses conditional flow matching to define a path-consistency score"
+        }
+      ],
+      "timing_ms": {
+        "dense": 0.7122000097297132,
+        "bm25": 40.359499980695546,
+        "rrf_fusion_only": 0.14129996998235583
+      },
+      "returned_ids": {
+        "dense": [
+          3,
+          15,
+          12,
+          25,
+          11,
+          71
+        ],
+        "bm25": [
+          25,
+          12,
+          11,
+          3,
+          15,
+          132
+        ],
+        "rrf": [
+          3,
+          25,
+          12,
+          15,
+          11,
+          24
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 4,
+            "reciprocal_rank": 0.25,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 4,
+            "reciprocal_rank": 0.25,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "flow-stages",
+      "type": "method",
+      "paper_id": "2611.09863",
+      "question": "For the paper Flow-Guided Target-Space Alignment via Path Consistency, What are the two stages of FlowAlign training?",
+      "expected": "第一阶段学习以源表示为条件的速度场；第二阶段冻结该场并用它定义路径一致性分数。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "First, we learn a source-conditioned velocity field"
+        },
+        {
+          "page": 4,
+          "quote": "Second, we freeze this field and use it to define a path-consistency score"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.1794999591074884,
+        "bm25": 40.17980000935495,
+        "rrf_fusion_only": 0.1702999579720199
+      },
+      "returned_ids": {
+        "dense": [
+          3,
+          15,
+          12,
+          11,
+          25,
+          71
+        ],
+        "bm25": [
+          25,
+          11,
+          3,
+          12,
+          15,
+          132
+        ],
+        "rrf": [
+          3,
+          25,
+          11,
+          15,
+          12,
+          71
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 2,
+            "reciprocal_rank": 0.5,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "flow-datasets",
+      "type": "experiment",
+      "paper_id": "2611.09863",
+      "question": "For the paper Flow-Guided Target-Space Alignment via Path Consistency, Which single-cell multiome benchmarks are evaluated in FlowAlign?",
+      "expected": "使用 PBMC 和 BMMC 基准。",
+      "evidence": [
+        {
+          "page": 7,
+          "quote": "PBMC and BMMC benchmarks evaluate source-only mapping"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.0474000009708107,
+        "bm25": 37.87890000967309,
+        "rrf_fusion_only": 0.14409999130293727
+      },
+      "returned_ids": {
+        "dense": [
+          15,
+          3,
+          55,
+          4,
+          14,
+          12
+        ],
+        "bm25": [
+          15,
+          25,
+          11,
+          46,
+          12,
+          13
+        ],
+        "rrf": [
+          15,
+          25,
+          3,
+          4,
+          12,
+          55
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "flow-limits",
+      "type": "limitation",
+      "paper_id": "2611.09863",
+      "question": "For the paper Flow-Guided Target-Space Alignment via Path Consistency, What assumptions or data requirements limit FlowAlign?",
+      "expected": "依赖配对数据、合适的共同向量空间和准确的第一阶段场；当前分析假设欧氏线性路径。",
+      "evidence": [
+        {
+          "page": 10,
+          "quote": "requires paired data, a meaningful common vector space for path construction, and an accurate Stage-1 field"
+        },
+        {
+          "page": 10,
+          "quote": "the current analysis assumes Euclidean linear paths"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.087700016796589,
+        "bm25": 32.4665000080131,
+        "rrf_fusion_only": 0.14519999967887998
+      },
+      "returned_ids": {
+        "dense": [
+          3,
+          15,
+          73,
+          12,
+          25,
+          11
+        ],
+        "bm25": [
+          25,
+          11,
+          12,
+          3,
+          15,
+          132
+        ],
+        "rrf": [
+          3,
+          25,
+          15,
+          12,
+          11,
+          73
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 6,
+            "reciprocal_rank": 0.16666666666666666,
+            "evidence_hits": [
+              true,
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "grasp-name",
+      "type": "term",
+      "paper_id": "2611.09864",
+      "question": "For the paper Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Prehensile Loco-Manipulation, What does Grasp-TAGS stand for and which simulator is shown in its pipeline?",
+      "expected": "Grasp-TAGS 名称包含 Task-Aware Grasp Selection；流程图展示 Isaac Lab 仿真器。",
+      "evidence": [
+        {
+          "page": 1,
+          "quote": "Task-Aware Grasp Selection via Critic Distillation"
+        },
+        {
+          "page": 4,
+          "quote": "Simulator (Isaac Lab)"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.0544999968260527,
+        "bm25": 51.5350999776274,
+        "rrf_fusion_only": 0.1330000231973827
+      },
+      "returned_ids": {
+        "dense": [
+          35,
+          13,
+          41,
+          34,
+          0,
+          63
+        ],
+        "bm25": [
+          0,
+          13,
+          16,
+          35,
+          76,
+          75
+        ],
+        "rrf": [
+          13,
+          35,
+          0,
+          16,
+          5,
+          41
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 0.5,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true,
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "grasp-critic",
+      "type": "method",
+      "paper_id": "2611.09864",
+      "question": "For the paper Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Prehensile Loco-Manipulation, What happens to the learned critic after PPO training in Grasp-TAGS?",
+      "expected": "PPO 训练后的 critic 被蒸馏成抓取效用网络。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "the learned critic is distilled into a grasp utility network"
+        }
+      ],
+      "timing_ms": {
+        "dense": 0.9466999908909202,
+        "bm25": 45.43910000938922,
+        "rrf_fusion_only": 0.1283999881707132
+      },
+      "returned_ids": {
+        "dense": [
+          49,
+          41,
+          0,
+          16,
+          35,
+          80
+        ],
+        "bm25": [
+          0,
+          13,
+          35,
+          5,
+          16,
+          76
+        ],
+        "rrf": [
+          0,
+          49,
+          35,
+          13,
+          62,
+          41
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "grasp-reward",
+      "type": "experiment",
+      "paper_id": "2611.09864",
+      "question": "For the paper Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Prehensile Loco-Manipulation, What is the task-completion objective of the high-level controller reward?",
+      "expected": "任务完成奖励鼓励机器人将物体运送到目标位姿。",
+      "evidence": [
+        {
+          "page": 5,
+          "quote": "task completion, which encourages the robot to transport the object to the desired pose"
+        }
+      ],
+      "timing_ms": {
+        "dense": 0.9820000268518925,
+        "bm25": 44.68210000777617,
+        "rrf_fusion_only": 0.12169999536126852
+      },
+      "returned_ids": {
+        "dense": [
+          36,
+          76,
+          13,
+          0,
+          49,
+          77
+        ],
+        "bm25": [
+          48,
+          0,
+          35,
+          76,
+          16,
+          33
+        ],
+        "rrf": [
+          76,
+          0,
+          48,
+          13,
+          49,
+          16
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 1,
+            "reciprocal_rank": 1.0,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "grasp-future",
+      "type": "limitation",
+      "paper_id": "2611.09864",
+      "question": "For the paper Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Prehensile Loco-Manipulation, What future evaluation and deployment are proposed for Grasp-TAGS?",
+      "expected": "扩展对更多家用物体的评测，并在 SPOT 平台进行真实部署。",
+      "evidence": [
+        {
+          "page": 8,
+          "quote": "extend the evaluation to additional household objects and real-world deployment on the SPOT platform"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.275799993891269,
+        "bm25": 44.02640002081171,
+        "rrf_fusion_only": 0.12790004257112741
+      },
+      "returned_ids": {
+        "dense": [
+          13,
+          0,
+          35,
+          49,
+          16,
+          34
+        ],
+        "bm25": [
+          0,
+          16,
+          76,
+          13,
+          35,
+          69
+        ],
+        "rrf": [
+          0,
+          13,
+          16,
+          35,
+          76,
+          49
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "quant-benchmarks",
+      "type": "term",
+      "paper_id": "2611.09868",
+      "question": "For the paper CodeQuant2: Enhanced Outlier Mitigation and Adaptive Clustering for Low-Precision LRMs, Which reasoning benchmarks are used to analyze outlier behavior in CodeQuant2?",
+      "expected": "论文在异常值分析中提到 GSM8K 和 AIME25。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "including GSM8K [10] and AIME25 [56]"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.1807000264525414,
+        "bm25": 44.780900003388524,
+        "rrf_fusion_only": 0.13509998098015785
+      },
+      "returned_ids": {
+        "dense": [
+          69,
+          10,
+          0,
+          2,
+          25,
+          24
+        ],
+        "bm25": [
+          0,
+          10,
+          23,
+          24,
+          2,
+          28
+        ],
+        "rrf": [
+          0,
+          10,
+          2,
+          23,
+          24,
+          17
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 6,
+            "reciprocal_rank": 0.16666666666666666,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 4,
+            "reciprocal_rank": 0.25,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 4,
+            "reciprocal_rank": 0.25,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "quant-fluctuation",
+      "type": "method",
+      "paper_id": "2611.09868",
+      "question": "For the paper CodeQuant2: Enhanced Outlier Mitigation and Adaptive Clustering for Low-Precision LRMs, What activation fluctuation is observed in the early decoding stage?",
+      "expected": "前 30 个解码步骤的平均激活标准差比非思考解码高约 20%。",
+      "evidence": [
+        {
+          "page": 4,
+          "quote": "the average activation standard deviation over the first 30 decoding steps is about 20% higher than that of non-thinking decoding"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.0372999822720885,
+        "bm25": 44.10940001253039,
+        "rrf_fusion_only": 0.1449999981559813
+      },
+      "returned_ids": {
+        "dense": [
+          8,
+          0,
+          2,
+          69,
+          25,
+          23
+        ],
+        "bm25": [
+          0,
+          8,
+          23,
+          24,
+          7,
+          1
+        ],
+        "rrf": [
+          8,
+          0,
+          23,
+          2,
+          24,
+          69
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 4,
+            "reciprocal_rank": 0.25,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 4,
+            "reciprocal_rank": 0.25,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": true,
+            "evidence_recall": 1.0,
+            "first_rank": 5,
+            "reciprocal_rank": 0.2,
+            "evidence_hits": [
+              true
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "quant-baselines",
+      "type": "experiment",
+      "paper_id": "2611.09868",
+      "question": "For the paper CodeQuant2: Enhanced Outlier Mitigation and Adaptive Clustering for Low-Precision LRMs, Which quantization baselines are listed alongside QuaRot in the evaluation table?",
+      "expected": "表中包含 ParoQuant、SqueezeLLM 和 CodeQuant；数字与设置应结合表格核对。",
+      "evidence": [
+        {
+          "page": 7,
+          "quote": "ParoQuant 14.771 23.070"
+        },
+        {
+          "page": 7,
+          "quote": "SqueezeLLM 14.627 22.642"
+        },
+        {
+          "page": 7,
+          "quote": "CodeQuant 13.623 21.410"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.109900011215359,
+        "bm25": 50.60820002108812,
+        "rrf_fusion_only": 0.14670001110062003
+      },
+      "returned_ids": {
+        "dense": [
+          69,
+          10,
+          0,
+          2,
+          20,
+          74
+        ],
+        "bm25": [
+          0,
+          23,
+          135,
+          10,
+          28,
+          7
+        ],
+        "rrf": [
+          0,
+          10,
+          74,
+          69,
+          23,
+          135
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "quant-limits",
+      "type": "limitation",
+      "paper_id": "2611.09868",
+      "question": "For the paper CodeQuant2: Enhanced Outlier Mitigation and Adaptive Clustering for Low-Precision LRMs, What questions about reasoning and safety are left for future work?",
+      "expected": "需要进一步研究量化后的推理轨迹及不可靠或过度自信输出等安全问题。",
+      "evidence": [
+        {
+          "page": 10,
+          "quote": "further study of its generated reasoning trajectories"
+        },
+        {
+          "page": 10,
+          "quote": "unreliable or overconfident outputs"
+        }
+      ],
+      "timing_ms": {
+        "dense": 1.3457000022754073,
+        "bm25": 50.4992000060156,
+        "rrf_fusion_only": 0.17110002227127552
+      },
+      "returned_ids": {
+        "dense": [
+          69,
+          3,
+          13,
+          0,
+          10,
+          2
+        ],
+        "bm25": [
+          0,
+          135,
+          23,
+          10,
+          77,
+          28
+        ],
+        "rrf": [
+          0,
+          10,
+          23,
+          2,
+          7,
+          69
+        ]
+      },
+      "methods": {
+        "dense": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "bm25": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        },
+        "rrf": {
+          "1": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 1
+          },
+          "3": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 3
+          },
+          "5": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 5
+          },
+          "6": {
+            "hit": false,
+            "evidence_recall": 0.0,
+            "first_rank": null,
+            "reciprocal_rank": 0.0,
+            "evidence_hits": [
+              false,
+              false
+            ],
+            "returned": 6
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "review_version": "1.0",
+  "results_file": "rag_quality_results_en_after_v2.json",
+  "results_sha256": "c87b6df7d2d2950ac02a99cbe21a81e158aaa2a287771b01d836ce9a22e92acb",
+  "reviewer": "single AI assistant manual chunk-by-chunk and answer-vs-context review; not independent human gold",
+  "relevance_rubric": "1 if the chunk directly answers or supplies part of the specific question from retrieved sources.",
+  "generation_rubric": {
+    "coverage": "full = covers listed expected facts; partial = covers some expected facts or misses key parts; none = misses or abstains on answerable question.",
+    "grounding": "supported = every claim and citation in the answer is backed by supplied sources; unsupported = contains misstatements, stage swaps, or false attributions; abstained = states excerpts lack the answer."
+  },
+  "cases": [
+    {
+      "id": "amp-benchmarks",
+      "relevant_chunks": [21, 31, 162, 126],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunks 21, 31, 162, and 126 establish the four simulation benchmarks; 45 and 46 cover real-world hardware tasks. Answer accurately names RoboLab-120, LIBERO-PRO, robosuite, and BEHAVIOR-1K with exact paper ID and pages."
+    },
+    {
+      "id": "amp-memory",
+      "relevant_chunks": [95, 77],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunk 95 directly details what AMP1+ writes to persistent memory and chunk 77 defines AMP1+ memory M; 225, 147, and 267 cover emergent behaviors and object scene-model IDs. Answer covers expected memory contents from chunk 95, but Excerpt 4 conflates scene-model object identifier retention with persistent memory storage."
+    },
+    {
+      "id": "amp-trials",
+      "relevant_chunks": [35, 49, 200, 175, 44, 209],
+      "coverage": "partial",
+      "grounding": "unsupported",
+      "reason": "All 6 chunks discuss the real-world hardware evaluation setup and error recovery (RfE). However, the answer calls AMP1 'the model' instead of Opus 5.5 (explicitly stated in chunks 35 and 44) and describes the RfE ablation rather than stating error recovery was enabled."
+    },
+    {
+      "id": "amp-limits",
+      "relevant_chunks": [127],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunk 127 directly states both speed waiting-to-reason and inability to reconsider executing trajectories in Sec. 3B; remaining chunks discuss harness/capabilities. Answer accurately summarizes both limitations with p. 12 citation."
+    },
+    {
+      "id": "flow-method",
+      "relevant_chunks": [25, 24],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunks 25 and 24 connect FlowAlign's path-consistency score to conditional flow matching (CFM); 30/12/11/71 discuss path-consistency score without naming CFM. Answer directly names conditional flow matching with accurate citations."
+    },
+    {
+      "id": "flow-stages",
+      "relevant_chunks": [25, 3, 71],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunk 25 gives exact two-stage sequence and chunks 3 and 71 summarize both stages. Answer clearly distinguishes Stage 1 velocity field training and Stage 2 freezing for path-consistency scoring with 2611.09863 p. 4."
+    },
+    {
+      "id": "flow-datasets",
+      "relevant_chunks": [55, 47],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunks 55 and 47 explicitly name PBMC and BMMC single-cell multiome benchmarks; 14/8/4/15 mention multiome alignment generically. Answer accurately reports PBMC and BMMC and processing details from chunk 55."
+    },
+    {
+      "id": "flow-limits",
+      "relevant_chunks": [73],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Only chunk 73 states FlowAlign's limitations; chunk 141 is NeurIPS checklist text. Answer lists all expected limitations, but contradicts chunk 73 in one clause by claiming FlowAlign 'assumes that the source-specific information is preserved' right before stating it does not guarantee preservation."
+    },
+    {
+      "id": "grasp-name",
+      "relevant_chunks": [35, 13],
+      "coverage": "partial",
+      "grounding": "unsupported",
+      "reason": "Chunk 13 gives Task-Aware Grasp Selection and chunk 35 shows the Simulator pipeline; Isaac Lab (chunk 33) was not retrieved. Answer omits Isaac Lab, reverses distillation timing ('at inference time'), and misreads truncated chunk 72 positional-error gap as policy size '0.32 to 1.05 cm'."
+    },
+    {
+      "id": "grasp-critic",
+      "relevant_chunks": [49, 35],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunk 35 states post-PPO critic distillation and inference selection, and chunk 49 explains critic utility estimation. Answer preserves exact stage order and cites 2611.09864 p. 4-5 cleanly (no prompt-ID leakage)."
+    },
+    {
+      "id": "grasp-reward",
+      "relevant_chunks": [48, 42],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunks 48 and 42 explicitly state task completion encouragement and Table I formula weight 10.0. Answer accurately states the objective and formula from provided sources."
+    },
+    {
+      "id": "grasp-future",
+      "relevant_chunks": [],
+      "coverage": "none",
+      "grounding": "abstained",
+      "reason": "Chunk 78 with future SPOT deployment was not retrieved; none of the 6 returned chunks mention future work. Answer honestly abstains based on supplied excerpts."
+    },
+    {
+      "id": "quant-benchmarks",
+      "relevant_chunks": [24],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunk 24 (Sec. 3.1) explicitly lists GSM8K and AIME25 for analyzing LRM activation outlier behavior; remaining chunks discuss general evals or CodeQuant2 components. Answer cites GSM8K and AIME25 cleanly on 2611.09868 p. 3."
+    },
+    {
+      "id": "quant-fluctuation",
+      "relevant_chunks": [8, 27, 24, 1, 26],
+      "coverage": "full",
+      "grounding": "supported",
+      "reason": "Chunk 24 reports the exact 20% higher std over the first 30 steps, and chunks 8, 27, 1, and 26 describe early-decoding activation fluctuations. Answer accurately reports the quantitative finding and 2611.09868 p. 4."
+    },
+    {
+      "id": "quant-baselines",
+      "relevant_chunks": [125, 61],
+      "coverage": "partial",
+      "grounding": "unsupported",
+      "reason": "Chunk 125 (Table 9) lists BF16, QuaRot, ParoQuant, SqueezeLLM, CodeQuant, and Ours, while chunk 61 covers BF16, QuaRot, and SqueezeLLM; p. 7 table was not retrieved. Answer drops CodeQuant from Table 9 and instead names CodeQuant2 alongside Ours."
+    },
+    {
+      "id": "quant-limits",
+      "relevant_chunks": [87],
+      "coverage": "full",
+      "grounding": "unsupported",
+      "reason": "Chunk 87 states all expected future work on reasoning traces and safety; 12 and 58 cover background and benchmarks. Answer covers all points accurately but misattributes them to 'the funding statement' in chunk 87."
+    },
+    {
+      "id": "noanswer-amp",
+      "relevant_chunks": [],
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": true,
+      "reason": "Explicitly states the excerpts contain no information about the fictitious ZXQ-7391-BLUE device or activation code."
+    },
+    {
+      "id": "noanswer-flow",
+      "relevant_chunks": [],
+      "coverage": "not_applicable",
+      "grounding": "abstained",
+      "abstention_correct": true,
+      "reason": "Explicitly states the excerpts contain no information about the fictitious JVN-4826-GREEN telescope or access code."
+    }
+  ]
+}

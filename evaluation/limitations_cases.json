@@ -1,0 +1,56 @@
+{
+  "description": "Exploratory, manually selected evidence and distractor checks against the current local index. These labels are not exhaustive relevance judgments.",
+  "cases": [
+    {
+      "paper_id": "2611.09892",
+      "paper_title": "On Agentic Manipulation Policies",
+      "source_pages": [12, 13],
+      "facts": [
+        {"id": "slow_reasoning", "description": "Policy latency while waiting for model reasoning", "evidence_chunks": [127], "evidence_text": "policy is slow"},
+        {"id": "dynamic_replanning", "description": "Cannot reconsider trajectory in execution; mostly quasi-static evaluation", "evidence_chunks": [127], "evidence_text": "cannot reconsider a trajectory"},
+        {"id": "feedback_controllers", "description": "Synthesize fast local feedback controllers", "evidence_chunks": [130], "evidence_text": "Fast local feedback controllers"},
+        {"id": "trace_supervision", "description": "Use execution traces as supervision for learned policies", "evidence_chunks": [130], "evidence_text": "execution traces could also provide supervision"},
+        {"id": "overlap_thinking_acting", "description": "Plan next motion while current motion executes", "evidence_chunks": [130], "evidence_text": "overlapping thinking with acting"}
+      ],
+      "distractor_chunks": [0, 5, 6, 20, 45, 51, 98, 104, 118, 123, 184],
+      "distractor_note": "Early sections (Intro / Preliminaries / Related Work) discussing general manipulation or prior work rather than AMP1 limitations"
+    },
+    {
+      "paper_id": "2611.09863",
+      "paper_title": "Flow-Guided Target-Space Alignment via Path Consistency",
+      "source_pages": [10],
+      "facts": [
+        {"id": "paired_space_field", "description": "Requires paired data, a meaningful common space and accurate first-stage field", "evidence_chunks": [73], "evidence_text": "requires paired data"},
+        {"id": "linear_paths", "description": "Analysis assumes Euclidean linear paths", "evidence_chunks": [73], "evidence_text": "assumes Euclidean linear paths"},
+        {"id": "source_information", "description": "Target alignment does not guarantee preservation of source-specific information", "evidence_chunks": [73], "evidence_text": "source-specific information absent from the target space"},
+        {"id": "future_directions", "description": "Explore start distributions, diagnostics and partially paired or unpaired settings", "evidence_chunks": [73], "evidence_text": "partially paired or unpaired settings"}
+      ],
+      "distractor_chunks": [139, 140, 141, 142, 143, 144, 145, 146, 152, 153, 155, 156, 157, 163, 164, 167, 174, 178, 180],
+      "distractor_note": "NeurIPS paper checklist questions and boilerplate on pages 22-27 instead of paper technical limitations"
+    },
+    {
+      "paper_id": "2611.09868",
+      "paper_title": "CodeQuant2: Enhanced Outlier Mitigation and Adaptive Clustering for Low-Precision LRMs",
+      "source_pages": [10],
+      "facts": [
+        {"id": "reasoning_trajectories", "description": "Generated reasoning trajectories need further study", "evidence_chunks": [86], "evidence_text": "further study of its generated reasoning trajectories"},
+        {"id": "posttraining_behaviors", "description": "Quantization interactions with post-training behavior require investigation", "evidence_chunks": [87], "evidence_text": "behaviors learned during post-training"},
+        {"id": "safety", "description": "Potential unreliable or overconfident outputs not evaluated", "evidence_chunks": [87], "evidence_text": "unreliable or overconfident outputs"}
+      ],
+      "distractor_chunks": [131, 133, 134, 136, 137, 138, 139, 140, 141, 163, 164, 174],
+      "distractor_note": "NeurIPS Checklist 问卷及其说明（第 18～24 页）而非正文结论"
+    },
+    {
+      "paper_id": "2611.09864",
+      "paper_title": "Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Loco-Manipulation",
+      "source_pages": [8],
+      "facts": [
+        {"id": "spot_deployment", "description": "Future real-world deployment on SPOT platform", "evidence_chunks": [78], "evidence_text": "deployment on the SPOT platform"},
+        {"id": "household_objects", "description": "Future evaluation on additional household objects", "evidence_chunks": [78], "evidence_text": "extend the evaluation to additional household objects"},
+        {"id": "simulation_setting", "description": "Current evaluation conducted in simulation with real-world deployment left to future work", "evidence_chunks": [77], "evidence_text": "Simulation results demonstrate"}
+      ],
+      "distractor_chunks": [23, 24, 26, 27],
+      "distractor_note": "Section II Related Work discussing limitations of prior grasp pose estimation methods (page 3) rather than Grasp-TAGS limitations"
+    }
+  ]
+}

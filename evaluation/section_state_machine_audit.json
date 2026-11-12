@@ -1,0 +1,114 @@
+{
+  "2611.09892": {
+    "set": "Dev",
+    "unique_chunks": 297,
+    "counts": {
+      "body": 176,
+      "references": 18,
+      "appendix": 103
+    },
+    "transitions": [
+      "body@(c0,p1)",
+      "references@(c176,p16)",
+      "appendix@(c194,p18)"
+    ]
+  },
+  "2611.09863": {
+    "set": "Dev",
+    "unique_chunks": 181,
+    "counts": {
+      "body": 74,
+      "references": 20,
+      "appendix": 44,
+      "checklist": 43
+    },
+    "transitions": [
+      "body@(c0,p1)",
+      "references@(c74,p10)",
+      "appendix@(c94,p13)",
+      "checklist@(c138,p22)"
+    ]
+  },
+  "2611.09868": {
+    "set": "Dev",
+    "unique_chunks": 181,
+    "counts": {
+      "body": 88,
+      "references": 25,
+      "appendix": 17,
+      "checklist": 51
+    },
+    "transitions": [
+      "body@(c0,p1)",
+      "references@(c88,p10)",
+      "appendix@(c113,p14)",
+      "checklist@(c130,p17)"
+    ]
+  },
+  "2611.09864": {
+    "set": "Dev",
+    "unique_chunks": 106,
+    "counts": {
+      "body": 78,
+      "references": 28
+    },
+    "transitions": [
+      "body@(c0,p1)",
+      "references@(c78,p8)"
+    ]
+  },
+  "2611.09847": {
+    "set": "Held-Out",
+    "unique_chunks": 113,
+    "counts": {
+      "body": 55,
+      "references": 58
+    },
+    "transitions": [
+      "body@(c0,p1)",
+      "references@(c55,p8)"
+    ]
+  },
+  "2611.09878": {
+    "set": "Held-Out",
+    "unique_chunks": 188,
+    "counts": {
+      "body": 165,
+      "appendix": 12,
+      "references": 11
+    },
+    "transitions": [
+      "body@(c0,p1)",
+      "appendix@(c165,p23)",
+      "references@(c177,p24)"
+    ]
+  },
+  "2611.09882": {
+    "set": "Held-Out",
+    "unique_chunks": 141,
+    "counts": {
+      "body": 68,
+      "references": 11,
+      "appendix": 62
+    },
+    "transitions": [
+      "body@(c0,p1)",
+      "references@(c68,p10)",
+      "appendix@(c79,p12)"
+    ]
+  },
+  "2611.09803": {
+    "set": "Held-Out",
+    "unique_chunks": 116,
+    "counts": {
+      "body": 93,
+      "appendix": 20,
+      "references": 3
+    },
+    "transitions": [
+      "body@(c0,p1)",
+      "appendix@(c93,p20)",
+      "references@(c113,p24)"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "review_version": "1.0",
+  "results_file": "rag_quality_results_zh_v1.json",
+  "results_sha256": "11623d4a90a9116e5df14995991fc366a6d55fec96238f4e9716830d60c96021",
+  "reviewer": "One AI assistant compared each answer with expected facts and the retrieved context; not an independent human or expert panel.",
+  "relevance_rubric": "For these single-paper queries, mark a returned chunk relevant only when it directly contains information answering at least one part of the question. Related background without a direct answer is marked nonrelevant. All six RRF results of each answerable case were inspected by one AI assistant; judgments are subjective and not exhaustive corpus-wide labels.",
+  "generation_rubric": "coverage=full/partial/none relative to listed expected facts; grounding=supported/unsupported/uncertain/abstained relative to supplied context. Abstention on an answerable query is reported separately, not treated as a supported substantive answer. An explicitly identified source-page error is recorded separately.",
+  "cases": [
+    {"id":"amp-benchmarks","relevant_chunks":[],"coverage":"none","grounding":"unsupported","reason":"将 VLA、WAM、π0.5 和 FLUX 等方法或策略误当成仿真基准；没有给出标注中的基准。"},
+    {"id":"amp-memory","relevant_chunks":[95],"coverage":"partial","grounding":"supported","reason":"块 95 支持机器人知识、应对方式和代码实例；未明确概括观察、策略和代码三类。"},
+    {"id":"amp-trials","relevant_chunks":[171,49,48,170],"coverage":"partial","grounding":"unsupported","reason":"提及错误恢复，但把 DROID 设备配置误称为试验模型；原文表 1 指定 Opus 5.5。"},
+    {"id":"amp-limits","relevant_chunks":[],"coverage":"none","grounding":"abstained","reason":"回答表示给定片段不足；所选片段没有包含目标局限块 127，但原 PDF 该页实际有答案。"},
+    {"id":"flow-method","relevant_chunks":[3,15],"coverage":"none","grounding":"unsupported","reason":"未回答条件流匹配，并称框架基于论文编号 5 中的标准；所给上下文不支持这一归属。"},
+    {"id":"flow-stages","relevant_chunks":[71,25],"coverage":"partial","grounding":"uncertain","reason":"包含学习并冻结速度场，但将路径一致性分数称为速度一致性分数；二者术语是否等价需领域复核。"},
+    {"id":"flow-datasets","relevant_chunks":[55,130],"coverage":"full","grounding":"supported","reason":"块 55 支持 PBMC 和 BMMC，块 130 提及 PBMC 实验。"},
+    {"id":"flow-limits","relevant_chunks":[71,25,20],"coverage":"none","grounding":"abstained","reason":"回答称所给片段未明确说明局限；目标块 73 未召回，原文第 10 页实际提供相关限制；三个片段提及配对数据或路径。"},
+    {"id":"grasp-name","relevant_chunks":[13],"coverage":"partial","grounding":"supported","reason":"给出任务感知抓取选择，但未给出 Isaac Lab；所给片段中未显示仿真器名称。"},
+    {"id":"grasp-critic","relevant_chunks":[33,35],"coverage":"full","grounding":"unsupported","reason":"提到蒸馏为抓取效用网络，但错误地说蒸馏发生在推理阶段；块 35 区分训练后蒸馏与推理时选择。"},
+    {"id":"grasp-reward","relevant_chunks":[48,42],"coverage":"partial","grounding":"supported","reason":"回答移动到指定位置，但标注事实是目标位姿；位置未完整表达位姿。"},
+    {"id":"grasp-future","relevant_chunks":[],"coverage":"none","grounding":"abstained","reason":"对未包含目标块 78 的给定片段表示无具体后续计划；原 PDF 第 8 页有家庭物体与 SPOT 部署计划。"},
+    {"id":"quant-benchmarks","relevant_chunks":[],"coverage":"partial","grounding":"unsupported","reason":"命中 AIME25，但将量化模型评测中出现的 AIME26 当作异常值分析基准，遗漏 GSM8K；返回片段未直接列出异常值分析所用基准。"},
+    {"id":"quant-fluctuation","relevant_chunks":[8,1,24],"coverage":"full","grounding":"supported","citation_issue":true,"reason":"20% 与前 30 步由块 24 支持；答案引用第 3 页源自块起始页，但该关键表述位于原 PDF 第 4 页。"},
+    {"id":"quant-baselines","relevant_chunks":[121,125,60,122],"coverage":"full","grounding":"supported","reason":"ParoQuant、SqueezeLLM、CodeQuant 均可由块 121、125、60 或 122 支持。"},
+    {"id":"quant-limits","relevant_chunks":[87],"coverage":"none","grounding":"unsupported","reason":"回答称没有具体未来问题，但返回的块 87 明确讨论推理行为与安全问题。"},
+    {"id":"noanswer-amp","coverage":"not_applicable","grounding":"abstained","abstention_correct":true,"reason":"针对虚构设备标识明确说明没有激活码信息。"},
+    {"id":"noanswer-flow","coverage":"not_applicable","grounding":"abstained","abstention_correct":true,"reason":"针对虚构望远镜标识明确说明没有访问码信息。"}
+  ]
+}
