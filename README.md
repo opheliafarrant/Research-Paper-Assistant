@@ -143,5 +143,5 @@ python -B -m unittest discover -s tests -p "test_*.py"
 ## 🔒 隐私与开源许可 (Privacy & License)
 
 - **本地数据**：下载的论文 PDF 保存在 `data/pdfs/`，向量与词法索引保存在 `data/cache/`，对话记录保存在 `data/conversations.sqlite3`，生成与向量推理全部在本地完成；仅在点击抓取论文时访问 arXiv API。
-- **上游致谢**：本项目早期雏形基于 MIT 协议的开源项目 [Hagar-Ghazi/Research-Paper-Assistant](https://github.com/Hagar-Ghazi/Research-Paper-Assistant)（commit `9e8f0f2`），在此基础上完成了分层架构重构、中文跨语言检索、跨页引文与 PDF 高亮、结构化速读、原子索引事务与 SQLite 会话持久化。
-- **License**：基于 [MIT License](LICENSE) 开源。
+- **上游致谢**：本项目早期雏形基于开源项目 [Hagar-Ghazi/Research-Paper-Assistant](https://github.com/Hagar-Ghazi/Research-Paper-Assistant)（作者 `Hagar-Ghazi`，commit `9e8f0f2`，其原仓库 `README.md` 声明为 `MIT License free to use, modify and distribute`），在此基础上完成了分层架构重构、中文跨语言检索、跨页引文与 PDF 高亮、结构化速读、原子索引事务与 SQLite 会话持久化。详细来源与代码改编说明见 [NOTICE](NOTICE)。
+- **License**：基于 [MIT License](LICENSE) 开源，上游署名与来源声明保留于 [NOTICE](NOTICE)。
